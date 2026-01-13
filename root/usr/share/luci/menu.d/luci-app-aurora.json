@@ -1,7 +1,7 @@
 {
   "admin/system/aurora": {
     "title": "Aurora Settings",
-    "order": 60,
+    "order": 100,
     "action": {
       "type": "view",
       "path": "aurora/theme"
