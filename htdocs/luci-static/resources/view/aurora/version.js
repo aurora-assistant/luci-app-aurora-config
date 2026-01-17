@@ -172,6 +172,7 @@ const executeUpdate = (packageName, repo, version, packageFilter) => {
             {
               class: "btn cbi-button-positive",
               click: () => {
+                versionCache.clear();
                 ui.hideModal();
                 window.location.reload();
               },
