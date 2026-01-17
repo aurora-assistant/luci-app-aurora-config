@@ -55,9 +55,10 @@ const renderColorPicker = function (option_index, section_id, in_table) {
       const colorInput = E("input", {
         type: "color",
         value: color.toString({ format: "hex" }),
-        style: "margin-left: 8px; height: 2em; width: 3em; vertical-align: middle; cursor: pointer;",
+        style:
+          "margin-left: 8px; height: 2em; width: 3em; vertical-align: middle; cursor: pointer;",
         title: _("Color Picker Helper"),
-        change: () => input.value = colorInput.value,
+        change: () => (input.value = colorInput.value),
       });
       input.parentNode.appendChild(colorInput);
     }
@@ -411,9 +412,9 @@ return view.extend({
       installedVersions?.config?.installed_version || "Unknown";
 
     m.description =
-      '<span id="aurora-versions">Theme: <span id="theme-version" class="label" style="cursor: pointer;">v' +
+      '<span id="aurora-versions">Theme: <span id="theme-version" class="label success" style="cursor: pointer;">v' +
       themeVersion +
-      '</span> | Config: <span id="config-version" class="label" style="cursor: pointer;">v' +
+      '</span> | Config: <span id="config-version" class="label success" style="cursor: pointer;">v' +
       configVersion +
       "</span></span>";
 
@@ -543,28 +544,40 @@ return view.extend({
         if (!label || !hasUpdate) return;
 
         label.className = "label warning";
-        Object.assign(label.style, { position: "relative", paddingRight: "16px" });
+        Object.assign(label.style, {
+          position: "relative",
+          paddingRight: "16px",
+        });
         const redDot = document.createElement("span");
-        redDot.style.cssText = "position: absolute; top: 3px; right: 4px; width: 6px; height: 6px; background: #f44; border-radius: 50%; animation: pulse 2s infinite;";
+        redDot.style.cssText =
+          "position: absolute; top: 3px; right: 4px; width: 6px; height: 6px; background: #f44; border-radius: 50%; animation: pulse 2s infinite;";
         label.appendChild(redDot);
       };
 
       requestAnimationFrame(() => {
         const labels = {
           theme: mapNode.querySelector("#theme-version"),
-          config: mapNode.querySelector("#config-version")
+          config: mapNode.querySelector("#config-version"),
         };
 
-        Object.values(labels).forEach(label => {
-          if (label) label.onclick = () => window.location.href = L.url("admin/system/aurora/version");
+        Object.values(labels).forEach((label) => {
+          if (label)
+            label.onclick = () =>
+              (window.location.href = L.url("admin/system/aurora/version"));
         });
 
         L.resolveDefault(callCheckUpdates(0), null)
-          .then(updateData => {
-            updateVersionLabel(labels.theme, updateData?.theme?.update_available);
-            updateVersionLabel(labels.config, updateData?.config?.update_available);
+          .then((updateData) => {
+            updateVersionLabel(
+              labels.theme,
+              updateData?.theme?.update_available
+            );
+            updateVersionLabel(
+              labels.config,
+              updateData?.config?.update_available
+            );
           })
-          .catch(err => console.error("Failed to check version:", err));
+          .catch((err) => console.error("Failed to check version:", err));
       });
 
       return mapNode;

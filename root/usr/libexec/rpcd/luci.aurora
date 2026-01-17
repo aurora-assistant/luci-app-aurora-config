@@ -334,13 +334,22 @@ case "$1" in
 		downloaded_files=""
 
 		if [ -n "$package_filter" ]; then
-			specific_pkg=$(echo "$response" | jsonfilter -e '@.assets[*].name' | grep "^${package_filter}_.*\.${file_ext}$" | head -1)
+			if [ "$pkg_manager" = "apk" ]; then
+				specific_pkg=$(echo "$response" | jsonfilter -e '@.assets[*].name' | grep "^${package_filter}-.*\.${file_ext}$" | head -1)
+			else
+				specific_pkg=$(echo "$response" | jsonfilter -e '@.assets[*].name' | grep "^${package_filter}_.*\.${file_ext}$" | head -1)
+			fi
 			if [ -n "$specific_pkg" ]; then
 				wget -q -O "$download_path/$specific_pkg" "$download_url/$specific_pkg" 2>/dev/null && downloaded_files="$download_path/$specific_pkg"
 			fi
 		else
-			main_pkg=$(echo "$response" | jsonfilter -e '@.assets[*].name' | grep "^${package_name}_.*\.${file_ext}$" | grep -v "i18n" | head -1)
-			i18n_pkg=$(echo "$response" | jsonfilter -e '@.assets[*].name' | grep "luci-i18n-.*-${lang}.*\.${file_ext}$" | head -1)
+			if [ "$pkg_manager" = "apk" ]; then
+				main_pkg=$(echo "$response" | jsonfilter -e '@.assets[*].name' | grep "^${package_name}-.*\.${file_ext}$" | grep -v "i18n" | head -1)
+				i18n_pkg=$(echo "$response" | jsonfilter -e '@.assets[*].name' | grep "^luci-i18n-.*-${lang}-.*\.${file_ext}$" | head -1)
+			else
+				main_pkg=$(echo "$response" | jsonfilter -e '@.assets[*].name' | grep "^${package_name}_.*\.${file_ext}$" | grep -v "i18n" | head -1)
+				i18n_pkg=$(echo "$response" | jsonfilter -e '@.assets[*].name' | grep "luci-i18n-.*-${lang}.*\.${file_ext}$" | head -1)
+			fi
 
 			if [ -n "$main_pkg" ]; then
 				wget -q -O "$download_path/$main_pkg" "$download_url/$main_pkg" 2>/dev/null && downloaded_files="$download_path/$main_pkg"
