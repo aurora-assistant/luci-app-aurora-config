@@ -6,6 +6,42 @@
 "require ui";
 "require fs";
 
+const CACHE_KEY = "aurora.version.cache";
+const CACHE_TTL = 1800000;
+
+const versionCache = {
+  get: () => {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (!cached) return null;
+
+      const data = JSON.parse(cached);
+      const now = Date.now();
+
+      if (now - data.timestamp > CACHE_TTL) {
+        localStorage.removeItem(CACHE_KEY);
+        return null;
+      }
+
+      return data.value;
+    } catch (e) {
+      return null;
+    }
+  },
+
+  set: (value) => {
+    try {
+      const data = {
+        timestamp: Date.now(),
+        value: value,
+      };
+      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.error("Failed to cache version data:", e);
+    }
+  },
+};
+
 document.querySelector("head").appendChild(
   E("script", {
     type: "text/javascript",
@@ -33,7 +69,6 @@ const callRemoveIcon = rpc.declare({
 const callCheckUpdates = rpc.declare({
   object: "luci.aurora",
   method: "check_updates",
-  params: ["force_refresh"],
 });
 
 const callGetInstalledVersions = rpc.declare({
@@ -628,18 +663,33 @@ return view.extend({
               (window.location.href = L.url("admin/system/aurora/version"));
         });
 
-        L.resolveDefault(callCheckUpdates(0), null)
-          .then((updateData) => {
-            updateVersionLabel(
-              labels.theme,
-              updateData?.theme?.update_available
-            );
-            updateVersionLabel(
-              labels.config,
-              updateData?.config?.update_available
-            );
-          })
-          .catch((err) => console.error("Failed to check version:", err));
+        const cached = versionCache.get();
+        if (cached) {
+          updateVersionLabel(
+            labels.theme,
+            cached?.theme?.update_available
+          );
+          updateVersionLabel(
+            labels.config,
+            cached?.config?.update_available
+          );
+        } else {
+          L.resolveDefault(callCheckUpdates(), null)
+            .then((updateData) => {
+              if (updateData) {
+                versionCache.set(updateData);
+                updateVersionLabel(
+                  labels.theme,
+                  updateData?.theme?.update_available
+                );
+                updateVersionLabel(
+                  labels.config,
+                  updateData?.config?.update_available
+                );
+              }
+            })
+            .catch((err) => console.error("Failed to check version:", err));
+        }
       });
 
       return mapNode;

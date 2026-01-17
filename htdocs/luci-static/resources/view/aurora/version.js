@@ -3,6 +3,50 @@
 "require rpc";
 "require ui";
 
+const CACHE_KEY = "aurora.version.cache";
+const CACHE_TTL = 1800000;
+
+const versionCache = {
+  get: () => {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (!cached) return null;
+
+      const data = JSON.parse(cached);
+      const now = Date.now();
+
+      if (now - data.timestamp > CACHE_TTL) {
+        localStorage.removeItem(CACHE_KEY);
+        return null;
+      }
+
+      return data.value;
+    } catch (e) {
+      return null;
+    }
+  },
+
+  set: (value) => {
+    try {
+      const data = {
+        timestamp: Date.now(),
+        value: value,
+      };
+      localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+    } catch (e) {
+      console.error("Failed to cache version data:", e);
+    }
+  },
+
+  clear: () => {
+    try {
+      localStorage.removeItem(CACHE_KEY);
+    } catch (e) {
+      console.error("Failed to clear version cache:", e);
+    }
+  },
+};
+
 const callGetInstalledVersions = rpc.declare({
   object: "luci.aurora",
   method: "get_installed_versions",
@@ -11,7 +55,6 @@ const callGetInstalledVersions = rpc.declare({
 const callCheckUpdates = rpc.declare({
   object: "luci.aurora",
   method: "check_updates",
-  params: ["force_refresh"],
 });
 
 const callDownloadPackage = rpc.declare({
@@ -286,10 +329,23 @@ const checkForUpdates = (forceRefresh) => {
     btn.classList.add("spinning");
   }
 
+  if (!forceRefresh) {
+    const cached = versionCache.get();
+    if (cached) {
+      updateVersionTable(cached);
+      if (btn) {
+        btn.disabled = false;
+        btn.classList.remove("spinning");
+      }
+      return;
+    }
+  }
+
   updateVersionTable(null);
 
-  callCheckUpdates(forceRefresh ? 1 : 0)
+  callCheckUpdates()
     .then((updateData) => {
+      versionCache.set(updateData);
       updateVersionTable(updateData);
       if (btn) {
         btn.disabled = false;

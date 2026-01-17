@@ -6,8 +6,6 @@
 readonly icon_path="/www/luci-static/aurora/images"
 readonly tmp_path="/tmp/aurora_icon.tmp"
 readonly download_path="/tmp/aurora_downloads"
-readonly cache_file="/tmp/aurora_version_cache.json"
-readonly cache_ttl=300
 
 detect_package_manager() {
 	if command -v opkg >/dev/null 2>&1; then
@@ -33,15 +31,6 @@ get_system_lang() {
 	fi
 
 	echo "$lang"
-}
-
-is_cache_valid() {
-	[ ! -f "$cache_file" ] && return 1
-	local cache_time=$(stat -c %Y "$cache_file" 2>/dev/null || stat -f %m "$cache_file" 2>/dev/null)
-	local current_time=$(date +%s)
-	local age=$((current_time - cache_time))
-	[ "$age" -lt "$cache_ttl" ] && return 0
-	return 1
 }
 
 parse_version() {
@@ -190,18 +179,6 @@ case "$1" in
 	"check_updates")
 		read -r input 2>/dev/null || true
 
-		force_refresh=0
-		if [ -n "$input" ]; then
-			json_load "$input" 2>/dev/null
-			json_get_var force_refresh "force_refresh" 2>/dev/null
-			json_cleanup
-		fi
-
-		if [ "$force_refresh" != "1" ] && is_cache_valid; then
-			cat "$cache_file"
-			exit 0
-		fi
-
 		pkg_manager=$(detect_package_manager)
 
 		theme_api_url="https://api.github.com/repos/eamonxg/luci-theme-aurora/releases/latest"
@@ -264,21 +241,19 @@ case "$1" in
 		fi
 	fi
 
-		json_init
-		json_add_object "theme"
-			json_add_string "latest_version" "$theme_latest"
-			json_add_boolean "update_available" "$theme_update_available"
-		json_close_object
-		json_add_object "config"
-			json_add_string "latest_version" "$config_latest"
-			json_add_string "i18n_updates" "$config_i18n_updates"
-			json_add_boolean "update_available" "$config_update_available"
-		json_close_object
+	json_init
+	json_add_object "theme"
+		json_add_string "latest_version" "$theme_latest"
+		json_add_boolean "update_available" "$theme_update_available"
+	json_close_object
+	json_add_object "config"
+		json_add_string "latest_version" "$config_latest"
+		json_add_string "i18n_updates" "$config_i18n_updates"
+		json_add_boolean "update_available" "$config_update_available"
+	json_close_object
 
-		json_dump > "$cache_file"
-
-		cat "$cache_file"
-		json_cleanup
+	json_dump
+	json_cleanup
 		;;
 	"get_system_info")
 		read -r input 2>/dev/null || true
