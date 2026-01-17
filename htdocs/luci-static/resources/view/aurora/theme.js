@@ -55,12 +55,9 @@ const renderColorPicker = function (option_index, section_id, in_table) {
       const colorInput = E("input", {
         type: "color",
         value: color.toString({ format: "hex" }),
-        style:
-          "margin-left: 8px; height: 2em; width: 3em; vertical-align: middle; cursor: pointer;",
+        style: "margin-left: 8px; height: 2em; width: 3em; vertical-align: middle; cursor: pointer;",
         title: _("Color Picker Helper"),
-        change: function () {
-          input.value = this.value;
-        },
+        change: () => input.value = colorInput.value,
       });
       input.parentNode.appendChild(colorInput);
     }
@@ -541,52 +538,33 @@ return view.extend({
     so.validate = (section_id, value) =>
       !value?.trim() ? _("Icon is required") : true;
 
-    return m.render().then(function (mapNode) {
-      requestAnimationFrame(function () {
-        const themeLabel = mapNode.querySelector("#theme-version");
-        const configLabel = mapNode.querySelector("#config-version");
+    return m.render().then((mapNode) => {
+      const updateVersionLabel = (label, hasUpdate) => {
+        if (!label || !hasUpdate) return;
 
-        if (themeLabel) {
-          themeLabel.onclick = function () {
-            window.location.href = L.url("admin/system/aurora/version");
-          };
-        }
+        label.className = "label warning";
+        Object.assign(label.style, { position: "relative", paddingRight: "16px" });
+        const redDot = document.createElement("span");
+        redDot.style.cssText = "position: absolute; top: 3px; right: 4px; width: 6px; height: 6px; background: #f44; border-radius: 50%; animation: pulse 2s infinite;";
+        label.appendChild(redDot);
+      };
 
-        if (configLabel) {
-          configLabel.onclick = function () {
-            window.location.href = L.url("admin/system/aurora/version");
-          };
-        }
+      requestAnimationFrame(() => {
+        const labels = {
+          theme: mapNode.querySelector("#theme-version"),
+          config: mapNode.querySelector("#config-version")
+        };
+
+        Object.values(labels).forEach(label => {
+          if (label) label.onclick = () => window.location.href = L.url("admin/system/aurora/version");
+        });
 
         L.resolveDefault(callCheckUpdates(0), null)
-          .then(function (updateData) {
-            if (updateData?.theme?.update_available && themeLabel) {
-              themeLabel.className = "label warning";
-              themeLabel.style.position = "relative";
-              themeLabel.style.paddingRight = "16px";
-              const redDot = document.createElement("span");
-              redDot.style.cssText =
-                "position: absolute; top: 3px; right: 4px; width: 6px; height: 6px; background: #f44; border-radius: 50%; animation: pulse 2s infinite;";
-              themeLabel.appendChild(redDot);
-            } else if (themeLabel) {
-              themeLabel.className = "label success";
-            }
-
-            if (updateData?.config?.update_available && configLabel) {
-              configLabel.className = "label warning";
-              configLabel.style.position = "relative";
-              configLabel.style.paddingRight = "16px";
-              const redDot = document.createElement("span");
-              redDot.style.cssText =
-                "position: absolute; top: 3px; right: 4px; width: 6px; height: 6px; background: #f44; border-radius: 50%; animation: pulse 2s infinite;";
-              configLabel.appendChild(redDot);
-            } else if (configLabel) {
-              configLabel.className = "label success";
-            }
+          .then(updateData => {
+            updateVersionLabel(labels.theme, updateData?.theme?.update_available);
+            updateVersionLabel(labels.config, updateData?.config?.update_available);
           })
-          .catch(function (err) {
-            console.error("Failed to check version:", err);
-          });
+          .catch(err => console.error("Failed to check version:", err));
       });
 
       return mapNode;
