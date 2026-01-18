@@ -1,19 +1,19 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:665
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:729
 msgid "(No icons uploaded)"
-msgstr "(Không có biểu tượng nào được tải lên)"
+msgstr "(Chưa có biểu tượng nào được tải lên)"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:419
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:437
 msgid "Accent Color"
-msgstr "Màu nhấn"
+msgstr "Màu điểm nhấn"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:420
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:438
 msgid "Accent Text Color"
-msgstr "Màu chữ nhấn"
+msgstr "Màu văn bản điểm nhấn"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:266
 msgid "Actions"
@@ -31,7 +31,7 @@ msgstr "Cài đặt Aurora"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:484
 msgid "Aurora Theme Settings"
-msgstr "Cài đặt Giao diện Aurora"
+msgstr "Cài đặt giao diện Aurora"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:370
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:397
@@ -50,68 +50,71 @@ msgstr "Màu bắt đầu nền"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:568
 msgid "Boxed Dropdown"
-msgstr ""
+msgstr "Menu thả xuống dạng hộp"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:642
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:706
 msgid "Button Title"
-msgstr ""
+msgstr "Tiêu đề nút"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:646
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:710
 msgid "Button title cannot be empty"
-msgstr ""
+msgstr "Tiêu đề nút không được để trống"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:282
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:101
 msgid "Cancel"
-msgstr ""
+msgstr "Hủy"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:427
 msgid "Check for Updates"
-msgstr ""
+msgstr "Kiểm tra cập nhật"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:413
 msgid ""
 "Check for and install updates for Aurora theme and configuration packages. "
 "Updates are downloaded from the official GitHub repository."
-msgstr ""
+msgstr "Kiểm tra và cài đặt các bản cập nhật cho giao diện Aurora và các gói cấu hình. Các bản cập nhật được tải xuống từ kho lưu trữ GitHub chính thức."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:257
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:276
 msgid "Checking for updates..."
-msgstr ""
+msgstr "Đang kiểm tra cập nhật..."
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:203
+msgid "Click me to upload"
+msgstr "Nhấn vào đây để tải lên"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:95
 msgid "Click to select color visually"
-msgstr ""
+msgstr "Nhấn để chọn màu trực quan"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:215
 msgid "Close"
-msgstr ""
+msgstr "Đóng"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:529
 msgid "Color"
-msgstr ""
+msgstr "Màu sắc"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:557
 msgid ""
 "Control how the navigation menu displays and adjust the spacing between "
 "interface elements. These settings affect the overall look and feel of the "
 "interface."
-msgstr ""
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:628
-msgid ""
-"Customize the buttons in your floating toolbar. Add new buttons, edit "
-"existing ones, remove unwanted items, or drag to reorder them. Each button "
-"needs a title, URL, and icon."
-msgstr ""
+msgstr "Kiểm soát cách hiển thị menu điều hướng và điều chỉnh khoảng cách giữa các thành phần giao diện. Các cài đặt này ảnh hưởng đến giao diện tổng thể."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:134
 msgid ""
 "Customize the gradient colors used throughout the interface. The page "
 "background uses a smooth three-color gradient (start, middle, end), while "
 "progress bars use a two-color gradient (start, end)."
-msgstr "Tùy chỉnh các màu gradient được sử dụng trong toàn bộ giao diện. Nền trang sử dụng gradient ba màu mượt mà (bắt đầu, giữa, kết thúc), trong khi thanh tiến trình sử dụng gradient hai màu (bắt đầu, kết thúc)."
+msgstr "Tùy chỉnh các màu chuyển sắc (gradient) được sử dụng trong giao diện. Nền trang sử dụng gradient ba màu mượt mà (bắt đầu, giữa, kết thúc), trong khi các thanh tiến trình sử dụng gradient hai màu (bắt đầu, kết thúc)."
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:691
+msgid ""
+"Customize toolbar buttons by adding new entries, editing existing ones, "
+"removing unwanted items, or dragging rows to reorder them."
+msgstr "Tùy chỉnh các nút trên thanh công cụ bằng cách thêm mục mới, chỉnh sửa mục hiện có, xóa các mục không mong muốn hoặc kéo các hàng để sắp xếp lại chúng."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:543
 msgid "Dark Mode"
@@ -125,7 +128,7 @@ msgstr "Màu mặc định"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:460
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:479
 msgid "Default Text Color"
-msgstr "Màu chữ mặc định"
+msgstr "Màu văn bản mặc định"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:141
 msgid ""
@@ -134,7 +137,7 @@ msgid ""
 "color and a text color. The primary color also affects interactive form "
 "elements (inputs, checkboxes, radio buttons, etc.) when you hover over or "
 "interact with them."
-msgstr "Định nghĩa các màu đại diện cho các hành động và hành vi khác nhau. Các màu này được sử dụng cho các nút và huy hiệu. Mỗi loại có hai màu: một màu nền và một màu chữ. Màu chính cũng ảnh hưởng đến các yếu tố biểu mẫu tương tác (nhập liệu, hộp kiểm, nút radio, v.v.) khi bạn di chuột qua hoặc tương tác với chúng."
+msgstr "Xác định các màu đại diện cho các hành động và hành vi khác nhau. Những màu này được sử dụng cho các nút và huy hiệu. Mỗi loại có hai màu: màu nền và màu văn bản. Màu chủ đạo cũng ảnh hưởng đến các thành phần biểu mẫu tương tác (đầu vào, hộp kiểm, nút radio, v.v.) khi bạn di chuột qua hoặc tương tác với chúng."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:317
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:323
@@ -160,32 +163,30 @@ msgstr "Đang xóa..."
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:421
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:442
 msgid "Destructive Color"
-msgstr "Màu phá hủy"
+msgstr "Màu hành động hủy"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:425
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:447
 msgid "Destructive Text Color"
-msgstr "Màu chữ phá hủy"
+msgstr "Màu văn bản hành động hủy"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:120
 msgid "Downloading update files..."
-msgstr "Đang tải xuống các tệp cập nhật..."
+msgstr "Đang tải xuống tệp cập nhật..."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:575
 msgid "Element Spacing"
-msgstr "Khoảng cách giữa các phần tử"
+msgstr "Khoảng cách phần tử"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:599
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:676
 msgid "Enable Floating Toolbar"
 msgstr "Bật thanh công cụ nổi"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:591
-msgid ""
-"Enable or disable the floating toolbar that appears on the right side of the "
-"screen for quick access to common functions."
-msgstr "Bật hoặc tắt thanh công cụ nổi xuất hiện ở phía bên phải màn hình để truy cập nhanh các chức năng thông dụng."
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:679
+msgid "Enable or disable the floating toolbar on the right side of the screen."
+msgstr "Bật hoặc tắt thanh công cụ nổi ở bên phải màn hình."
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:637
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:701
 msgid "Enabled"
 msgstr "Đã bật"
 
@@ -197,7 +198,7 @@ msgstr "Màu lỗi"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:458
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:474
 msgid "Error Text Color"
-msgstr "Màu chữ lỗi"
+msgstr "Màu văn bản lỗi"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:381
 msgid "Failed to check for updates: %s. Please check your internet connection."
@@ -211,23 +212,23 @@ msgstr "Không thể xóa biểu tượng: %s"
 msgid "Failed to upload icon: %s"
 msgstr "Không thể tải lên biểu tượng: %s"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:531
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:669
 msgid "Floating Toolbar"
 msgstr "Thanh công cụ nổi"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:132
 msgid "Gradient Colors"
-msgstr "Màu gradient"
+msgstr "Màu chuyển sắc"
 
 #: applications/luci-app-aurora-config/root/usr/share/rpcd/acl.d/luci-app-aurora.json:3
 msgid "Grant access to Aurora theme configuration"
-msgstr "Cấp quyền truy cập cấu hình chủ đề Aurora"
+msgstr "Cấp quyền truy cập cấu hình giao diện Aurora"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:654
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:718
 msgid "Icon"
 msgstr "Biểu tượng"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:611
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:589
 msgid "Icon Management"
 msgstr "Quản lý biểu tượng"
 
@@ -237,11 +238,15 @@ msgstr "Tên biểu tượng"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:299
 msgid "Icon deleted: %s"
-msgstr "Biểu tượng đã bị xóa: %s"
+msgstr "Biểu tượng đã xóa: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:215
 msgid "Icon uploaded successfully: %s"
-msgstr "Biểu tượng đã được tải lên thành công: %s"
+msgstr "Tải lên biểu tượng thành công: %s"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:531
+msgid "Icons & Toolbar"
+msgstr "Biểu tượng & Thanh công cụ"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:453
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:465
@@ -251,7 +256,7 @@ msgstr "Màu thông tin"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:454
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:466
 msgid "Info Text Color"
-msgstr "Màu chữ thông tin"
+msgstr "Màu văn bản thông tin"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:164
 msgid "Installation Details"
@@ -259,7 +264,7 @@ msgstr "Chi tiết cài đặt"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:434
 msgid "Installed Version"
-msgstr "Phiên bản đã cài đặt"
+msgstr "Phiên bản đã cài"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:131
 msgid "Installing update packages..."
@@ -277,9 +282,13 @@ msgstr "Bố cục"
 msgid "Light Mode"
 msgstr "Chế độ sáng"
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:605
+msgid "Logo Settings"
+msgstr "Cài đặt Logo"
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:567
 msgid "Mega Menu"
-msgstr "Menu lớn"
+msgstr "Mega Menu"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:417
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:435
@@ -289,15 +298,15 @@ msgstr "Màu nhạt"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:418
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:436
 msgid "Muted Text Color"
-msgstr "Màu chữ nhạt"
+msgstr "Màu văn bản nhạt"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:565
 msgid "Navigation Submenu Type"
-msgstr "Loại menu con điều hướng"
+msgstr "Loại menu phụ điều hướng"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:208
 msgid "No file selected or upload failed"
-msgstr "Không có tệp nào được chọn hoặc tải lên thất bại"
+msgstr "Chưa chọn tệp hoặc tải lên thất bại"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:256
 msgid "No icons uploaded yet."
@@ -309,47 +318,62 @@ msgstr "Không tìm thấy gói nào. Vui lòng kiểm tra cài đặt của b�
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:274
 msgid "Not installed"
-msgstr "Chưa được cài đặt"
+msgstr "Chưa cài đặt"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:638
+msgid "PNG Logo (32x32)"
+msgstr "Logo PNG (32x32)"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:433
 msgid "Package Name"
 msgstr "Tên gói"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:672
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:736
 msgid "Please select an icon"
 msgstr "Vui lòng chọn một biểu tượng"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:411
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:429
 msgid "Primary Color"
-msgstr "Màu chính"
+msgstr "Màu chủ đạo"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:415
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:433
 msgid "Primary Text Color"
-msgstr "Màu chữ chính"
+msgstr "Màu văn bản chủ đạo"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:380
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:407
 msgid "Progress End Color"
-msgstr "Màu kết thúc tiến trình"
+msgstr "Màu kết thúc thanh tiến trình"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:375
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:402
 msgid "Progress Start Color"
-msgstr "Màu bắt đầu tiến trình"
+msgstr "Màu bắt đầu thanh tiến trình"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:230
 msgid "RPC call failed: %s"
-msgstr "Gọi RPC thất bại: %s"
+msgstr "Cuộc gọi RPC thất bại: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:193
 msgid "Reload"
 msgstr "Tải lại"
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:612
+msgid "SVG Logo"
+msgstr "Logo SVG"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:607
+msgid ""
+"Select custom logos for your browser tab icon (favicon). For best "
+"compatibility, upload both SVG and PNG formats. Modern browsers will use the "
+"SVG version, while older browsers will fall back to the 32x32 PNG version."
+msgstr "Chọn logo tùy chỉnh cho biểu tượng tab trình duyệt (favicon). Để có khả năng tương thích tốt nhất, hãy tải lên cả định dạng SVG và PNG. Các trình duyệt hiện đại sẽ sử dụng phiên bản SVG, trong khi các trình duyệt cũ hơn sẽ dùng phiên bản PNG 32x32."
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:139
 msgid "Semantic Colors"
-msgstr ""
+msgstr "Màu ngữ nghĩa"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:148
 msgid ""
@@ -357,121 +381,113 @@ msgid ""
 "type (default, success, info, warning, error) has two colors: a background "
 "color and a text color. These are used in tooltips, alert messages, status "
 "labels, and legends throughout the interface."
-msgstr "Đặt màu để chỉ trạng thái hệ thống và các thông báo phản hồi. Mỗi loại trạng thái (mặc định, thành công, thông tin, cảnh báo, lỗi) có hai màu: một màu nền và một màu chữ. Những màu này được sử dụng trong các gợi ý công cụ, thông báo cảnh báo, nhãn trạng thái và chú giải trong toàn bộ giao diện."
+msgstr "Thiết lập màu sắc biểu thị trạng thái hệ thống và thông báo phản hồi. Mỗi loại trạng thái (mặc định, thành công, thông tin, cảnh báo, lỗi) có hai màu: màu nền và màu văn bản. Chúng được sử dụng trong chú giải công cụ, thông báo cảnh báo, nhãn trạng thái và chú thích trên toàn giao diện."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:439
 msgid "Status"
-msgstr ""
+msgstr "Trạng thái"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:146
 msgid "Status Colors"
-msgstr ""
+msgstr "Màu trạng thái"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:530
 msgid "Structure"
-msgstr ""
+msgstr "Cấu trúc"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:451
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:463
 msgid "Success Color"
-msgstr ""
+msgstr "Màu thành công"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:452
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:464
 msgid "Success Text Color"
-msgstr ""
+msgstr "Màu văn bản thành công"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:648
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:712
 msgid "Target URL"
-msgstr ""
+msgstr "URL đích"
 
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:13
 msgid "Theme Settings"
-msgstr ""
+msgstr "Cài đặt giao diện"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:626
-msgid "Toolbar Items"
-msgstr ""
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:689
+msgid "Toolbar Buttons"
+msgstr "Nút thanh công cụ"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:589
-msgid "Toolbar Settings"
-msgstr ""
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:652
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:716
 msgid "URL cannot be empty"
-msgstr ""
+msgstr "URL không được để trống"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:280
 msgid "Unknown"
-msgstr ""
+msgstr "Không xác định"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:254
 msgid "Up to date"
-msgstr ""
+msgstr "Đã cập nhật"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:112
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:252
 msgid "Update"
-msgstr ""
+msgstr "Cập nhật"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:86
 msgid "Update Package"
-msgstr ""
+msgstr "Cập nhật gói"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:177
 msgid ""
 "Update completed successfully! Please reload the page to see the changes. If "
 "the old version still appears, try a hard refresh (Ctrl+Shift+R or "
 "Cmd+Shift+R) or open an incognito/private window."
-msgstr ""
+msgstr "Cập nhật hoàn tất thành công! Vui lòng tải lại trang để xem các thay đổi. Nếu phiên bản cũ vẫn xuất hiện, hãy thử làm mới cứng (Ctrl+Shift+R hoặc Cmd+Shift+R) hoặc mở cửa sổ ẩn danh/riêng tư."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:204
 msgid "Update failed: %s"
-msgstr ""
+msgstr "Cập nhật thất bại: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:119
 msgid "Updating Package"
-msgstr ""
+msgstr "Đang cập nhật gói"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:201
 msgid "Upload Icon"
-msgstr ""
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:203
-msgid "Click me to upload"
-msgstr "Nhấp vào tôi để tải lên"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:613
-msgid ""
-"Upload custom icons for toolbar buttons and theme branding (browser tab "
-"logo). Supported formats include SVG, PNG, JPG, and more. Icons are stored "
-"in <code>/www/luci-static/aurora/images/</code> and can be used throughout "
-"the theme."
-msgstr "Tải lên các biểu tượng tùy chỉnh cho các nút trên thanh công cụ và thương hiệu chủ đề (logo tab trình duyệt). Các định dạng được hỗ trợ bao gồm SVG, PNG, JPG và nhiều định dạng khác. Các biểu tượng được lưu trữ trong <code>/www/luci-static/aurora/images/</code> và có thể được sử dụng trong toàn bộ chủ đề."
+msgstr "Tải lên biểu tượng"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:238
 msgid "Upload error: %s"
-msgstr ""
+msgstr "Lỗi tải lên: %s"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:591
+msgid ""
+"Upload theme branding assets (browser tab favicon) and custom toolbar icons. "
+"Supported formats include SVG, PNG, JPG, and more. Uploaded assets are "
+"stored in<code>/www/luci-static/aurora/images/</code> and can be used "
+"throughout the theme."
+msgstr "Tải lên tài sản thương hiệu giao diện (favicon tab trình duyệt) và biểu tượng thanh công cụ tùy chỉnh. Các định dạng được hỗ trợ bao gồm SVG, PNG, JPG, v.v. Các tài sản đã tải lên được lưu trữ trong <code>/www/luci-static/aurora/images/</code> và có thể được sử dụng trong toàn bộ giao diện."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:246
 msgid "Uploaded Icons"
-msgstr ""
+msgstr "Biểu tượng đã tải lên"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:407
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:21
 msgid "Version Management"
-msgstr ""
+msgstr "Quản lý phiên bản"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:455
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:467
 msgid "Warning Color"
-msgstr ""
+msgstr "Màu cảnh báo"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:456
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:471
 msgid "Warning Text Color"
-msgstr ""
+msgstr "Màu văn bản cảnh báo"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:644
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:708
 msgid "e.g., System Settings"
-msgstr ""
+msgstr "ví dụ: Cài đặt hệ thống"

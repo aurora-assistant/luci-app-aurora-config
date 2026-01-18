@@ -1,9 +1,9 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:665
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:729
 msgid "(No icons uploaded)"
-msgstr "(Yüklenen simge yok)"
+msgstr "(Simge yüklenmedi)"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:419
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:437
@@ -17,13 +17,13 @@ msgstr "Vurgu Metin Rengi"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:266
 msgid "Actions"
-msgstr "Eylemler"
+msgstr "İşlemler"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:91
 msgid ""
 "Are you sure you want to update <strong>%h</strong> to version <strong>%h</"
 "strong>?"
-msgstr "<strong>%h</strong> sürümünü <strong>%h</strong> sürümüne güncellemek istediğinizden emin misiniz?"
+msgstr "<strong>%h</strong> öğesini <strong>%h</strong> sürümüne güncellemek istediğinizden emin misiniz?"
 
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:3
 msgid "Aurora Settings"
@@ -52,11 +52,11 @@ msgstr "Arka Plan Başlangıç Rengi"
 msgid "Boxed Dropdown"
 msgstr "Kutulu Açılır Menü"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:642
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:706
 msgid "Button Title"
 msgstr "Düğme Başlığı"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:646
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:710
 msgid "Button title cannot be empty"
 msgstr "Düğme başlığı boş olamaz"
 
@@ -73,12 +73,16 @@ msgstr "Güncellemeleri Kontrol Et"
 msgid ""
 "Check for and install updates for Aurora theme and configuration packages. "
 "Updates are downloaded from the official GitHub repository."
-msgstr "Aurora tema ve yapılandırma paketleri için güncellemeleri kontrol edin ve yükleyin. Güncellemeler resmi GitHub deposundan indirilir."
+msgstr "Aurora teması ve yapılandırma paketleri için güncellemeleri kontrol edin ve yükleyin. Güncellemeler resmi GitHub deposundan indirilir."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:257
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:276
 msgid "Checking for updates..."
 msgstr "Güncellemeler kontrol ediliyor..."
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:203
+msgid "Click me to upload"
+msgstr "Yüklemek için tıklayın"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:95
 msgid "Click to select color visually"
@@ -99,19 +103,18 @@ msgid ""
 "interface."
 msgstr "Gezinme menüsünün nasıl görüntüleneceğini kontrol edin ve arayüz öğeleri arasındaki boşluğu ayarlayın. Bu ayarlar arayüzün genel görünümünü ve hissini etkiler."
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:628
-msgid ""
-"Customize the buttons in your floating toolbar. Add new buttons, edit "
-"existing ones, remove unwanted items, or drag to reorder them. Each button "
-"needs a title, URL, and icon."
-msgstr "Yüzer araç çubuğunuzdaki düğmeleri özelleştirin. Yeni düğmeler ekleyin, mevcut olanları düzenleyin, istenmeyen öğeleri kaldırın veya sürükleyerek yeniden sıralayın. Her düğmenin bir başlık, URL ve simgeye ihtiyacı vardır."
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:134
 msgid ""
 "Customize the gradient colors used throughout the interface. The page "
 "background uses a smooth three-color gradient (start, middle, end), while "
 "progress bars use a two-color gradient (start, end)."
-msgstr "Arayüz genelinde kullanılan gradyan renklerini özelleştirin. Sayfa arka planı, yumuşak bir üç renkli gradyan (başlangıç, orta, bitiş) kullanırken, ilerleme çubukları iki renkli bir gradyan (başlangıç, bitiş) kullanır."
+msgstr "Arayüz genelinde kullanılan gradyan renklerini özelleştirin. Sayfa arka planı yumuşak bir üç renkli gradyan (başlangıç, orta, bitiş) kullanırken, ilerleme çubukları iki renkli bir gradyan (başlangıç, bitiş) kullanır."
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:691
+msgid ""
+"Customize toolbar buttons by adding new entries, editing existing ones, "
+"removing unwanted items, or dragging rows to reorder them."
+msgstr "Yeni girişler ekleyerek, mevcut olanları düzenleyerek, istenmeyen öğeleri kaldırarak veya sıralarını değiştirmek için satırları sürükleyerek araç çubuğu düğmelerini özelleştirin."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:543
 msgid "Dark Mode"
@@ -134,7 +137,7 @@ msgid ""
 "color and a text color. The primary color also affects interactive form "
 "elements (inputs, checkboxes, radio buttons, etc.) when you hover over or "
 "interact with them."
-msgstr "Farklı eylemleri ve davranışları temsil eden renkleri tanımlayın. Bu renkler düğmeler ve rozetler için kullanılır. Her türün iki rengi vardır: bir arka plan rengi ve bir metin rengi. Birincil renk, ayrıca etkileşimli form öğelerini (girişler, onay kutuları, radyo düğmeleri vb.) etkiler."
+msgstr "Farklı eylemleri ve davranışları temsil eden renkleri tanımlayın. Bu renkler düğmeler ve rozetler için kullanılır. Her türün iki rengi vardır: bir arka plan rengi ve bir metin rengi. Birincil renk ayrıca, üzerlerine geldiğinizde veya onlarla etkileşimde bulunduğunuzda etkileşimli form öğelerini (girdiler, onay kutuları, radyo düğmeleri vb.) de etkiler."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:317
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:323
@@ -147,7 +150,7 @@ msgstr "Simgeyi Sil"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:277
 msgid "Delete icon '%s'?"
-msgstr "'%s' simgesini silmek istiyor musunuz?"
+msgstr "'%s' simgesi silinsin mi?"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:291
 msgid "Deleting icon..."
@@ -175,17 +178,15 @@ msgstr "Güncelleme dosyaları indiriliyor..."
 msgid "Element Spacing"
 msgstr "Öğe Aralığı"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:599
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:676
 msgid "Enable Floating Toolbar"
 msgstr "Yüzer Araç Çubuğunu Etkinleştir"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:591
-msgid ""
-"Enable or disable the floating toolbar that appears on the right side of the "
-"screen for quick access to common functions."
-msgstr "Ekranın sağ tarafında görünen ve yaygın işlevlere hızlı erişim sağlayan yüzer araç çubuğunu etkinleştirin veya devre dışı bırakın."
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:679
+msgid "Enable or disable the floating toolbar on the right side of the screen."
+msgstr "Ekranın sağ tarafındaki yüzer araç çubuğunu etkinleştirin veya devre dışı bırakın."
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:637
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:701
 msgid "Enabled"
 msgstr "Etkin"
 
@@ -211,23 +212,23 @@ msgstr "Simge silinemedi: %s"
 msgid "Failed to upload icon: %s"
 msgstr "Simge yüklenemedi: %s"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:531
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:669
 msgid "Floating Toolbar"
 msgstr "Yüzer Araç Çubuğu"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:132
 msgid "Gradient Colors"
-msgstr "Gradyan Renkler"
+msgstr "Gradyan Renkleri"
 
 #: applications/luci-app-aurora-config/root/usr/share/rpcd/acl.d/luci-app-aurora.json:3
 msgid "Grant access to Aurora theme configuration"
 msgstr "Aurora tema yapılandırmasına erişim izni ver"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:654
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:718
 msgid "Icon"
 msgstr "Simge"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:611
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:589
 msgid "Icon Management"
 msgstr "Simge Yönetimi"
 
@@ -242,6 +243,10 @@ msgstr "Simge silindi: %s"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:215
 msgid "Icon uploaded successfully: %s"
 msgstr "Simge başarıyla yüklendi: %s"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:531
+msgid "Icons & Toolbar"
+msgstr "Simgeler ve Araç Çubuğu"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:453
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:465
@@ -267,7 +272,7 @@ msgstr "Güncelleme paketleri yükleniyor..."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:435
 msgid "Latest Version"
-msgstr "En Son Sürüm"
+msgstr "Son Sürüm"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:555
 msgid "Layout"
@@ -276,6 +281,10 @@ msgstr "Düzen"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:542
 msgid "Light Mode"
 msgstr "Aydınlık Mod"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:605
+msgid "Logo Settings"
+msgstr "Logo Ayarları"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:567
 msgid "Mega Menu"
@@ -293,29 +302,33 @@ msgstr "Soluk Metin Rengi"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:565
 msgid "Navigation Submenu Type"
-msgstr "Gezinme Alt Menü Türü"
+msgstr "Navigasyon Alt Menü Türü"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:208
 msgid "No file selected or upload failed"
-msgstr "Hiçbir dosya seçilmedi veya yükleme başarısız oldu"
+msgstr "Dosya seçilmedi veya yükleme başarısız oldu"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:256
 msgid "No icons uploaded yet."
-msgstr "Henüz yüklenmiş simge yok."
+msgstr "Henüz simge yüklenmedi."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:335
 msgid "No packages found. Please check your installation."
-msgstr "Hiçbir paket bulunamadı. Lütfen kurulumunuzu kontrol edin."
+msgstr "Paket bulunamadı. Lütfen kurulumunuzu kontrol edin."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:274
 msgid "Not installed"
-msgstr "Yüklenmedi"
+msgstr "Yüklü değil"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:638
+msgid "PNG Logo (32x32)"
+msgstr "PNG Logo (32x32)"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:433
 msgid "Package Name"
 msgstr "Paket Adı"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:672
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:736
 msgid "Please select an icon"
 msgstr "Lütfen bir simge seçin"
 
@@ -332,12 +345,12 @@ msgstr "Birincil Metin Rengi"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:380
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:407
 msgid "Progress End Color"
-msgstr "İlerleme Bitiş Rengi"
+msgstr "İlerleme Çubuğu Bitiş Rengi"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:375
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:402
 msgid "Progress Start Color"
-msgstr "İlerleme Başlangıç Rengi"
+msgstr "İlerleme Çubuğu Başlangıç Rengi"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:230
 msgid "RPC call failed: %s"
@@ -346,6 +359,17 @@ msgstr "RPC çağrısı başarısız oldu: %s"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:193
 msgid "Reload"
 msgstr "Yeniden Yükle"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:612
+msgid "SVG Logo"
+msgstr "SVG Logo"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:607
+msgid ""
+"Select custom logos for your browser tab icon (favicon). For best "
+"compatibility, upload both SVG and PNG formats. Modern browsers will use the "
+"SVG version, while older browsers will fall back to the 32x32 PNG version."
+msgstr "Tarayıcı sekmesi simgeniz (favicon) için özel logolar seçin. En iyi uyumluluk için hem SVG hem de PNG formatlarını yükleyin. Modern tarayıcılar SVG sürümünü kullanırken, eski tarayıcılar 32x32 PNG sürümüne geri döner."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:139
 msgid "Semantic Colors"
@@ -357,101 +381,93 @@ msgid ""
 "type (default, success, info, warning, error) has two colors: a background "
 "color and a text color. These are used in tooltips, alert messages, status "
 "labels, and legends throughout the interface."
-msgstr "Sistem durumu ve geri bildirim mesajlarını gösteren renkleri ayarlayın. Her durum türünün (varsayılan, başarı, bilgi, uyarı, hata) iki rengi vardır: bir arka plan rengi ve bir metin rengi. Bunlar, araç ipuçlarında, uyarı mesajlarında, durum etiketlerinde ve arayüz genelindeki açıklamalarda kullanılır."
+msgstr "Sistem durumunu ve geri bildirim mesajlarını gösteren renkleri ayarlayın. Her durum türünün (varsayılan, başarı, bilgi, uyarı, hata) iki rengi vardır: arka plan rengi ve metin rengi. Bunlar arayüz genelinde ipuçlarında, uyarı mesajlarında, durum etiketlerinde ve göstergelerde kullanılır."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:439
 msgid "Status"
-msgstr ""
+msgstr "Durum"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:146
 msgid "Status Colors"
-msgstr ""
+msgstr "Durum Renkleri"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:530
 msgid "Structure"
-msgstr ""
+msgstr "Yapı"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:451
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:463
 msgid "Success Color"
-msgstr ""
+msgstr "Başarı Rengi"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:452
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:464
 msgid "Success Text Color"
-msgstr ""
+msgstr "Başarı Metin Rengi"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:648
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:712
 msgid "Target URL"
-msgstr ""
+msgstr "Hedef URL"
 
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:13
 msgid "Theme Settings"
-msgstr ""
+msgstr "Tema Ayarları"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:626
-msgid "Toolbar Items"
-msgstr ""
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:689
+msgid "Toolbar Buttons"
+msgstr "Araç Çubuğu Düğmeleri"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:589
-msgid "Toolbar Settings"
-msgstr ""
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:652
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:716
 msgid "URL cannot be empty"
-msgstr ""
+msgstr "URL boş olamaz"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:280
 msgid "Unknown"
-msgstr ""
+msgstr "Bilinmeyen"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:254
 msgid "Up to date"
-msgstr ""
+msgstr "Güncel"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:112
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:252
 msgid "Update"
-msgstr ""
+msgstr "Güncelle"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:86
 msgid "Update Package"
-msgstr ""
+msgstr "Paketi Güncelle"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:177
 msgid ""
 "Update completed successfully! Please reload the page to see the changes. If "
 "the old version still appears, try a hard refresh (Ctrl+Shift+R or "
 "Cmd+Shift+R) or open an incognito/private window."
-msgstr ""
+msgstr "Güncelleme başarıyla tamamlandı! Değişiklikleri görmek için lütfen sayfayı yeniden yükleyin. Eski sürüm hala görünüyorsa, zorla yenilemeyi (Ctrl+Shift+R veya Cmd+Shift+R) deneyin veya gizli/özel bir pencere açın."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:204
 msgid "Update failed: %s"
-msgstr ""
+msgstr "Güncelleme başarısız: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:119
 msgid "Updating Package"
-msgstr ""
+msgstr "Paket Güncelleniyor"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:201
 msgid "Upload Icon"
-msgstr ""
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:203
-msgid "Click me to upload"
-msgstr "Yüklemek için beni tıklayın"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:613
-msgid ""
-"Upload custom icons for toolbar buttons and theme branding (browser tab "
-"logo). Supported formats include SVG, PNG, JPG, and more. Icons are stored "
-"in <code>/www/luci-static/aurora/images/</code> and can be used throughout "
-"the theme."
-msgstr "Araç çubuğu düğmeleri ve tema markalaması (tarayıcı sekmesi logosu) için özel simgeler yükleyin. Desteklenen formatlar arasında SVG, PNG, JPG ve daha fazlası bulunur. Simgeler <code>/www/luci-static/aurora/images/</code> içinde saklanır ve tema genelinde kullanılabilir."
+msgstr "Simge Yükle"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:238
 msgid "Upload error: %s"
-msgstr ""
+msgstr "Yükleme hatası: %s"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:591
+msgid ""
+"Upload theme branding assets (browser tab favicon) and custom toolbar icons. "
+"Supported formats include SVG, PNG, JPG, and more. Uploaded assets are "
+"stored in<code>/www/luci-static/aurora/images/</code> and can be used "
+"throughout the theme."
+msgstr "Tema markalama varlıklarını (tarayıcı sekmesi favicon) ve özel araç çubuğu simgelerini yükleyin. Desteklenen formatlar SVG, PNG, JPG ve daha fazlasını içerir. Yüklenen varlıklar <code>/www/luci-static/aurora/images/</code> içinde saklanır ve tema genelinde kullanılabilir."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:246
 msgid "Uploaded Icons"
@@ -460,18 +476,18 @@ msgstr "Yüklenen Simgeler"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:407
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:21
 msgid "Version Management"
-msgstr ""
+msgstr "Sürüm Yönetimi"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:455
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:467
 msgid "Warning Color"
-msgstr ""
+msgstr "Uyarı Rengi"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:456
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:471
 msgid "Warning Text Color"
-msgstr ""
+msgstr "Uyarı Metin Rengi"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:644
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:708
 msgid "e.g., System Settings"
-msgstr ""
+msgstr "örneğin, Sistem Ayarları"

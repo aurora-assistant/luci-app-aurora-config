@@ -1,9 +1,9 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:665
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:729
 msgid "(No icons uploaded)"
-msgstr "(アイコンがアップロードされていません)"
+msgstr "(アイコンはアップロードされていません)"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:419
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:437
@@ -13,52 +13,52 @@ msgstr "アクセントカラー"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:420
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:438
 msgid "Accent Text Color"
-msgstr "アクセントテキストの色"
+msgstr "アクセントテキスト色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:266
 msgid "Actions"
-msgstr "アクション"
+msgstr "操作"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:91
 msgid ""
 "Are you sure you want to update <strong>%h</strong> to version <strong>%h</"
 "strong>?"
-msgstr "<strong>%h</strong> をバージョン <strong>%h</strong> に更新してもよろしいですか？"
+msgstr "本当に <strong>%h</strong> をバージョン <strong>%h</strong> に更新しますか？"
 
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:3
 msgid "Aurora Settings"
-msgstr "オーロラ設定"
+msgstr "Aurora 設定"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:484
 msgid "Aurora Theme Settings"
-msgstr "オーロラテーマ設定"
+msgstr "Aurora テーマ設定"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:370
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:397
 msgid "Background End Color"
-msgstr "背景終了色"
+msgstr "背景の終了色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:365
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:392
 msgid "Background Mid Color"
-msgstr "背景中間色"
+msgstr "背景の中間色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:360
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:387
 msgid "Background Start Color"
-msgstr "背景開始色"
+msgstr "背景の開始色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:568
 msgid "Boxed Dropdown"
-msgstr "ボックス化されたドロップダウン"
+msgstr "ボックス型ドロップダウン"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:642
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:706
 msgid "Button Title"
 msgstr "ボタンのタイトル"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:646
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:710
 msgid "Button title cannot be empty"
-msgstr "ボタンのタイトルを空にすることはできません"
+msgstr "ボタンのタイトルは空にできません"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:282
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:101
@@ -73,16 +73,20 @@ msgstr "更新を確認"
 msgid ""
 "Check for and install updates for Aurora theme and configuration packages. "
 "Updates are downloaded from the official GitHub repository."
-msgstr "Auroraテーマと構成パッケージの更新を確認してインストールします。更新は公式GitHubリポジトリからダウンロードされます。"
+msgstr "Auroraテーマと設定パッケージの更新を確認してインストールします。更新は公式GitHubリポジトリからダウンロードされます。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:257
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:276
 msgid "Checking for updates..."
 msgstr "更新を確認中..."
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:203
+msgid "Click me to upload"
+msgstr "クリックしてアップロード"
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:95
 msgid "Click to select color visually"
-msgstr "クリックして色を視覚的に選択"
+msgstr "クリックして視覚的に色を選択"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:215
 msgid "Close"
@@ -97,21 +101,20 @@ msgid ""
 "Control how the navigation menu displays and adjust the spacing between "
 "interface elements. These settings affect the overall look and feel of the "
 "interface."
-msgstr "ナビゲーションメニューの表示方法を制御し、インターフェース要素間の間隔を調整します。これらの設定は、インターフェース全体の外観と感触に影響を与えます。"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:628
-msgid ""
-"Customize the buttons in your floating toolbar. Add new buttons, edit "
-"existing ones, remove unwanted items, or drag to reorder them. Each button "
-"needs a title, URL, and icon."
-msgstr "フローティングツールバーのボタンをカスタマイズします。新しいボタンを追加したり、既存のボタンを編集したり、不要な項目を削除したり、ドラッグして順序を変更したりできます。各ボタンにはタイトル、URL、アイコンが必要です。"
+msgstr "ナビゲーションメニューの表示方法を制御し、インターフェース要素間の間隔を調整します。これらの設定は、インターフェース全体のルックアンドフィールに影響します。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:134
 msgid ""
 "Customize the gradient colors used throughout the interface. The page "
 "background uses a smooth three-color gradient (start, middle, end), while "
 "progress bars use a two-color gradient (start, end)."
-msgstr "インターフェース全体で使用されるグラデーションカラーをカスタマイズします。ページの背景には滑らかな3色のグラデーション（開始、中間、終了）が使用され、プログレスバーには2色のグラデーション（開始、終了）が使用されます。"
+msgstr "インターフェース全体で使用されるグラデーションカラーをカスタマイズします。ページの背景は滑らかな3色グラデーション（開始、中間、終了）を使用し、プログレスバーは2色グラデーション（開始、終了）を使用します。"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:691
+msgid ""
+"Customize toolbar buttons by adding new entries, editing existing ones, "
+"removing unwanted items, or dragging rows to reorder them."
+msgstr "新しいエントリの追加、既存エントリの編集、不要な項目の削除、または行をドラッグして並べ替えることで、ツールバーのボタンをカスタマイズします。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:543
 msgid "Dark Mode"
@@ -120,7 +123,7 @@ msgstr "ダークモード"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:459
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:475
 msgid "Default Color"
-msgstr "デフォルトの色"
+msgstr "デフォルト色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:460
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:479
@@ -134,7 +137,7 @@ msgid ""
 "color and a text color. The primary color also affects interactive form "
 "elements (inputs, checkboxes, radio buttons, etc.) when you hover over or "
 "interact with them."
-msgstr "さまざまなアクションや動作を表す色を定義します。これらの色はボタンやバッジに使用されます。各タイプには背景色とテキスト色の2つの色があります。プライマリカラーは、ホバーや操作時にインタラクティブなフォーム要素（入力、チェックボックス、ラジオボタンなど）にも影響を与えます。"
+msgstr "さまざまなアクションや動作を表す色を定義します。これらの色はボタンやバッジに使用されます。各タイプには、背景色とテキスト色の2つの色があります。プライマリカラーは、ホバー時や操作時にインタラクティブなフォーム要素（入力、チェックボックス、ラジオボタンなど）にも影響します。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:317
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:323
@@ -160,12 +163,12 @@ msgstr "削除中..."
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:421
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:442
 msgid "Destructive Color"
-msgstr "破壊的な色"
+msgstr "デストラクティブカラー"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:425
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:447
 msgid "Destructive Text Color"
-msgstr "破壊的なテキスト色"
+msgstr "デストラクティブテキスト色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:120
 msgid "Downloading update files..."
@@ -175,17 +178,15 @@ msgstr "更新ファイルをダウンロード中..."
 msgid "Element Spacing"
 msgstr "要素の間隔"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:599
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:676
 msgid "Enable Floating Toolbar"
-msgstr "フローティングツールバーを有効にする"
+msgstr "フローティングツールバーを有効化"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:591
-msgid ""
-"Enable or disable the floating toolbar that appears on the right side of the "
-"screen for quick access to common functions."
-msgstr "画面の右側に表示されるフローティングツールバーを有効または無効にして、一般的な機能にすばやくアクセスできるようにします。"
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:679
+msgid "Enable or disable the floating toolbar on the right side of the screen."
+msgstr "画面右側のフローティングツールバーを有効または無効にします。"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:637
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:701
 msgid "Enabled"
 msgstr "有効"
 
@@ -211,7 +212,7 @@ msgstr "アイコンの削除に失敗しました: %s"
 msgid "Failed to upload icon: %s"
 msgstr "アイコンのアップロードに失敗しました: %s"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:531
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:669
 msgid "Floating Toolbar"
 msgstr "フローティングツールバー"
 
@@ -221,13 +222,13 @@ msgstr "グラデーションカラー"
 
 #: applications/luci-app-aurora-config/root/usr/share/rpcd/acl.d/luci-app-aurora.json:3
 msgid "Grant access to Aurora theme configuration"
-msgstr "Auroraテーマ構成へのアクセスを許可"
+msgstr "Aurora テーマ設定へのアクセスを許可"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:654
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:718
 msgid "Icon"
 msgstr "アイコン"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:611
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:589
 msgid "Icon Management"
 msgstr "アイコン管理"
 
@@ -237,11 +238,15 @@ msgstr "アイコン名"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:299
 msgid "Icon deleted: %s"
-msgstr "アイコンが削除されました: %s"
+msgstr "アイコンを削除しました: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:215
 msgid "Icon uploaded successfully: %s"
 msgstr "アイコンが正常にアップロードされました: %s"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:531
+msgid "Icons & Toolbar"
+msgstr "アイコンとツールバー"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:453
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:465
@@ -277,6 +282,10 @@ msgstr "レイアウト"
 msgid "Light Mode"
 msgstr "ライトモード"
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:605
+msgid "Logo Settings"
+msgstr "ロゴ設定"
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:567
 msgid "Mega Menu"
 msgstr "メガメニュー"
@@ -284,12 +293,12 @@ msgstr "メガメニュー"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:417
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:435
 msgid "Muted Color"
-msgstr "控えめな色"
+msgstr "ミュートカラー"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:418
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:436
 msgid "Muted Text Color"
-msgstr "控えめなテキスト色"
+msgstr "ミュートテキスト色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:565
 msgid "Navigation Submenu Type"
@@ -301,7 +310,7 @@ msgstr "ファイルが選択されていないか、アップロードに失敗
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:256
 msgid "No icons uploaded yet."
-msgstr "まだアイコンがアップロードされていません。"
+msgstr "アイコンはまだアップロードされていません。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:335
 msgid "No packages found. Please check your installation."
@@ -309,13 +318,17 @@ msgstr "パッケージが見つかりません。インストールを確認し
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:274
 msgid "Not installed"
-msgstr "インストールされていません"
+msgstr "未インストール"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:638
+msgid "PNG Logo (32x32)"
+msgstr "PNG ロゴ (32x32)"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:433
 msgid "Package Name"
 msgstr "パッケージ名"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:672
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:736
 msgid "Please select an icon"
 msgstr "アイコンを選択してください"
 
@@ -332,12 +345,12 @@ msgstr "プライマリテキスト色"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:380
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:407
 msgid "Progress End Color"
-msgstr "進行終了色"
+msgstr "プログレスバーの終了色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:375
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:402
 msgid "Progress Start Color"
-msgstr "進行開始色"
+msgstr "プログレスバーの開始色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:230
 msgid "RPC call failed: %s"
@@ -346,6 +359,17 @@ msgstr "RPC呼び出しに失敗しました: %s"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:193
 msgid "Reload"
 msgstr "再読み込み"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:612
+msgid "SVG Logo"
+msgstr "SVG ロゴ"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:607
+msgid ""
+"Select custom logos for your browser tab icon (favicon). For best "
+"compatibility, upload both SVG and PNG formats. Modern browsers will use the "
+"SVG version, while older browsers will fall back to the 32x32 PNG version."
+msgstr "ブラウザタブのアイコン（ファビコン）用のカスタムロゴを選択します。互換性を最大限に高めるには、SVG形式とPNG形式の両方をアップロードしてください。最新のブラウザはSVGバージョンを使用し、古いブラウザは32x32のPNGバージョンを使用します。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:139
 msgid "Semantic Colors"
@@ -357,121 +381,113 @@ msgid ""
 "type (default, success, info, warning, error) has two colors: a background "
 "color and a text color. These are used in tooltips, alert messages, status "
 "labels, and legends throughout the interface."
-msgstr "システムの状態とフィードバックメッセージを示す色を設定します。各状態タイプ（デフォルト、成功、情報、警告、エラー）は、背景色とテキスト色の2つの色を持っています。これらは、ツールチップ、警告メッセージ、状態ラベル、インターフェース全体の凡例で使用されます。"
+msgstr "システムの状態やフィードバックメッセージを示す色を設定します。各ステータスタイプ（デフォルト、成功、情報、警告、エラー）には、背景色とテキスト色の2つの色があります。これらは、インターフェース全体でツールチップ、アラートメッセージ、ステータスラベル、凡例に使用されます。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:439
 msgid "Status"
-msgstr ""
+msgstr "ステータス"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:146
 msgid "Status Colors"
-msgstr ""
+msgstr "ステータスカラー"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:530
 msgid "Structure"
-msgstr ""
+msgstr "構造"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:451
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:463
 msgid "Success Color"
-msgstr ""
+msgstr "成功色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:452
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:464
 msgid "Success Text Color"
-msgstr ""
+msgstr "成功テキスト色"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:648
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:712
 msgid "Target URL"
-msgstr ""
+msgstr "ターゲット URL"
 
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:13
 msgid "Theme Settings"
-msgstr ""
+msgstr "テーマ設定"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:626
-msgid "Toolbar Items"
-msgstr ""
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:689
+msgid "Toolbar Buttons"
+msgstr "ツールバーボタン"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:589
-msgid "Toolbar Settings"
-msgstr ""
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:652
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:716
 msgid "URL cannot be empty"
-msgstr ""
+msgstr "URLは空にできません"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:280
 msgid "Unknown"
-msgstr ""
+msgstr "不明"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:254
 msgid "Up to date"
-msgstr ""
+msgstr "最新です"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:112
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:252
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:86
 msgid "Update Package"
-msgstr ""
+msgstr "パッケージを更新"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:177
 msgid ""
 "Update completed successfully! Please reload the page to see the changes. If "
 "the old version still appears, try a hard refresh (Ctrl+Shift+R or "
 "Cmd+Shift+R) or open an incognito/private window."
-msgstr ""
+msgstr "更新が正常に完了しました！ 変更を確認するにはページを再読み込みしてください。古いバージョンがまだ表示される場合は、ハードリフレッシュ（Ctrl+Shift+R または Cmd+Shift+R）を試すか、シークレット/プライベートウィンドウを開いてください。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:204
 msgid "Update failed: %s"
-msgstr ""
+msgstr "更新に失敗しました: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:119
 msgid "Updating Package"
-msgstr ""
+msgstr "パッケージを更新中"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:201
 msgid "Upload Icon"
-msgstr ""
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:203
-msgid "Click me to upload"
-msgstr "私をクリックしてアップロード"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:613
-msgid ""
-"Upload custom icons for toolbar buttons and theme branding (browser tab "
-"logo). Supported formats include SVG, PNG, JPG, and more. Icons are stored "
-"in <code>/www/luci-static/aurora/images/</code> and can be used throughout "
-"the theme."
-msgstr "ツールバーボタンやテーマブランディング（ブラウザタブのロゴ）のカスタムアイコンをアップロードしてください。サポートされている形式には、SVG、PNG、JPGなどがあります。アイコンは<code>/www/luci-static/aurora/images/</code>に保存され、テーマ全体で使用できます。"
+msgstr "アイコンをアップロード"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:238
 msgid "Upload error: %s"
-msgstr ""
+msgstr "アップロードエラー: %s"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:591
+msgid ""
+"Upload theme branding assets (browser tab favicon) and custom toolbar icons. "
+"Supported formats include SVG, PNG, JPG, and more. Uploaded assets are "
+"stored in<code>/www/luci-static/aurora/images/</code> and can be used "
+"throughout the theme."
+msgstr "テーマのブランディングアセット（ブラウザタブのファビコン）とカスタムツールバーアイコンをアップロードします。サポートされている形式には、SVG、PNG、JPGなどがあります。アップロードされたアセットは <code>/www/luci-static/aurora/images/</code> に保存され、テーマ全体で使用できます。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:246
 msgid "Uploaded Icons"
-msgstr ""
+msgstr "アップロード済みアイコン"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:407
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:21
 msgid "Version Management"
-msgstr ""
+msgstr "バージョン管理"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:455
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:467
 msgid "Warning Color"
-msgstr ""
+msgstr "警告色"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:456
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:471
 msgid "Warning Text Color"
-msgstr ""
+msgstr "警告テキスト色"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:644
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:708
 msgid "e.g., System Settings"
-msgstr ""
+msgstr "例: システム設定"

@@ -1,7 +1,7 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=UTF-8"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:665
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:729
 msgid "(No icons uploaded)"
 msgstr ""
 
@@ -52,11 +52,11 @@ msgstr ""
 msgid "Boxed Dropdown"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:642
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:706
 msgid "Button Title"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:646
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:710
 msgid "Button title cannot be empty"
 msgstr ""
 
@@ -80,6 +80,10 @@ msgstr ""
 msgid "Checking for updates..."
 msgstr ""
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:203
+msgid "Click me to upload"
+msgstr ""
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:95
 msgid "Click to select color visually"
 msgstr ""
@@ -99,18 +103,17 @@ msgid ""
 "interface."
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:628
-msgid ""
-"Customize the buttons in your floating toolbar. Add new buttons, edit "
-"existing ones, remove unwanted items, or drag to reorder them. Each button "
-"needs a title, URL, and icon."
-msgstr ""
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:134
 msgid ""
 "Customize the gradient colors used throughout the interface. The page "
 "background uses a smooth three-color gradient (start, middle, end), while "
 "progress bars use a two-color gradient (start, end)."
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:691
+msgid ""
+"Customize toolbar buttons by adding new entries, editing existing ones, "
+"removing unwanted items, or dragging rows to reorder them."
 msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:543
@@ -175,17 +178,15 @@ msgstr ""
 msgid "Element Spacing"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:599
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:676
 msgid "Enable Floating Toolbar"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:591
-msgid ""
-"Enable or disable the floating toolbar that appears on the right side of the "
-"screen for quick access to common functions."
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:679
+msgid "Enable or disable the floating toolbar on the right side of the screen."
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:637
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:701
 msgid "Enabled"
 msgstr ""
 
@@ -211,7 +212,7 @@ msgstr ""
 msgid "Failed to upload icon: %s"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:531
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:669
 msgid "Floating Toolbar"
 msgstr ""
 
@@ -223,11 +224,11 @@ msgstr ""
 msgid "Grant access to Aurora theme configuration"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:654
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:718
 msgid "Icon"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:611
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:589
 msgid "Icon Management"
 msgstr ""
 
@@ -241,6 +242,10 @@ msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:215
 msgid "Icon uploaded successfully: %s"
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:531
+msgid "Icons & Toolbar"
 msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:453
@@ -277,6 +282,10 @@ msgstr ""
 msgid "Light Mode"
 msgstr ""
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:605
+msgid "Logo Settings"
+msgstr ""
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:567
 msgid "Mega Menu"
 msgstr ""
@@ -311,11 +320,15 @@ msgstr ""
 msgid "Not installed"
 msgstr ""
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:638
+msgid "PNG Logo (32x32)"
+msgstr ""
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:433
 msgid "Package Name"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:672
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:736
 msgid "Please select an icon"
 msgstr ""
 
@@ -345,6 +358,17 @@ msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:193
 msgid "Reload"
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:612
+msgid "SVG Logo"
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:607
+msgid ""
+"Select custom logos for your browser tab icon (favicon). For best "
+"compatibility, upload both SVG and PNG formats. Modern browsers will use the "
+"SVG version, while older browsers will fall back to the 32x32 PNG version."
 msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:139
@@ -381,7 +405,7 @@ msgstr ""
 msgid "Success Text Color"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:648
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:712
 msgid "Target URL"
 msgstr ""
 
@@ -389,15 +413,11 @@ msgstr ""
 msgid "Theme Settings"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:626
-msgid "Toolbar Items"
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:689
+msgid "Toolbar Buttons"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:589
-msgid "Toolbar Settings"
-msgstr ""
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:652
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:716
 msgid "URL cannot be empty"
 msgstr ""
 
@@ -437,20 +457,16 @@ msgstr ""
 msgid "Upload Icon"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:203
-msgid "Click me to upload"
-msgstr ""
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:613
-msgid ""
-"Upload custom icons for toolbar buttons and theme branding (browser tab "
-"logo). Supported formats include SVG, PNG, JPG, and more. Icons are stored "
-"in <code>/www/luci-static/aurora/images/</code> and can be used throughout "
-"the theme."
-msgstr ""
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:238
 msgid "Upload error: %s"
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:591
+msgid ""
+"Upload theme branding assets (browser tab favicon) and custom toolbar icons. "
+"Supported formats include SVG, PNG, JPG, and more. Uploaded assets are "
+"stored in<code>/www/luci-static/aurora/images/</code> and can be used "
+"throughout the theme."
 msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:246
@@ -472,6 +488,6 @@ msgstr ""
 msgid "Warning Text Color"
 msgstr ""
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:644
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:708
 msgid "e.g., System Settings"
 msgstr ""
