@@ -92,7 +92,7 @@ const handleUpdate = (ev) => {
           class: "btn",
           click: ui.hideModal,
         },
-        _("Cancel")
+        _("Cancel"),
       ),
       " ",
       E(
@@ -103,7 +103,7 @@ const handleUpdate = (ev) => {
             executeUpdate(packageName, repo, version, packageFilter);
           },
         },
-        _("Update")
+        _("Update"),
       ),
     ]),
   ]);
@@ -122,7 +122,7 @@ const executeUpdate = (packageName, repo, version, packageFilter) => {
 
       dlg.removeChild(dlg.lastChild);
       dlg.appendChild(
-        E("p", { class: "spinning" }, _("Installing packages..."))
+        E("p", { class: "spinning" }, _("Installing packages...")),
       );
 
       const files = downloadResult.files.trim().split(/\s+/);
@@ -144,7 +144,7 @@ const executeUpdate = (packageName, repo, version, packageFilter) => {
                 };
               }
               throw err;
-            })
+            }),
         );
       });
 
@@ -163,7 +163,13 @@ const executeUpdate = (packageName, repo, version, packageFilter) => {
       }
 
       dlg.appendChild(
-        E("p", {}, _("Installation completed! The page will reload to verify the update."))
+        E(
+          "p",
+          {},
+          _(
+            "Installation completed! The page will reload to verify the update.",
+          ),
+        ),
       );
       dlg.appendChild(
         E("div", { class: "right" }, [
@@ -177,9 +183,9 @@ const executeUpdate = (packageName, repo, version, packageFilter) => {
                 window.location.reload();
               },
             },
-            _("Reload")
+            _("Reload"),
           ),
-        ])
+        ]),
       );
     })
     .catch((err) => {
@@ -188,8 +194,8 @@ const executeUpdate = (packageName, repo, version, packageFilter) => {
         E(
           "p",
           { class: "alert-message error" },
-          _(`Installation failed: %s`).format(err.message || err)
-        )
+          _(`Installation failed: %s`).format(err.message || err),
+        ),
       );
       dlg.appendChild(
         E("div", { class: "right" }, [
@@ -199,9 +205,9 @@ const executeUpdate = (packageName, repo, version, packageFilter) => {
               class: "btn",
               click: ui.hideModal,
             },
-            _("Close")
+            _("Close"),
           ),
-        ])
+        ]),
       );
     });
 };
@@ -213,7 +219,7 @@ const createUpdateButton = (
   displayName,
   installedVersion,
   packageFilter,
-  i18nUpdateMap
+  i18nUpdateMap,
 ) => {
   let hasUpdate = false;
 
@@ -288,7 +294,7 @@ const updateVersionTable = (updateInfo) => {
         pkg.display,
         installed,
         null,
-        i18nUpdateMap
+        i18nUpdateMap,
       ),
     ]);
 
@@ -309,7 +315,7 @@ const updateVersionTable = (updateInfo) => {
             i18nName,
             i18nVersion,
             i18nName,
-            i18nUpdateMap
+            i18nUpdateMap,
           ),
         ]);
       });
@@ -319,7 +325,7 @@ const updateVersionTable = (updateInfo) => {
   cbi_update_table(
     "#version-table",
     rows,
-    E("em", {}, _("No version information available"))
+    E("em", {}, _("No version information available")),
   );
 };
 
@@ -364,9 +370,9 @@ const checkForUpdates = (forceRefresh) => {
         E(
           "p",
           {},
-          _(`Failed to check for updates: %s`).format(err.message || err)
+          _(`Failed to check for updates: %s`).format(err.message || err),
         ),
-        "error"
+        "error",
       );
     });
 };
@@ -394,7 +400,7 @@ return view.extend({
         E(
           "div",
           { class: "cbi-map-descr" },
-          _("Manage Aurora theme and configuration package versions.")
+          _("Manage Aurora theme and configuration package versions."),
         ),
 
         E("div", { style: "margin: 1em 0" }, [
@@ -407,7 +413,7 @@ return view.extend({
                 checkForUpdates(true);
               },
             },
-            _("Check for Updates")
+            _("Check for Updates"),
           ),
         ]),
 
@@ -419,11 +425,11 @@ return view.extend({
             E(
               "th",
               { class: "th col-3 center cbi-section-actions" },
-              _("Status")
+              _("Status"),
             ),
           ]),
         ]),
-      ]
+      ],
     );
 
     requestAnimationFrame(() => {

@@ -46,7 +46,7 @@ document.querySelector("head").appendChild(
   E("script", {
     type: "text/javascript",
     src: L.resource("view/aurora/color.global.js"),
-  })
+  }),
 );
 
 const callUploadIcon = rpc.declare({
@@ -120,7 +120,7 @@ const createColorSection = (ss, tab, id, title, description, colorVars) => {
     "theme",
     "aurora",
     title,
-    description
+    description,
   );
   addColorInputs(o.subsection, colorVars);
 };
@@ -131,21 +131,21 @@ const createColorSections = (ss, mode, colorVars) => {
       key: "gradient",
       title: _("Gradient Colors"),
       description: _(
-        "Configure gradient colors used for backgrounds and progress bars.The theme background uses a three-color gradient, and progress bars use a two-color gradient."
+        "Configure gradient colors used for backgrounds and progress bars.The theme background uses a three-color gradient, and progress bars use a two-color gradient.",
       ),
     },
     {
       key: "semantic",
       title: _("Semantic Colors"),
       description: _(
-        "Semantic colors convey different operational behaviors, primarily used for buttons and badge elements. Each semantic type has two colors: the base color for backgrounds and the text color for content. The primary color affects form components (input, radio, checkbox, textarea, select, dynamic list) in hover, focus, and active states."
+        "Semantic colors convey different operational behaviors, primarily used for buttons and badge elements. Each semantic type has two colors: the base color for backgrounds and the text color for content. The primary color affects form components (input, radio, checkbox, textarea, select, dynamic list) in hover, focus, and active states.",
       ),
     },
     {
       key: "status",
       title: _("Status Colors"),
       description: _(
-        "Status colors indicate different system states and feedback (default, success, info, warning, error). Each status has two colors: the base color for backgrounds and the text color for content. Applied to tooltips, alert messages, labels, and legends."
+        "Status colors indicate different system states and feedback (default, success, info, warning, error). Each status has two colors: the base color for backgrounds and the text color for content. Applied to tooltips, alert messages, labels, and legends.",
       ),
     },
   ];
@@ -175,7 +175,7 @@ const renderSpacingControl = function (option_index, section_id, in_table) {
         {
           style: "margin-left: 10px; min-width: 60px; display: inline-block;",
         },
-        `${numValue.toFixed(2)}rem`
+        `${numValue.toFixed(2)}rem`,
       );
       const rangeInput = E("input", {
         type: "range",
@@ -212,14 +212,14 @@ const createIconUploadButton = (ss, tmpPath) => {
             if (ret?.result === 0) {
               ui.addNotification(
                 null,
-                E("p", _("Icon uploaded successfully: %s").format(filename))
+                E("p", _("Icon uploaded successfully: %s").format(filename)),
               );
               setTimeout(() => window.location.reload(), 1000);
             } else {
               const errorMsg = ret?.error || "Unknown error";
               ui.addNotification(
                 null,
-                E("p", _("Failed to upload icon: %s").format(errorMsg))
+                E("p", _("Failed to upload icon: %s").format(errorMsg)),
               );
               return L.resolveDefault(fs.remove(tmpPath), {});
             }
@@ -227,7 +227,7 @@ const createIconUploadButton = (ss, tmpPath) => {
           .catch((err) => {
             ui.addNotification(
               null,
-              E("p", _("RPC call failed: %s").format(err.message || err))
+              E("p", _("RPC call failed: %s").format(err.message || err)),
             );
             return L.resolveDefault(fs.remove(tmpPath), {});
           });
@@ -235,7 +235,7 @@ const createIconUploadButton = (ss, tmpPath) => {
       .catch((e) => {
         ui.addNotification(
           null,
-          E("p", _("Upload error: %s").format(e.message))
+          E("p", _("Upload error: %s").format(e.message)),
         );
         return L.resolveDefault(fs.remove(tmpPath), {});
       });
@@ -279,7 +279,7 @@ const createIconList = (ss) => {
                   E(
                     "button",
                     { class: "btn", click: ui.hideModal },
-                    _("Cancel")
+                    _("Cancel"),
                   ),
                   " ",
                   E(
@@ -296,7 +296,7 @@ const createIconList = (ss) => {
                               ui.hideModal();
                               ui.addNotification(
                                 null,
-                                E("p", _("Icon deleted: %s").format(icon))
+                                E("p", _("Icon deleted: %s").format(icon)),
                               );
                               window.location.reload();
                             } else {
@@ -305,29 +305,29 @@ const createIconList = (ss) => {
                                 null,
                                 E(
                                   "p",
-                                  _("Failed to delete icon: %s").format(icon)
+                                  _("Failed to delete icon: %s").format(icon),
                                 ),
-                                "error"
+                                "error",
                               );
                             }
-                          }
+                          },
                         );
                       },
                     },
-                    _("Delete")
+                    _("Delete"),
                   ),
                 ]),
               ]);
             }),
           },
-          _("Delete")
+          _("Delete"),
         );
 
         table.appendChild(
           E("tr", { class: "tr" }, [
             E("td", { class: "td", style: "font-family: monospace;" }, icon),
             E("td", { class: "td center" }, deleteBtn),
-          ])
+          ]),
         );
       });
 
@@ -488,12 +488,41 @@ return view.extend({
     const configVersion =
       installedVersions?.config?.installed_version || "Unknown";
 
-    m.description =
-      '<span id="aurora-versions">Theme: <span id="theme-version" class="label success" style="cursor: pointer;">v' +
-      themeVersion +
-      '</span> | Config: <span id="config-version" class="label success" style="cursor: pointer;">v' +
-      configVersion +
-      "</span></span>";
+    const versionBadges = E(
+      "div",
+      {
+        style:
+          "display: flex; flex-wrap: wrap; gap: 0.5em 1em; align-items: center;",
+      },
+      [
+        E("span", { style: "white-space: nowrap;" }, [
+          document.createTextNode("Theme: "),
+          E(
+            "span",
+            {
+              id: "theme-version",
+              class: "label success",
+              style: "cursor: pointer;",
+            },
+            `v${themeVersion}`,
+          ),
+        ]),
+        E("span", { style: "white-space: nowrap;" }, [
+          document.createTextNode("Config: "),
+          E(
+            "span",
+            {
+              id: "config-version",
+              class: "label success",
+              style: "cursor: pointer;",
+            },
+            `v${configVersion}`,
+          ),
+        ]),
+      ],
+    );
+
+    m.description = versionBadges;
 
     const s = m.section(form.NamedSection, "theme", "aurora");
 
@@ -507,7 +536,7 @@ return view.extend({
       "_colors",
       form.NamedSection,
       "theme",
-      "aurora"
+      "aurora",
     );
     const colorSubsection = colorSection.subsection;
     colorSubsection.tab("light", _("Light Mode"));
@@ -525,15 +554,15 @@ return view.extend({
       "aurora",
       _("Layout"),
       _(
-        "Layout settings control the navigation submenu display style and global component spacing."
-      )
+        "Layout settings control the navigation submenu display style and global component spacing.",
+      ),
     );
     const structureSubsection = structureSection.subsection;
 
     let so = structureSubsection.option(
       form.ListValue,
       "nav_submenu_type",
-      _("Navigation Submenu Type")
+      _("Navigation Submenu Type"),
     );
     so.value("mega-menu", _("Mega Menu"));
     so.value("boxed-dropdown", _("Boxed Dropdown"));
@@ -554,14 +583,14 @@ return view.extend({
       "theme",
       "aurora",
       _("Toolbar Settings"),
-      _("Configure floating toolbar visibility and behavior.")
+      _("Configure floating toolbar visibility and behavior."),
     );
     const toolbarSettingsSubsection = toolbarSettingsSection.subsection;
 
     so = toolbarSettingsSubsection.option(
       form.Flag,
       "toolbar_enabled",
-      _("Enable Floating Toolbar")
+      _("Enable Floating Toolbar"),
     );
     so.default = "1";
     so.rmempty = false;
@@ -575,8 +604,8 @@ return view.extend({
       "aurora",
       _("Icon Management"),
       _(
-        "Upload and manage custom icons for toolbar items. Icons are stored in <code>/www/luci-static/aurora/images/</code>."
-      )
+        "Upload and manage custom icons for toolbar items. Icons are stored in <code>/www/luci-static/aurora/images/</code>.",
+      ),
     );
     const iconSubsection = iconSection.subsection;
     createIconUploadButton(iconSubsection, "/tmp/aurora_icon.tmp");
@@ -590,8 +619,8 @@ return view.extend({
       "toolbar_item",
       _("Toolbar Items"),
       _(
-        "Configure the floating button group items. You can add, edit, remove, and reorder items by dragging."
-      )
+        "Configure the floating button group items. You can add, edit, remove, and reorder items by dragging.",
+      ),
     );
     const toolbarSubsection = toolbarSection.subsection;
     toolbarSubsection.addremove = true;
@@ -630,7 +659,7 @@ return view.extend({
             this.value("", _("(No icons uploaded)"));
           }
           return form.ListValue.prototype.load.apply(this, [section_id]);
-        }, this)
+        }, this),
       );
     };
     so.validate = (section_id, value) =>
@@ -665,14 +694,8 @@ return view.extend({
 
         const cached = versionCache.get();
         if (cached) {
-          updateVersionLabel(
-            labels.theme,
-            cached?.theme?.update_available
-          );
-          updateVersionLabel(
-            labels.config,
-            cached?.config?.update_available
-          );
+          updateVersionLabel(labels.theme, cached?.theme?.update_available);
+          updateVersionLabel(labels.config, cached?.config?.update_available);
         } else {
           L.resolveDefault(callCheckUpdates(), null)
             .then((updateData) => {
@@ -680,11 +703,11 @@ return view.extend({
                 versionCache.set(updateData);
                 updateVersionLabel(
                   labels.theme,
-                  updateData?.theme?.update_available
+                  updateData?.theme?.update_available,
                 );
                 updateVersionLabel(
                   labels.config,
-                  updateData?.config?.update_available
+                  updateData?.config?.update_available,
                 );
               }
             })
