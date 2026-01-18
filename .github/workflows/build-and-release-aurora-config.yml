@@ -83,7 +83,7 @@ jobs:
         run: |
           mkdir -p "$TMP"/${{ matrix.target.sdk_dir }}/package/${{ env.APP }}
           rsync -a --delete ./ "$TMP"/${{ matrix.target.sdk_dir }}/package/${{ env.APP }}/ \
-            --exclude .git --exclude .github --exclude .vscode --exclude "$TMP"
+            --exclude .github --exclude .vscode --exclude "$TMP"
 
       - name: Build ${{ env.APP }}
         run: |
