@@ -1,19 +1,57 @@
-# LuCI App Aurora Config
+<h4 align="right"><strong>English</strong> | <a href="README_zh.md">简体中文</a></h4>
+<h1 align="center">LuCI App Aurora Config</h1>
+<p align="center"><strong>The personalized assistant for the Aurora Theme.</strong></p>
+<h4 align="center">🎨 Visual Customization | 📐 Interface Layout | 🚀 One-Click Updates</h4>
+<div align="center">
+  <a href="https://openwrt.org"><img alt="OpenWrt" src="https://img.shields.io/badge/OpenWrt-%E2%89%A523.05-00B5E2?logo=openwrt&logoColor=white"></a>
+  <a href="https://github.com/eamonxg/luci-theme-aurora"><img alt="LuCI Theme Aurora" src="https://img.shields.io/badge/Theme-Aurora-46a3d1?logo=openwrt&logoColor=white"></a>
+  <a href="https://github.com/eamonxg/luci-app-aurora-config/releases/latest"><img alt="GitHub Release" src="https://img.shields.io/github/v/release/eamonxg/luci-app-aurora-config?logo=github&color=4ADE80"></a>
+  <a href="https://github.com/eamonxg/luci-app-aurora-config/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/eamonxg/luci-app-aurora-config/total?color=orange"></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-Apache%202.0-blue?logo=apache"></a>
+</div>
 
-**English** | [简体中文](README_zh.md)
+## Features
 
-## Introduction
+- **Seamless Updates**: Update the theme and config app directly from the interface—no CLI or SSH required.
+- **Professional Color System**: Customize the visual language, including Gradient Colors, Semantic Colors, and Status Colors
+- **Layout & Density Control**: Adjust navigation submenu styles and global element spacing to fit your screen perfectly.
+- **Brand Identity**: Customize the theme logo (favicon) and configure floating toolbar shortcuts for frequently used pages.
 
-**LuCI App Aurora Config** is a configuration application built specifically for [luci-theme-aurora](https://github.com/eamonxg/luci-theme-aurora). More customization options will be added in future releases _(assuming I still have any hair left by then)_ .
+## Preview
 
-With this application, you can configure:
+<div align="center">
+  <img src="https://raw.githubusercontent.com/eamonxg/assets/master/aurora/preview/config/config-overview.png" alt="Overview" width="100%">
+  <br>
+  <sub><strong>Dashboard Overview</strong> — A modern, intuitive configuration interface.</sub>
+</div>
 
-- **Theme Colors** : A built-in color picker so you can fine-tune your personal aesthetic
-- **Layout Options** : Adjust how secondary menus behave when the top navigation bar is floating
+<br>
 
----
+|                                                              Interface Layout                                                               |                                                                  Branding & Toolbar                                                                   |                                                                         Update Center                                                                         |
+| :-----------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| <img src="https://raw.githubusercontent.com/eamonxg/assets/master/aurora/preview/config/config-structure.png" width="100%" alt="Structure"> | <img src="https://raw.githubusercontent.com/eamonxg/assets/master/aurora/preview/config/config-icons-toolbar.png" width="100%" alt="Icons & Toolbar"> | <img src="https://raw.githubusercontent.com/eamonxg/assets/master/aurora/preview/config/config-version-management.png" width="100%" alt="Version Management"> |
 
-## ⚠️ Notes
+## Compatibility
 
-- This application supports **luci-theme-aurora ≥ v0.8.9_beta** only
-- Using older versions of the theme will cause the configuration to have no effect
+| Component             | Requirement | Note                                             |
+| :-------------------- | :---------- | :----------------------------------------------- |
+| **LuCI Theme Aurora** | `≥ v0.10.0` | Older versions will ignore these configurations. |
+| **OpenWrt**           | `≥ 23.05`   | Lua-based LuCI are not supported.                |
+
+## Installation
+
+### Using opkg:
+
+```sh
+cd /tmp
+wget -O luci-app-aurora-config.ipk https://github.com/eamonxg/luci-app-aurora-config/releases/latest/download/luci-app-aurora-config-0.2.0-r20260119_all.ipk
+opkg install luci-app-aurora-config.ipk
+```
+
+### Using apk:
+
+```sh
+cd /tmp
+wget -O luci-app-aurora-config.apk https://github.com/eamonxg/luci-app-aurora-config/releases/latest/download/luci-app-aurora-config-0.2.0-r20260119.apk
+apk add --allow-untrusted luci-app-aurora-config.apk
+```
