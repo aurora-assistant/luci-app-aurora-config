@@ -148,6 +148,13 @@ const createColorSections = (ss, mode, colorVars) => {
         "Set colors that indicate system status and feedback messages. Each status type (default, success, info, warning, error) has two colors: a background color and a text color. These are used in tooltips, alert messages, status labels, and legends throughout the interface.",
       ),
     },
+    {
+      key: "component",
+      title: _("Component Colors"),
+      description: _(
+        "Set colors for major interface components including headers, view backgrounds, and card containers.",
+      ),
+    },
   ];
 
   sections.forEach(({ key, title, description }) => {
@@ -356,7 +363,7 @@ return view.extend({
       lightGradient: [
         [
           "light_background_start",
-          "oklch(0.984 0.003 247.858)",
+          "oklch(0.968 0.007 247.896)",
           _("Background Start Color"),
         ],
         [
@@ -366,7 +373,7 @@ return view.extend({
         ],
         [
           "light_background_end",
-          "oklch(0.929 0.013 255.508)",
+          "oklch(0.968 0.007 247.896)",
           _("Background End Color"),
         ],
         [
@@ -478,6 +485,20 @@ return view.extend({
           "oklch(0.985 0.01 285.805)",
           _("Default Text Color"),
         ],
+      ],
+      lightComponent: [
+        [
+          "light_header_bg",
+          "oklch(0.968 0.007 247.896)",
+          _("Header Background"),
+        ],
+        ["light_view_bg", "oklch(1 0 0)", _("View Background")],
+        ["light_card_bg", "oklch(1 0 0)", _("Card Background")],
+      ],
+      darkComponent: [
+        ["dark_header_bg", "oklch(0.21 0.034 264.665)", _("Header Background")],
+        ["dark_view_bg", "oklch(0.21 0.034 264.665)", _("View Background")],
+        ["dark_card_bg", "oklch(0.279 0.041 260.031)", _("Card Background")],
       ],
     };
 
