@@ -7,43 +7,32 @@ const CACHE_KEY = "aurora.version.cache";
 const CACHE_TTL = 1800000;
 
 const versionCache = {
-  get: () => {
+  get() {
     try {
       const cached = localStorage.getItem(CACHE_KEY);
       if (!cached) return null;
-
-      const data = JSON.parse(cached);
-      const now = Date.now();
-
-      if (now - data.timestamp > CACHE_TTL) {
-        localStorage.removeItem(CACHE_KEY);
+      const { timestamp, value } = JSON.parse(cached);
+      if (Date.now() - timestamp > CACHE_TTL) {
+        this.clear();
         return null;
       }
-
-      return data.value;
+      return value;
     } catch (e) {
       return null;
     }
   },
 
-  set: (value) => {
+  set(value) {
     try {
-      const data = {
-        timestamp: Date.now(),
-        value: value,
-      };
+      const data = { timestamp: Date.now(), value };
       localStorage.setItem(CACHE_KEY, JSON.stringify(data));
     } catch (e) {
       console.error("Failed to cache version data:", e);
     }
   },
 
-  clear: () => {
-    try {
-      localStorage.removeItem(CACHE_KEY);
-    } catch (e) {
-      console.error("Failed to clear version cache:", e);
-    }
+  clear() {
+    localStorage.removeItem(CACHE_KEY);
   },
 };
 
