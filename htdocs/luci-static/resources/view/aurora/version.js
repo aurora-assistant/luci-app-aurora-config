@@ -281,6 +281,10 @@ const updateVersionTable = (updateInfo) => {
           : _("Checking for updates...");
         let i18nCanUpdate = false;
 
+        const parentLatest = updateInfo
+          ? updateInfo[pkg.key]?.latest_version || _("Unknown")
+          : _("Unknown");
+
         if (updateInfo && updateInfo.i18n && updateInfo.i18n[i18nName]) {
           i18nLatest = updateInfo.i18n[i18nName].latest_version || _("Unknown");
           i18nCanUpdate = updateInfo.i18n[i18nName].update_available;
@@ -293,7 +297,7 @@ const updateVersionTable = (updateInfo) => {
           updateInfo
             ? createUpdateButton(
                 i18nName,
-                i18nLatest,
+                parentLatest,
                 i18nCanUpdate,
                 i18nName,
                 pkg.name,
