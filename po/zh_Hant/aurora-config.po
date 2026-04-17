@@ -83,8 +83,8 @@ msgid "Border"
 msgstr "邊框"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
-msgid "Boxed Dropdown"
-msgstr "盒式下拉選單"
+msgid "Collapsed"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1166
 msgid "Button Title"
@@ -414,8 +414,8 @@ msgid "Logo Settings"
 msgstr "Logo 設定"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
-msgid "Mega Menu"
-msgstr "大型選單"
+msgid "Expanded"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:561
 msgid "Monochrome"
@@ -430,8 +430,8 @@ msgid "Muted Foreground"
 msgstr "柔和前景"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1015
-msgid "Navigation Submenu Type"
-msgstr "導覽子選單類型"
+msgid "Default Sidebar State"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:315
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:754

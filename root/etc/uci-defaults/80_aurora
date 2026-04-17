@@ -43,6 +43,11 @@ main() {
     else
         log "Configuration already exists, skipping initialization"
     fi
+
+    uci -q delete aurora.theme.nav_submenu_type 2>/dev/null || true
+    uci -q get aurora.theme.nav_default_sidebar >/dev/null 2>&1 || \
+        uci set aurora.theme.nav_default_sidebar=expanded
+    uci commit aurora 2>/dev/null || true
 }
 
 main

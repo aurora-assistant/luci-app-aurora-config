@@ -87,8 +87,8 @@ msgid "Border"
 msgstr "Borde"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
-msgid "Boxed Dropdown"
-msgstr "Menú desplegable en caja"
+msgid "Collapsed"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1166
 msgid "Button Title"
@@ -428,8 +428,8 @@ msgid "Logo Settings"
 msgstr "Ajustes del logo"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
-msgid "Mega Menu"
-msgstr "Mega menú"
+msgid "Expanded"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:561
 msgid "Monochrome"
@@ -444,8 +444,8 @@ msgid "Muted Foreground"
 msgstr "Primer plano tenue"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1015
-msgid "Navigation Submenu Type"
-msgstr "Tipo de submenú de navegación"
+msgid "Default Sidebar State"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:315
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:754

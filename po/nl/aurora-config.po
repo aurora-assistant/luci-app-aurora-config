@@ -87,8 +87,8 @@ msgid "Border"
 msgstr "Rand"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
-msgid "Boxed Dropdown"
-msgstr "Omlijnd vervolgkeuzemenu"
+msgid "Collapsed"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1166
 msgid "Button Title"
@@ -424,8 +424,8 @@ msgid "Logo Settings"
 msgstr "Logo-instellingen"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
-msgid "Mega Menu"
-msgstr "Mega-menu"
+msgid "Expanded"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:561
 msgid "Monochrome"
@@ -440,8 +440,8 @@ msgid "Muted Foreground"
 msgstr "Gedempte voorgrond"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1015
-msgid "Navigation Submenu Type"
-msgstr "Type navigatiesubmenu"
+msgid "Default Sidebar State"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:315
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:754

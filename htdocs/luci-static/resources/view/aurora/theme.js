@@ -1011,12 +1011,12 @@ return view.extend({
 
     so = structureSubsection.option(
       form.ListValue,
-      "nav_submenu_type",
-      _("Navigation Submenu Type"),
+      "nav_default_sidebar",
+      _("Default Sidebar State"),
     );
-    so.value("mega-menu", _("Mega Menu"));
-    so.value("boxed-dropdown", _("Boxed Dropdown"));
-    so.default = "mega-menu";
+    so.value("expanded", _("Expanded"));
+    so.value("collapsed", _("Collapsed"));
+    so.default = "expanded";
     so.rmempty = false;
 
     so = structureSubsection.option(
