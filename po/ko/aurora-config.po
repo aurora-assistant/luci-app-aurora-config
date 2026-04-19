@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1189
 msgid "(No icons uploaded)"
@@ -49,12 +49,10 @@ msgstr "적용 중..."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:856
 msgid ""
-"Are you sure you want to reset all theme settings (Color, Structure, Icons & "
-"Toolbar) back to the default theme's original configuration? This will "
-"revert everything to the default theme's initial state."
+"Are you sure you want to reset all theme settings (Color, Structure, Icons) "
+"back to the default theme's original configuration? This will revert "
+"everything to the default theme's initial state."
 msgstr ""
-"모든 테마 설정(색상, 구조, 아이콘 및 툴바)을 기본 테마의 원래 구성으로 초기"
-"화하시겠습니까? 이 작업은 모든 것을 기본 테마의 초기 상태로 되돌립니다."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:80
 msgid ""
@@ -84,17 +82,9 @@ msgstr "기본 색상"
 msgid "Border"
 msgstr "테두리"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1028
 msgid "Boxed Dropdown"
 msgstr "박스형 드롭다운"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1166
-msgid "Button Title"
-msgstr "버튼 제목"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1170
-msgid "Button title cannot be empty"
-msgstr "버튼 제목은 비워둘 수 없습니다"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:389
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:634
@@ -185,9 +175,9 @@ msgid ""
 msgstr ""
 "특정 UI 구성 요소에서 사용되는 색상을 제어합니다: 상단 내비게이션 바(Header) "
 "및 박스형 드롭다운 호버 배경(Header Interactive), 진행 표시줄 그라데이션"
-"(Progress Bar Start/End), 로그 패널(Terminal), 오버레이 마스크(Overlay), 링"
-"크(Link), 선택된 라디오/체크박스(Input Checked), 툴팁 말풍선(Tooltip) 및 섹"
-"션 헤더 표면(Label Surface)."
+"(Progress Bar Start/End), 로그 패널(Terminal), 오버레이 마스크(Overlay), 링크"
+"(Link), 선택된 라디오/체크박스(Input Checked), 툴팁 말풍선(Tooltip) 및 섹션 "
+"헤더 표면(Label Surface)."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1007
 msgid ""
@@ -256,18 +246,6 @@ msgstr "업데이트 파일 다운로드 중..."
 msgid "Element Spacing"
 msgstr "요소 간격"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1136
-msgid "Enable Floating Toolbar"
-msgstr "플로팅 툴바 활성화"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1139
-msgid "Enable or disable the floating toolbar on the right side of the screen."
-msgstr "화면 오른쪽의 플로팅 툴바를 활성화하거나 비활성화합니다."
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1161
-msgid "Enabled"
-msgstr "활성화됨"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:508
 msgid "Error"
 msgstr "오류"
@@ -308,10 +286,6 @@ msgstr "아이콘 삭제 실패: %s"
 msgid "Failed to upload icon: %s"
 msgstr "아이콘 업로드 실패: %s"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1129
-msgid "Floating Toolbar"
-msgstr "플로팅 툴바"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:469
 msgid "Foreground"
 msgstr "전경색"
@@ -327,10 +301,6 @@ msgstr "헤더 배경색"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:479
 msgid "Header Interactive"
 msgstr "헤더 인터랙티브"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1178
-msgid "Icon"
-msgstr "아이콘"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1049
 msgid "Icon Management"
@@ -349,8 +319,8 @@ msgid "Icon uploaded successfully: %s"
 msgstr "아이콘이 성공적으로 업로드됨: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:981
-msgid "Icons & Toolbar"
-msgstr "아이콘 & 툴바"
+msgid "Icons"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:842
 msgid "Import"
@@ -417,7 +387,7 @@ msgstr "링크"
 msgid "Logo Settings"
 msgstr "로고 설정"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1027
 msgid "Mega Menu"
 msgstr "메가 메뉴"
 
@@ -434,6 +404,10 @@ msgid "Muted Foreground"
 msgstr "흐림 전경색"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1015
+msgid "Navigation Layout"
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1025
 msgid "Navigation Submenu Type"
 msgstr "내비게이션 서브메뉴 유형"
 
@@ -583,10 +557,10 @@ msgid ""
 msgstr ""
 "의미론적 색상은 버튼과 배지에서 일반적으로 사용되는 다양한 작업과 의도를 나타"
 "냅니다. 예를 들어, 파괴적(Destructive)은 삭제 또는 초기화와 같은 고위험 작업"
-"에 매핑됩니다. 상태 색상은 툴팁 메시지(Tooltip), 경고 대화 상자(Alert), 상"
-"태 태그(Tag) 및 범례(Legend)에서 일반적으로 사용되는 시스템 피드백 상태를 나"
-"타냅니다. 각 상태 유형(기본, 정보, 경고, 성공, 오류)에는 배경색과 전경/텍스"
-"트 색상(Foreground)의 두 가지 색상이 있습니다."
+"에 매핑됩니다. 상태 색상은 툴팁 메시지(Tooltip), 경고 대화 상자(Alert), 상태 "
+"태그(Tag) 및 범례(Legend)에서 일반적으로 사용되는 시스템 피드백 상태를 나타냅"
+"니다. 각 상태 유형(기본, 정보, 경고, 성공, 오류)에는 배경색과 전경/텍스트 색"
+"상(Foreground)의 두 가지 색상이 있습니다."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:877
 msgid "Settings reset successfully."
@@ -595,6 +569,10 @@ msgstr "설정이 성공적으로 초기화되었습니다."
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:564
 msgid "Sky Blue"
 msgstr "스카이 블루"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+msgid "Sidebar"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:437
 msgid "Status"
@@ -611,10 +589,6 @@ msgstr "성공"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:507
 msgid "Success Foreground"
 msgstr "성공 전경색"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1172
-msgid "Target URL"
-msgstr "대상 URL"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:482
 msgid "Terminal Background"
@@ -633,15 +607,19 @@ msgid ""
 "selects, radios, checkboxes, and dropdowns, and is also used for key buttons "
 "and the page footer."
 msgstr ""
-"테마 레이아웃은 배경(Background) → 페이지 컨테이너(Page) → 패널 카드"
-"(Panel)의 세 가지 레이어를 사용합니다. 기본 색상(Base Colors) 변수는 각 레이"
-"어의 배경색(Background)과 전경/텍스트 색상(Foreground)을 정의합니다. 주요 색"
-"상(Primary)은 주로 입력, 선택, 라디오, 체크박스 및 드롭다운의 포커스/활성 상"
-"태에 사용되며, 주요 버튼 및 페이지 바닥글에도 사용됩니다."
+"테마 레이아웃은 배경(Background) → 페이지 컨테이너(Page) → 패널 카드(Panel)"
+"의 세 가지 레이어를 사용합니다. 기본 색상(Base Colors) 변수는 각 레이어의 배"
+"경색(Background)과 전경/텍스트 색상(Foreground)을 정의합니다. 주요 색상"
+"(Primary)은 주로 입력, 선택, 라디오, 체크박스 및 드롭다운의 포커스/활성 상태"
+"에 사용되며, 주요 버튼 및 페이지 바닥글에도 사용됩니다."
 
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:13
 msgid "Theme Settings"
 msgstr "테마 설정"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+msgid "Top Bar"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:947
 msgid "Theme:"
@@ -655,17 +633,9 @@ msgstr ""
 "이 작업은 테마 스타일을 '%s' 프리셋으로 전환하고 /etc/config/aurora의 구성을 "
 "덮어씁니다. 계속하시겠습니까?"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1149
-msgid "Toolbar Buttons"
-msgstr "툴바 버튼"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:484
 msgid "Tooltip Background"
 msgstr "툴팁 배경색"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1176
-msgid "URL cannot be empty"
-msgstr "URL은 비워둘 수 없습니다"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:219
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:234
@@ -724,15 +694,10 @@ msgstr "업로드 오류: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1051
 msgid ""
-"Upload theme branding assets (browser tab favicon) and custom toolbar icons. "
-"Supported formats include SVG, PNG, JPG, and more. Uploaded assets are "
-"stored in<code>/www/luci-static/aurora/images/</code> and can be used "
-"throughout the theme."
+"Upload theme branding assets. Supported formats include SVG, PNG, JPG, and "
+"more. Uploaded assets are stored in<code>/www/luci-static/aurora/images/</"
+"code> and can be used throughout the theme."
 msgstr ""
-"테마 브랜딩 자산(브라우저 탭 파비콘) 및 사용자 정의 툴바 아이콘을 업로드합니"
-"다. 지원되는 형식에는 SVG, PNG, JPG 등이 포함됩니다. 업로드된 자산은 <code>/"
-"www/luci-static/aurora/images/</code>에 저장되며 테마 전체에서 사용할 수 있"
-"습니다."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:353
 msgid "Uploaded Icons"

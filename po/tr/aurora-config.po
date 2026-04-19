@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1189
 msgid "(No icons uploaded)"
@@ -49,13 +49,10 @@ msgstr "Uygulanıyor..."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:856
 msgid ""
-"Are you sure you want to reset all theme settings (Color, Structure, Icons & "
-"Toolbar) back to the default theme's original configuration? This will "
-"revert everything to the default theme's initial state."
+"Are you sure you want to reset all theme settings (Color, Structure, Icons) "
+"back to the default theme's original configuration? This will revert "
+"everything to the default theme's initial state."
 msgstr ""
-"Tüm tema ayarlarını (Renk, Yapı, Simgeler ve Araç Çubuğu) varsayılan temanın "
-"orijinal yapılandırmasına sıfırlamak istediğinizden emin misiniz? Bu işlem "
-"her şeyi varsayılan temanın ilk durumuna döndürecektir."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:80
 msgid ""
@@ -85,17 +82,9 @@ msgstr "Temel Renkler"
 msgid "Border"
 msgstr "Kenarlık"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1028
 msgid "Boxed Dropdown"
 msgstr "Kutulu Açılır Menü"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1166
-msgid "Button Title"
-msgstr "Düğme Başlığı"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1170
-msgid "Button title cannot be empty"
-msgstr "Düğme başlığı boş olamaz"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:389
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:634
@@ -198,9 +187,9 @@ msgid ""
 "displays, adjust the spacing between interface elements, and set the maximum "
 "width of the page content container."
 msgstr ""
-"Arayüzünüzün düzenini özelleştirin. Gezinme menüsünün nasıl görüntüleneceğini "
-"kontrol edin, arayüz öğeleri arasındaki boşluğu ayarlayın ve sayfa içeriği "
-"kapsayıcısının maksimum genişliğini belirleyin."
+"Arayüzünüzün düzenini özelleştirin. Gezinme menüsünün nasıl "
+"görüntüleneceğini kontrol edin, arayüz öğeleri arasındaki boşluğu ayarlayın "
+"ve sayfa içeriği kapsayıcısının maksimum genişliğini belirleyin."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1151
 msgid ""
@@ -260,20 +249,6 @@ msgstr "Güncelleme dosyaları indiriliyor..."
 msgid "Element Spacing"
 msgstr "Öğe Boşluğu"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1136
-msgid "Enable Floating Toolbar"
-msgstr "Yüzen Araç Çubuğunu Etkinleştir"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1139
-msgid "Enable or disable the floating toolbar on the right side of the screen."
-msgstr ""
-"Ekranın sağ tarafındaki yüzen araç çubuğunu etkinleştirin veya devre dışı "
-"bırakın."
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1161
-msgid "Enabled"
-msgstr "Etkin"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:508
 msgid "Error"
 msgstr "Hata"
@@ -316,10 +291,6 @@ msgstr "Simge silinemedi: %s"
 msgid "Failed to upload icon: %s"
 msgstr "Simge yüklenemedi: %s"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1129
-msgid "Floating Toolbar"
-msgstr "Yüzen Araç Çubuğu"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:469
 msgid "Foreground"
 msgstr "Ön Plan"
@@ -335,10 +306,6 @@ msgstr "Üst Bilgi Arka Planı"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:479
 msgid "Header Interactive"
 msgstr "Üst Bilgi Etkileşimli"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1178
-msgid "Icon"
-msgstr "Simge"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1049
 msgid "Icon Management"
@@ -357,8 +324,8 @@ msgid "Icon uploaded successfully: %s"
 msgstr "Simge başarıyla yüklendi: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:981
-msgid "Icons & Toolbar"
-msgstr "Simgeler ve Araç Çubuğu"
+msgid "Icons"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:842
 msgid "Import"
@@ -425,7 +392,7 @@ msgstr "Bağlantı"
 msgid "Logo Settings"
 msgstr "Logo Ayarları"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1027
 msgid "Mega Menu"
 msgstr "Mega Menü"
 
@@ -442,6 +409,10 @@ msgid "Muted Foreground"
 msgstr "Sönük Ön Plan"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1015
+msgid "Navigation Layout"
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1025
 msgid "Navigation Submenu Type"
 msgstr "Gezinme Alt Menü Türü"
 
@@ -607,6 +578,10 @@ msgstr "Ayarlar başarıyla sıfırlandı."
 msgid "Sky Blue"
 msgstr "Gök Mavisi"
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+msgid "Sidebar"
+msgstr ""
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:437
 msgid "Status"
 msgstr "Durum"
@@ -622,10 +597,6 @@ msgstr "Başarı"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:507
 msgid "Success Foreground"
 msgstr "Başarı Ön Planı"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1172
-msgid "Target URL"
-msgstr "Hedef URL"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:482
 msgid "Terminal Background"
@@ -656,6 +627,10 @@ msgstr ""
 msgid "Theme Settings"
 msgstr "Tema Ayarları"
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+msgid "Top Bar"
+msgstr ""
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:947
 msgid "Theme:"
 msgstr "Tema:"
@@ -668,17 +643,9 @@ msgstr ""
 "Bu işlem tema stilini '%s' ön ayarına değiştirecek ve /etc/config/aurora "
 "içindeki yapılandırmanın üzerine yazacaktır. Devam etmek istiyor musunuz?"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1149
-msgid "Toolbar Buttons"
-msgstr "Araç Çubuğu Düğmeleri"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:484
 msgid "Tooltip Background"
 msgstr "İpucu Arka Planı"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1176
-msgid "URL cannot be empty"
-msgstr "URL boş olamaz"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:219
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:234
@@ -737,15 +704,10 @@ msgstr "Yükleme hatası: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1051
 msgid ""
-"Upload theme branding assets (browser tab favicon) and custom toolbar icons. "
-"Supported formats include SVG, PNG, JPG, and more. Uploaded assets are "
-"stored in<code>/www/luci-static/aurora/images/</code> and can be used "
-"throughout the theme."
+"Upload theme branding assets. Supported formats include SVG, PNG, JPG, and "
+"more. Uploaded assets are stored in<code>/www/luci-static/aurora/images/</"
+"code> and can be used throughout the theme."
 msgstr ""
-"Tema markalama varlıklarını (tarayıcı sekmesi favicon'u) ve özel araç çubuğu "
-"simgelerini yükleyin. Desteklenen formatlar arasında SVG, PNG, JPG ve daha "
-"fazlası bulunur. Yüklenen varlıklar <code>/www/luci-static/aurora/images/</"
-"code> içinde saklanır ve tema genelinde kullanılabilir."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:353
 msgid "Uploaded Icons"

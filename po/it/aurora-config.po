@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1189
 msgid "(No icons uploaded)"
@@ -49,14 +49,10 @@ msgstr "Applicazione in corso..."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:856
 msgid ""
-"Are you sure you want to reset all theme settings (Color, Structure, Icons & "
-"Toolbar) back to the default theme's original configuration? This will "
-"revert everything to the default theme's initial state."
+"Are you sure you want to reset all theme settings (Color, Structure, Icons) "
+"back to the default theme's original configuration? This will revert "
+"everything to the default theme's initial state."
 msgstr ""
-"Sei sicuro di voler reimpostare tutte le impostazioni del tema (Colore, "
-"Struttura, Icone e Barra degli strumenti) alla configurazione originale del "
-"tema predefinito? Questo riporterà tutto allo stato iniziale del tema "
-"predefinito."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:80
 msgid ""
@@ -86,17 +82,9 @@ msgstr "Colori Base"
 msgid "Border"
 msgstr "Bordo"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1028
 msgid "Boxed Dropdown"
 msgstr "Menu a discesa Riquadrato"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1166
-msgid "Button Title"
-msgstr "Titolo Pulsante"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1170
-msgid "Button title cannot be empty"
-msgstr "Il titolo del pulsante non può essere vuoto"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:389
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:634
@@ -262,20 +250,6 @@ msgstr "Download file di aggiornamento..."
 msgid "Element Spacing"
 msgstr "Spaziatura Elementi"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1136
-msgid "Enable Floating Toolbar"
-msgstr "Abilita Barra degli strumenti Flottante"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1139
-msgid "Enable or disable the floating toolbar on the right side of the screen."
-msgstr ""
-"Abilita o disabilita la barra degli strumenti flottante sul lato destro "
-"dello schermo."
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1161
-msgid "Enabled"
-msgstr "Abilitato"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:508
 msgid "Error"
 msgstr "Errore"
@@ -318,10 +292,6 @@ msgstr "Impossibile eliminare icona: %s"
 msgid "Failed to upload icon: %s"
 msgstr "Impossibile caricare icona: %s"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1129
-msgid "Floating Toolbar"
-msgstr "Barra degli strumenti Flottante"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:469
 msgid "Foreground"
 msgstr "Primo piano"
@@ -337,10 +307,6 @@ msgstr "Sfondo Intestazione"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:479
 msgid "Header Interactive"
 msgstr "Intestazione Interattiva"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1178
-msgid "Icon"
-msgstr "Icona"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1049
 msgid "Icon Management"
@@ -359,8 +325,8 @@ msgid "Icon uploaded successfully: %s"
 msgstr "Icona caricata con successo: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:981
-msgid "Icons & Toolbar"
-msgstr "Icone & Barra degli strumenti"
+msgid "Icons"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:842
 msgid "Import"
@@ -427,7 +393,7 @@ msgstr "Link"
 msgid "Logo Settings"
 msgstr "Impostazioni Logo"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1027
 msgid "Mega Menu"
 msgstr "Mega Menu"
 
@@ -444,6 +410,10 @@ msgid "Muted Foreground"
 msgstr "Primo piano Attenuato"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1015
+msgid "Navigation Layout"
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1025
 msgid "Navigation Submenu Type"
 msgstr "Tipo Sottomenu Navigazione"
 
@@ -585,22 +555,13 @@ msgstr "Colori Semantici & di Stato"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:533
 msgid ""
 "Semantic colors represent different actions and intents, commonly used in "
-"buttons and badges. For example, distruttivo (Destructive) corrisponde ad "
-"azioni ad alto rischio come elimina o reimposta. I colori di stato "
-"rappresentano stati di feedback del sistema, comunemente usati in messaggi "
-"tooltip (Tooltip), finestre di avviso (Alert), tag di stato (Tag) e legende "
-"(Legend). Ogni tipo di stato (Predefinito, Info, Avviso, Successo, Errore) "
-"ha due colori: un colore di sfondo e un colore di primo piano/testo "
-"(Foreground)."
+"buttons and badges. For example, destructive (Destructive) maps to high‑risk "
+"actions like delete or reset. Status colors represent system feedback "
+"states, commonly used in tooltip messages (Tooltip), alert dialogs (Alert), "
+"status tags (Tag), and legends (Legend). Each status type (Default, Info, "
+"Warning, Success, Error) has two colors: a background color and a foreground/"
+"text color (Foreground)."
 msgstr ""
-"I colori semantici rappresentano diverse azioni e intenti, comunemente usati "
-"in pulsanti e badge. Ad esempio, distruttivo (Destructive) corrisponde ad "
-"azioni ad alto rischio come elimina o reimposta. I colori di stato "
-"rappresentano stati di feedback del sistema, comunemente usati in messaggi "
-"tooltip (Tooltip), finestre di avviso (Alert), tag di stato (Tag) e legende "
-"(Legend). Ogni tipo di stato (Predefinito, Info, Avviso, Successo, Errore) "
-"ha due colori: un colore di sfondo e un colore di primo piano/testo "
-"(Foreground)."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:877
 msgid "Settings reset successfully."
@@ -609,6 +570,10 @@ msgstr "Impostazioni reimpostate con successo."
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:564
 msgid "Sky Blue"
 msgstr "Blu Cielo"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+msgid "Sidebar"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:437
 msgid "Status"
@@ -626,10 +591,6 @@ msgstr "Successo"
 msgid "Success Foreground"
 msgstr "Primo piano Successo"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1172
-msgid "Target URL"
-msgstr "URL Destinazione"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:482
 msgid "Terminal Background"
 msgstr "Sfondo Terminale"
@@ -644,20 +605,17 @@ msgid ""
 "(Page) → panel card (Panel). The Base Colors variables define each layer's "
 "background color (Background) and foreground/text color (Foreground). The "
 "primary color (Primary) is mainly used for focused/active states of inputs, "
-"selezioni, radio, checkbox e menu a discesa, ed è usato anche per pulsanti "
-"chiave e piè di pagina."
+"selects, radios, checkboxes, and dropdowns, and is also used for key buttons "
+"and the page footer."
 msgstr ""
-"Il layout del tema usa tre livelli: sfondo (Background) → contenitore pagina "
-"(Page) → scheda pannello (Panel). Le variabili Colori Base (Base Colors) "
-"definiscono il colore di sfondo (Background) e il colore di primo piano/"
-"testo (Foreground) di ogni livello. Il colore primario (Primary) è usato "
-"principalmente per stati focalizzati/attivi di input, selezioni, radio, "
-"checkbox e menu a discesa, ed è usato anche per pulsanti chiave e piè di "
-"pagina."
 
 #: applications/luci-app-aurora-config/root/usr/share/luci/menu.d/luci-app-aurora.json:13
 msgid "Theme Settings"
 msgstr "Impostazioni Tema"
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+msgid "Top Bar"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:947
 msgid "Theme:"
@@ -671,17 +629,9 @@ msgstr ""
 "Questo cambierà lo stile del tema alla preimpostazione '%s' e sovrascriverà "
 "la configurazione in /etc/config/aurora. Vuoi continuare?"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1149
-msgid "Toolbar Buttons"
-msgstr "Pulsanti Barra degli Strumenti"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:484
 msgid "Tooltip Background"
 msgstr "Sfondo Tooltip"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1176
-msgid "URL cannot be empty"
-msgstr "L'URL non può essere vuoto"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:219
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:234
@@ -740,15 +690,10 @@ msgstr "Errore caricamento: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1051
 msgid ""
-"Upload theme branding assets (browser tab favicon) and custom toolbar icons. "
-"Supported formats include SVG, PNG, JPG, and more. Uploaded assets are "
-"stored in<code>/www/luci-static/aurora/images/</code> and can be used "
-"throughout the theme."
+"Upload theme branding assets. Supported formats include SVG, PNG, JPG, and "
+"more. Uploaded assets are stored in<code>/www/luci-static/aurora/images/</"
+"code> and can be used throughout the theme."
 msgstr ""
-"Carica risorse di branding del tema (favicon scheda browser) e icone barra "
-"degli strumenti personalizzate. I formati supportati includono SVG, PNG, JPG "
-"e altri. Le risorse caricate sono memorizzate in <code>/www/luci-static/"
-"aurora/images/</code> e possono essere usate in tutto il tema."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:353
 msgid "Uploaded Icons"

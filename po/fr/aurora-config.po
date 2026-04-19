@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1189
 msgid "(No icons uploaded)"
@@ -49,14 +49,10 @@ msgstr "Application en cours..."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:856
 msgid ""
-"Are you sure you want to reset all theme settings (Color, Structure, Icons & "
-"Toolbar) back to the default theme's original configuration? This will "
-"revert everything to the default theme's initial state."
+"Are you sure you want to reset all theme settings (Color, Structure, Icons) "
+"back to the default theme's original configuration? This will revert "
+"everything to the default theme's initial state."
 msgstr ""
-"Êtes-vous sûr de vouloir réinitialiser tous les paramètres du thème "
-"(Couleur, Structure, Icônes et Barre d'outils) à la configuration d'origine "
-"du thème par défaut ? Cela rétablira tout à l'état initial du thème par "
-"défaut."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:80
 msgid ""
@@ -86,17 +82,9 @@ msgstr "Couleurs de base"
 msgid "Border"
 msgstr "Bordure"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1028
 msgid "Boxed Dropdown"
 msgstr "Menu déroulant encadré"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1166
-msgid "Button Title"
-msgstr "Titre du bouton"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1170
-msgid "Button title cannot be empty"
-msgstr "Le titre du bouton ne peut pas être vide"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:389
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:634
@@ -262,18 +250,6 @@ msgstr "Téléchargement des fichiers de mise à jour..."
 msgid "Element Spacing"
 msgstr "Espacement des éléments"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1136
-msgid "Enable Floating Toolbar"
-msgstr "Activer la barre d'outils flottante"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1139
-msgid "Enable or disable the floating toolbar on the right side of the screen."
-msgstr "Activer ou désactiver la barre d'outils flottante sur le côté droit de l'écran."
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1161
-msgid "Enabled"
-msgstr "Activé"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:508
 msgid "Error"
 msgstr "Erreur"
@@ -316,10 +292,6 @@ msgstr "Échec de la suppression de l'icône : %s"
 msgid "Failed to upload icon: %s"
 msgstr "Échec du téléversement de l'icône : %s"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1129
-msgid "Floating Toolbar"
-msgstr "Barre d'outils flottante"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:469
 msgid "Foreground"
 msgstr "Premier plan"
@@ -335,10 +307,6 @@ msgstr "Arrière-plan de l'en-tête"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:479
 msgid "Header Interactive"
 msgstr "En-tête interactif"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1178
-msgid "Icon"
-msgstr "Icône"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1049
 msgid "Icon Management"
@@ -357,8 +325,8 @@ msgid "Icon uploaded successfully: %s"
 msgstr "Icône téléversée avec succès : %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:981
-msgid "Icons & Toolbar"
-msgstr "Icônes et barre d'outils"
+msgid "Icons"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:842
 msgid "Import"
@@ -425,7 +393,7 @@ msgstr "Lien"
 msgid "Logo Settings"
 msgstr "Paramètres du logo"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1027
 msgid "Mega Menu"
 msgstr "Méga menu"
 
@@ -442,6 +410,10 @@ msgid "Muted Foreground"
 msgstr "Premier plan atténué"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1015
+msgid "Navigation Layout"
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1025
 msgid "Navigation Submenu Type"
 msgstr "Type de sous-menu de navigation"
 
@@ -608,6 +580,10 @@ msgstr "Paramètres réinitialisés avec succès."
 msgid "Sky Blue"
 msgstr "Bleu ciel"
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+msgid "Sidebar"
+msgstr ""
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:437
 msgid "Status"
 msgstr "État"
@@ -623,10 +599,6 @@ msgstr "Succès"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:507
 msgid "Success Foreground"
 msgstr "Premier plan de succès"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1172
-msgid "Target URL"
-msgstr "URL cible"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:482
 msgid "Terminal Background"
@@ -658,6 +630,10 @@ msgstr ""
 msgid "Theme Settings"
 msgstr "Paramètres du thème"
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+msgid "Top Bar"
+msgstr ""
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:947
 msgid "Theme:"
 msgstr "Thème :"
@@ -670,17 +646,9 @@ msgstr ""
 "Cela basculera le style du thème vers le préréglage '%s' et écrasera la "
 "configuration dans /etc/config/aurora. Voulez-vous continuer ?"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1149
-msgid "Toolbar Buttons"
-msgstr "Boutons de la barre d'outils"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:484
 msgid "Tooltip Background"
 msgstr "Arrière-plan de l'infobulle"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1176
-msgid "URL cannot be empty"
-msgstr "L'URL ne peut pas être vide"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:219
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:234
@@ -740,16 +708,10 @@ msgstr "Erreur de téléversement : %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1051
 msgid ""
-"Upload theme branding assets (browser tab favicon) and custom toolbar icons. "
-"Supported formats include SVG, PNG, JPG, and more. Uploaded assets are "
-"stored in<code>/www/luci-static/aurora/images/</code> and can be used "
-"throughout the theme."
+"Upload theme branding assets. Supported formats include SVG, PNG, JPG, and "
+"more. Uploaded assets are stored in<code>/www/luci-static/aurora/images/</"
+"code> and can be used throughout the theme."
 msgstr ""
-"Téléversez les ressources de marque du thème (favicon de l'onglet du "
-"navigateur) et les icônes personnalisées de la barre d'outils. Les formats "
-"pris en charge incluent SVG, PNG, JPG, et plus. Les ressources téléversées "
-"sont stockées dans <code>/www/luci-static/aurora/images/</code> et peuvent "
-"être utilisées dans tout le thème."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:353
 msgid "Uploaded Icons"

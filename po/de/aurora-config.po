@@ -1,5 +1,5 @@
 msgid ""
-msgstr "Content-Type: text/plain; charset=UTF-8"
+msgstr "Content-Type: text/plain; charset=UTF-8\n"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1189
 msgid "(No icons uploaded)"
@@ -49,14 +49,10 @@ msgstr "Wird angewendet..."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:856
 msgid ""
-"Are you sure you want to reset all theme settings (Color, Structure, Icons & "
-"Toolbar) back to the default theme's original configuration? This will "
-"revert everything to the default theme's initial state."
+"Are you sure you want to reset all theme settings (Color, Structure, Icons) "
+"back to the default theme's original configuration? This will revert "
+"everything to the default theme's initial state."
 msgstr ""
-"Sind Sie sicher, dass Sie alle Theme-Einstellungen (Farbe, Struktur, Symbole "
-"& Werkzeugleiste) auf die ursprüngliche Konfiguration des Standard-Themes "
-"zurücksetzen möchten? Dies setzt alles auf den Ausgangszustand des Standard-"
-"Themes zurück."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:80
 msgid ""
@@ -86,17 +82,9 @@ msgstr "Basisfarben"
 msgid "Border"
 msgstr "Rahmen"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1028
 msgid "Boxed Dropdown"
 msgstr "Boxed Dropdown"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1166
-msgid "Button Title"
-msgstr "Schaltflächentitel"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1170
-msgid "Button title cannot be empty"
-msgstr "Schaltflächentitel darf nicht leer sein"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:389
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:634
@@ -118,7 +106,8 @@ msgid ""
 msgstr ""
 "Nach Updates für das Aurora-Theme und Konfigurationspakete suchen und diese "
 "installieren. Updates werden von den neuesten Releases der GitHub-"
-"Repositories des Aurora-Themes und des Konfigurations-Plugins heruntergeladen."
+"Repositories des Aurora-Themes und des Konfigurations-Plugins "
+"heruntergeladen."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:756
 msgid "Checking file…"
@@ -262,20 +251,6 @@ msgstr "Update-Dateien werden heruntergeladen..."
 msgid "Element Spacing"
 msgstr "Elementabstand"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1136
-msgid "Enable Floating Toolbar"
-msgstr "Schwebende Werkzeugleiste aktivieren"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1139
-msgid "Enable or disable the floating toolbar on the right side of the screen."
-msgstr ""
-"Aktivieren oder deaktivieren Sie die schwebende Werkzeugleiste auf der "
-"rechten Seite des Bildschirms."
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1161
-msgid "Enabled"
-msgstr "Aktiviert"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:508
 msgid "Error"
 msgstr "Fehler"
@@ -318,10 +293,6 @@ msgstr "Löschen des Symbols fehlgeschlagen: %s"
 msgid "Failed to upload icon: %s"
 msgstr "Hochladen des Symbols fehlgeschlagen: %s"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1129
-msgid "Floating Toolbar"
-msgstr "Schwebende Werkzeugleiste"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:469
 msgid "Foreground"
 msgstr "Vordergrund"
@@ -337,10 +308,6 @@ msgstr "Kopfzeilen-Hintergrund"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:479
 msgid "Header Interactive"
 msgstr "Kopfzeile Interaktiv"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1178
-msgid "Icon"
-msgstr "Symbol"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1049
 msgid "Icon Management"
@@ -359,8 +326,8 @@ msgid "Icon uploaded successfully: %s"
 msgstr "Symbol erfolgreich hochgeladen: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:981
-msgid "Icons & Toolbar"
-msgstr "Symbole & Werkzeugleiste"
+msgid "Icons"
+msgstr ""
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:842
 msgid "Import"
@@ -427,7 +394,7 @@ msgstr "Link"
 msgid "Logo Settings"
 msgstr "Logo-Einstellungen"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1027
 msgid "Mega Menu"
 msgstr "Mega-Menü"
 
@@ -444,6 +411,10 @@ msgid "Muted Foreground"
 msgstr "Gedämpft Vordergrund"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1015
+msgid "Navigation Layout"
+msgstr ""
+
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1025
 msgid "Navigation Submenu Type"
 msgstr "Navigations-Untermenü-Typ"
 
@@ -609,6 +580,10 @@ msgstr "Einstellungen erfolgreich zurückgesetzt."
 msgid "Sky Blue"
 msgstr "Himmelblau"
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1018
+msgid "Sidebar"
+msgstr ""
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:437
 msgid "Status"
 msgstr "Status"
@@ -624,10 +599,6 @@ msgstr "Erfolg"
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:507
 msgid "Success Foreground"
 msgstr "Erfolg Vordergrund"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1172
-msgid "Target URL"
-msgstr "Ziel-URL"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:482
 msgid "Terminal Background"
@@ -658,6 +629,10 @@ msgstr ""
 msgid "Theme Settings"
 msgstr "Theme-Einstellungen"
 
+#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1017
+msgid "Top Bar"
+msgstr ""
+
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:947
 msgid "Theme:"
 msgstr "Theme:"
@@ -670,17 +645,9 @@ msgstr ""
 "Dies wechselt den Theme-Stil zur Voreinstellung '%s' und überschreibt die "
 "Konfiguration in /etc/config/aurora. Möchten Sie fortfahren?"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1149
-msgid "Toolbar Buttons"
-msgstr "Werkzeugleisten-Schaltflächen"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:484
 msgid "Tooltip Background"
 msgstr "Tooltip-Hintergrund"
-
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1176
-msgid "URL cannot be empty"
-msgstr "URL darf nicht leer sein"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:219
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:234
@@ -740,15 +707,10 @@ msgstr "Upload-Fehler: %s"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1051
 msgid ""
-"Upload theme branding assets (browser tab favicon) and custom toolbar icons. "
-"Supported formats include SVG, PNG, JPG, and more. Uploaded assets are "
-"stored in<code>/www/luci-static/aurora/images/</code> and can be used "
-"throughout the theme."
+"Upload theme branding assets. Supported formats include SVG, PNG, JPG, and "
+"more. Uploaded assets are stored in<code>/www/luci-static/aurora/images/</"
+"code> and can be used throughout the theme."
 msgstr ""
-"Laden Sie Theme-Branding-Assets (Browser-Tab-Favicon) und benutzerdefinierte "
-"Werkzeugleisten-Symbole hoch. Unterstützte Formate sind SVG, PNG, JPG und "
-"mehr. Hochgeladene Assets werden in <code>/www/luci-static/aurora/images/</"
-"code> gespeichert und können im gesamten Theme verwendet werden."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:353
 msgid "Uploaded Icons"

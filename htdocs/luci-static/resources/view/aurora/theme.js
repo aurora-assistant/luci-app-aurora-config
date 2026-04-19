@@ -853,7 +853,7 @@ return view.extend({
                 "p",
                 {},
                 _(
-                  "Are you sure you want to reset all theme settings (Color, Structure, Icons & Toolbar) back to the default theme's original configuration? This will revert everything to the default theme's initial state.",
+                  "Are you sure you want to reset all theme settings (Color, Structure, Icons) back to the default theme's original configuration? This will revert everything to the default theme's initial state.",
                 ),
               ),
               E("div", { class: "right" }, [
@@ -978,7 +978,7 @@ return view.extend({
 
     s.tab("colors", _("Color"));
     s.tab("structure", _("Structure"));
-    s.tab("icons_toolbar", _("Icons & Toolbar"));
+    s.tab("icons", _("Icons"));
 
     const colorSection = s.taboption(
       "colors",
@@ -1011,6 +1011,16 @@ return view.extend({
 
     so = structureSubsection.option(
       form.ListValue,
+      "nav_layout",
+      _("Navigation Layout"),
+    );
+    so.value("topbar", _("Top Bar"));
+    so.value("sidebar", _("Sidebar"));
+    so.default = "topbar";
+    so.rmempty = false;
+
+    so = structureSubsection.option(
+      form.ListValue,
       "nav_submenu_type",
       _("Navigation Submenu Type"),
     );
@@ -1018,6 +1028,7 @@ return view.extend({
     so.value("boxed-dropdown", _("Boxed Dropdown"));
     so.default = "mega-menu";
     so.rmempty = false;
+    so.depends("nav_layout", "topbar");
 
     so = structureSubsection.option(
       form.Value,
@@ -1040,7 +1051,7 @@ return view.extend({
     so.render = renderContainerMaxWidthControl;
 
     const iconSection = s.taboption(
-      "icons_toolbar",
+      "icons",
       form.SectionValue,
       "_icon_management",
       form.NamedSection,
@@ -1048,7 +1059,7 @@ return view.extend({
       "aurora",
       _("Icon Management"),
       _(
-        "Upload theme branding assets (browser tab favicon) and custom toolbar icons. Supported formats include SVG, PNG, JPG, and more. Uploaded assets are stored in<code>/www/luci-static/aurora/images/</code> and can be used throughout the theme.",
+        "Upload theme branding assets. Supported formats include SVG, PNG, JPG, and more. Uploaded assets are stored in<code>/www/luci-static/aurora/images/</code> and can be used throughout the theme.",
       ),
     );
     const iconSubsection = iconSection.subsection;
@@ -1056,7 +1067,7 @@ return view.extend({
     createIconList(iconSubsection);
 
     const logoSection = s.taboption(
-      "icons_toolbar",
+      "icons",
       form.SectionValue,
       "_logo_settings",
       form.NamedSection,
@@ -1118,82 +1129,6 @@ return view.extend({
         }, this),
       );
     };
-
-    const toolbarSection = s.taboption(
-      "icons_toolbar",
-      form.SectionValue,
-      "_toolbar_settings",
-      form.NamedSection,
-      "theme",
-      "aurora",
-      _("Floating Toolbar"),
-    );
-    const toolbarSubsection = toolbarSection.subsection;
-
-    so = toolbarSubsection.option(
-      form.Flag,
-      "toolbar_enabled",
-      _("Enable Floating Toolbar"),
-    );
-    so.description = _(
-      "Enable or disable the floating toolbar on the right side of the screen.",
-    );
-    so.default = "1";
-    so.rmempty = false;
-
-    so = toolbarSubsection.option(
-      form.SectionValue,
-      "_toolbar_items",
-      form.GridSection,
-      "toolbar_item",
-      _("Toolbar Buttons"),
-      _(
-        "Customize toolbar buttons by adding new entries, editing existing ones, removing unwanted items, or dragging rows to reorder them.",
-      ),
-    );
-    so.depends("toolbar_enabled", "1");
-    const toolbarGrid = so.subsection;
-    toolbarGrid.addremove = true;
-    toolbarGrid.sortable = true;
-    toolbarGrid.anonymous = true;
-    toolbarGrid.nodescriptions = true;
-
-    so = toolbarGrid.option(form.Flag, "enabled", _("Enabled"));
-    so.default = "1";
-    so.rmempty = false;
-    so.editable = true;
-
-    so = toolbarGrid.option(form.Value, "title", _("Button Title"));
-    so.rmempty = false;
-    so.placeholder = _("e.g., System Settings");
-    so.validate = (section_id, value) =>
-      !value?.trim() ? _("Button title cannot be empty") : true;
-
-    so = toolbarGrid.option(form.Value, "url", _("Target URL"));
-    so.rmempty = false;
-    so.placeholder = "/cgi-bin/luci/admin/...";
-    so.validate = (section_id, value) =>
-      !value?.trim() ? _("URL cannot be empty") : true;
-
-    so = toolbarGrid.option(form.ListValue, "icon", _("Icon"));
-    so.rmempty = false;
-    so.load = function (section_id) {
-      return L.resolveDefault(callListIcons(), { icons: [] }).then(
-        L.bind((response) => {
-          const icons = response?.icons || [];
-          this.keylist = [];
-          this.vallist = [];
-          if (icons.length > 0) {
-            icons.forEach(L.bind((icon) => this.value(icon, icon), this));
-          } else {
-            this.value("", _("(No icons uploaded)"));
-          }
-          return form.ListValue.prototype.load.apply(this, [section_id]);
-        }, this),
-      );
-    };
-    so.validate = (section_id, value) =>
-      !value?.trim() ? _("Please select an icon") : true;
 
     return m.render().then((mapNode) => {
       const updateVersionLabel = (label, hasUpdate) => {
