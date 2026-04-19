@@ -1011,6 +1011,19 @@ return view.extend({
 
     so = structureSubsection.option(
       form.ListValue,
+      "layout_mode",
+      _("Layout Mode"),
+      _(
+        "Switch between a top navigation bar and a fixed left sidebar. The sidebar can be collapsed into an icon rail on desktop.",
+      ),
+    );
+    so.value("topbar", _("Top Navigation Bar"));
+    so.value("sidebar", _("Left Sidebar"));
+    so.default = "topbar";
+    so.rmempty = false;
+
+    so = structureSubsection.option(
+      form.ListValue,
       "nav_submenu_type",
       _("Navigation Submenu Type"),
     );
@@ -1018,6 +1031,7 @@ return view.extend({
     so.value("boxed-dropdown", _("Boxed Dropdown"));
     so.default = "mega-menu";
     so.rmempty = false;
+    so.depends("layout_mode", "topbar");
 
     so = structureSubsection.option(
       form.Value,
