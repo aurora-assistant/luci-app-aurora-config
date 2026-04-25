@@ -98,7 +98,7 @@ const callApplyThemePreset = rpc.declare({
 const callApplyFontPreset = rpc.declare({
   object: "luci.aurora",
   method: "apply_font_preset",
-  params: ["name"],
+  params: ["slot", "name"],
 });
 
 const callExportConfig = rpc.declare({
@@ -474,7 +474,7 @@ return view.extend({
     const themeConfig = loadData[1]?.theme || {};
     const themePresets = loadData[2]?.presets || [];
     const installedVersions = loadData[3];
-    const fontPresets = loadData[4]?.fonts || [];
+    const fontPresetsBySlot = loadData[4]?.fonts || {};
 
     // Order matches luci-theme-aurora/.dev/src/media/main.css @theme inline
     const baseColorVars = [
@@ -578,29 +578,38 @@ return view.extend({
       ];
     };
 
-    const buildFontOptions = () => {
-      if (fontPresets.length > 0) {
-        const options = fontPresets
+    const FONT_FALLBACKS = {
+      sans: [
+        { name: "default", label: _("Aurora Default"), source: _("Built-in") },
+        { name: "inter", label: "Inter", source: "Google Fonts" },
+        { name: "roboto", label: "Roboto", source: "Google Fonts" },
+        { name: "source-sans-3", label: "Source Sans 3", source: "Google Fonts" },
+        { name: "noto-sans-sc", label: "Noto Sans SC", source: "Google Fonts" },
+      ],
+      mono: [
+        { name: "default", label: _("System Mono"), source: _("Built-in") },
+        { name: "jetbrains-mono", label: "JetBrains Mono", source: "Google Fonts" },
+        { name: "fira-code", label: "Fira Code", source: "Google Fonts" },
+        { name: "ibm-plex-mono", label: "IBM Plex Mono", source: "Google Fonts" },
+        { name: "source-code-pro", label: "Source Code Pro", source: "Google Fonts" },
+      ],
+    };
+
+    const buildFontOptions = (slot) => {
+      const list = fontPresetsBySlot?.[slot];
+      if (Array.isArray(list) && list.length > 0) {
+        const options = list
           .filter((font) => font?.name)
           .map((font) => ({
             name: font.name,
             label: font.label || font.name,
             source: font.source || "",
+            family: font.family || "",
             stack: font.stack || "",
           }));
         if (options.length > 0) return options;
       }
-      return [
-        { name: "default", label: _("Aurora Default"), source: _("Built-in") },
-        { name: "inter", label: "Inter", source: "Google Fonts" },
-        { name: "roboto", label: "Roboto", source: "Google Fonts" },
-        {
-          name: "source-sans-3",
-          label: "Source Sans 3",
-          source: "Google Fonts",
-        },
-        { name: "noto-sans-sc", label: "Noto Sans SC", source: "Google Fonts" },
-      ];
+      return FONT_FALLBACKS[slot] || [];
     };
 
     const buildPresetToolbarNode = () => {
@@ -1087,107 +1096,193 @@ return view.extend({
       "aurora",
       _("Font Settings"),
       _(
-        "Choose a bundled or free web font. When you apply a web font, Aurora downloads the font files to /www/luci-static/aurora/fonts/ and uses them locally.",
+        "Pick a sans-serif font for body text and a monospaced font for code. Web fonts are downloaded to /www/luci-static/aurora/fonts/ on apply and served locally — no CDN at runtime.",
       ),
     );
     const fontSubsection = fontSection.subsection;
 
-    so = fontSubsection.option(
-      form.ListValue,
-      "_font_preset",
-      _("Font Preset"),
-    );
-    so.default = themeConfig.font_preset || "default";
-    so.rmempty = false;
-    buildFontOptions().forEach((font) => {
-      const label = font.source
-        ? "%s (%s)".format(font.label, font.source)
-        : font.label;
-      so.value(font.name, label);
-    });
-    so.cfgvalue = () => themeConfig.font_preset || "default";
-    so.write = () => Promise.resolve();
-    so.remove = () => Promise.resolve();
+    so = fontSubsection.option(form.DummyValue, "_font_slots");
+    so.cfgvalue = () => "";
+    so.render = function () {
+      const buildSlotCard = (slot, title, presetKey, stackKey, defaultStack, sampleText) => {
+        const options = buildFontOptions(slot);
+        const currentPreset = themeConfig[presetKey] || "default";
+        const currentStack = themeConfig[stackKey] || defaultStack;
 
-    so = fontSubsection.option(form.Button, "_apply_font", _("Apply Font"));
-    so.inputstyle = "apply";
-    so.inputtitle = _("Download and Apply");
-    so.onclick = ui.createHandlerFn(viewCtx, (ev) => {
-      const sectionNode = ev.target.closest(".cbi-section");
-      const select = sectionNode?.querySelector(
-        '[data-name="_font_preset"] select',
-      );
-      const fontName = select?.value || "default";
-      const fontLabel = select?.selectedOptions?.[0]?.textContent || fontName;
+        const previewEl = E(
+          "div",
+          {
+            class: "aurora-font-preview",
+            style: `font-family: ${currentStack}; font-size: 1.05rem; line-height: 1.5; padding: 0.75rem 0.875rem; border-radius: 0.625rem; background: var(--label-surface, rgba(0,0,0,0.04)); color: var(--foreground, inherit); border: 1px solid var(--border, rgba(0,0,0,0.08)); min-height: 3rem; word-break: break-word;`,
+          },
+          sampleText,
+        );
 
-      ui.showModal(_("Apply Font"), [
-        E(
-          "p",
-          {},
-          fontName === "default"
-            ? _("This will restore the default Aurora font.")
-            : _(
-                "Aurora will download '%s' and store the font files locally. Continue?",
-              ).format(fontLabel),
-        ),
-        E("div", { class: "right" }, [
-          E("button", { class: "btn", click: ui.hideModal }, _("Cancel")),
-          " ",
-          E(
-            "button",
-            {
-              class: "btn cbi-button-action important",
-              click: () => {
-                ui.showModal(_("Applying..."), [
+        const stackInput = E("input", {
+          type: "text",
+          class: "cbi-input-text",
+          value: currentStack,
+          placeholder: defaultStack,
+          readonly: "readonly",
+          style: "width: 100%; font-family: var(--font-mono, monospace); font-size: 0.8rem;",
+        });
+
+        const select = E(
+          "select",
+          { class: "cbi-input-select", style: "width: 100%;" },
+          options.map((font) =>
+            E(
+              "option",
+              {
+                value: font.name,
+                selected: font.name === currentPreset ? "selected" : null,
+              },
+              font.source ? "%s (%s)".format(font.label, font.source) : font.label,
+            ),
+          ),
+        );
+
+        select.addEventListener("change", () => {
+          const opt = options.find((o) => o.name === select.value);
+          if (!opt) return;
+          const previewStack = opt.stack || defaultStack;
+          previewEl.style.fontFamily = previewStack;
+          stackInput.value = previewStack;
+        });
+
+        const applyBtn = E(
+          "button",
+          {
+            class: "btn cbi-button cbi-button-apply",
+            style: "min-width: 9rem;",
+            click: ui.createHandlerFn(viewCtx, () => {
+              const fontName = select.value;
+              const opt = options.find((o) => o.name === fontName) || {};
+              const fontLabel = opt.label || fontName;
+
+              return ui.showModal(
+                slot === "sans" ? _("Apply Sans Font") : _("Apply Mono Font"),
+                [
                   E(
                     "p",
-                    { class: "spinning" },
+                    {},
                     fontName === "default"
-                      ? _("Restoring default font...")
-                      : _("Downloading font files..."),
+                      ? _("This will restore the default font for this slot.")
+                      : _("Aurora will download '%s' and store the font files locally. Continue?").format(fontLabel),
                   ),
-                ]);
+                  E("div", { class: "right" }, [
+                    E("button", { class: "btn", click: ui.hideModal }, _("Cancel")),
+                    " ",
+                    E(
+                      "button",
+                      {
+                        class: "btn cbi-button-action important",
+                        click: () => {
+                          ui.showModal(_("Applying..."), [
+                            E(
+                              "p",
+                              { class: "spinning" },
+                              fontName === "default"
+                                ? _("Restoring default font...")
+                                : _("Downloading font files..."),
+                            ),
+                          ]);
+                          return L.resolveDefault(
+                            callApplyFontPreset(slot, fontName),
+                            {},
+                          ).then((ret) => {
+                            ui.hideModal();
+                            if (ret?.result === 0) {
+                              ui.addNotification(
+                                null,
+                                E("p", _("Font applied successfully.")),
+                                "info",
+                              );
+                              window.location.reload();
+                            } else {
+                              ui.addNotification(
+                                null,
+                                E(
+                                  "p",
+                                  _("Font apply failed: %s").format(
+                                    ret?.error || "Unknown",
+                                  ),
+                                ),
+                                "error",
+                              );
+                            }
+                          });
+                        },
+                      },
+                      _("Continue"),
+                    ),
+                  ]),
+                ],
+              );
+            }),
+          },
+          _("Apply"),
+        );
 
-                return L.resolveDefault(callApplyFontPreset(fontName), {}).then(
-                  (ret) => {
-                    ui.hideModal();
-                    if (ret?.result === 0) {
-                      ui.addNotification(
-                        null,
-                        E("p", _("Font applied successfully.")),
-                        "info",
-                      );
-                      window.location.reload();
-                    } else {
-                      ui.addNotification(
-                        null,
-                        E(
-                          "p",
-                          _("Font apply failed: %s").format(
-                            ret?.error || "Unknown",
-                          ),
-                        ),
-                        "error",
-                      );
-                    }
-                  },
-                );
+        return E(
+          "div",
+          {
+            class: "aurora-font-card",
+            style: "flex: 1 1 18rem; min-width: 0; padding: 1rem 1.125rem; border-radius: 0.875rem; background: var(--panel-bg, transparent); border: 1px solid var(--border, rgba(0,0,0,0.08)); display: flex; flex-direction: column; gap: 0.75rem;",
+          },
+          [
+            E(
+              "div",
+              {
+                style: "font-size: 0.95rem; font-weight: 600; letter-spacing: -0.01em;",
               },
-            },
-            _("Continue"),
-          ),
-        ]),
-      ]);
-    });
+              title,
+            ),
+            select,
+            previewEl,
+            E(
+              "div",
+              { style: "display: flex; gap: 0.5rem; align-items: stretch;" },
+              [stackInput, applyBtn],
+            ),
+          ],
+        );
+      };
 
-    so = fontSubsection.option(
-      form.Value,
-      "struct_font_sans",
-      _("Current Font Stack"),
-    );
-    so.default = '"Lato", ui-sans-serif, system-ui, sans-serif';
-    so.placeholder = so.default;
-    so.rmempty = true;
+      const slots = E(
+        "div",
+        {
+          class: "aurora-font-slots",
+          style: "display: flex; flex-wrap: wrap; gap: 1rem; align-items: stretch;",
+        },
+        [
+          buildSlotCard(
+            "sans",
+            _("Sans Font"),
+            "font_sans_preset",
+            "struct_font_sans",
+            '"Lato", ui-sans-serif, system-ui, sans-serif',
+            _("The quick brown fox jumps over the lazy dog. 0123456789"),
+          ),
+          buildSlotCard(
+            "mono",
+            _("Mono Font"),
+            "font_mono_preset",
+            "struct_font_mono",
+            'ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace',
+            "const aurora = () => 'OpenWrt'; // 0123 + - * /",
+          ),
+        ],
+      );
+
+      return E(
+        "div",
+        { class: "cbi-value", "data-name": this.option },
+        [E("div", { class: "cbi-value-field", style: "width: 100%;" }, [slots])],
+      );
+    };
+    so.write = () => Promise.resolve();
+    so.remove = () => Promise.resolve();
 
     const iconSection = s.taboption(
       "icons_toolbar",
