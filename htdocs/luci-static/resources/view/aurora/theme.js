@@ -95,9 +95,15 @@ const callApplyThemePreset = rpc.declare({
   params: ["name"],
 });
 
-const callApplyFontPreset = rpc.declare({
+const callStageFont = rpc.declare({
   object: "luci.aurora",
-  method: "apply_font_preset",
+  method: "stage_font",
+  params: ["slot", "name"],
+});
+
+const callCommitFont = rpc.declare({
+  object: "luci.aurora",
+  method: "commit_font",
   params: ["slot", "name"],
 });
 
@@ -1106,94 +1112,160 @@ return view.extend({
       const stackByName = Object.fromEntries(options.map((o) => [o.name, o.stack || defaultStack]));
       const currentPreset = themeConfig[presetKey] || "default";
 
-      const presetOpt = ss.option(form.ListValue, "_" + slot + "_preset",
-        slot === "sans" ? _("Sans Font") : _("Mono Font"));
+      // Per-slot stage cache (name → { face_css, stack }); avoids redundant RPC calls
+      const stageCache = {};
+      // Tracks which preset is currently staged/selected (drives commit_font)
+      let pendingName = currentPreset;
+
+      const presetOpt = ss.option(
+        form.ListValue,
+        "_" + slot + "_preset",
+        slot === "sans" ? _("Sans Font") : _("Mono Font"),
+      );
       presetOpt.default = currentPreset;
       presetOpt.rmempty = false;
       options.forEach((font) => {
-        presetOpt.value(font.name,
-          font.source ? "%s (%s)".format(font.label, font.source) : font.label);
+        presetOpt.value(
+          font.name,
+          font.source ? "%s (%s)".format(font.label, font.source) : font.label,
+        );
       });
       presetOpt.cfgvalue = () => currentPreset;
       presetOpt.write = () => Promise.resolve();
       presetOpt.remove = () => Promise.resolve();
+
       presetOpt.render = function (option_index, section_id, in_table) {
-        return form.ListValue.prototype.render.call(this, option_index, section_id, in_table)
+        return form.ListValue.prototype.render
+          .call(this, option_index, section_id, in_table)
           .then((el) => {
             const select = el.querySelector("select");
-            const preview = E("em", {
-              style: "display:block; margin-top:0.4rem; font-size:0.95rem; color: var(--muted-foreground, inherit);",
+            const field = el.querySelector(".cbi-value-field");
+
+            const slotLabel = slot === "sans"
+              ? _("Sans-serif font — interface text")
+              : _("Monospace font — code &amp; terminal");
+            const previewEl = E("em", {
+              style: "display:block; font-size:0.95rem; font-style:normal;",
             }, sampleText);
-            const update = () => {
-              preview.style.fontFamily = stackByName[select.value] || defaultStack;
+            const preview = E("div", {
+              style: "margin-top:0.4rem; color:var(--muted-foreground,inherit);",
+            }, [
+              E("small", {
+                style: "display:block; font-size:0.7rem; opacity:0.7; font-family:inherit; margin-bottom:0.2rem; letter-spacing:0.02em;",
+              }, slotLabel),
+              previewEl,
+            ]);
+
+            // Inject the slot-specific @font-face into the page head
+            const applyFaceToPage = (faceCSS) => {
+              const id = "aurora-font-stage-" + slot;
+              let tag = document.getElementById(id);
+              if (!tag) {
+                tag = document.createElement("style");
+                tag.id = id;
+                document.head.appendChild(tag);
+              }
+              tag.textContent = faceCSS || "";
             };
-            select.addEventListener("change", update);
-            update();
-            el.querySelector(".cbi-value-field").appendChild(preview);
+
+            const setPreview = (stack) => {
+              previewEl.style.fontFamily = stack;
+              previewEl.textContent = sampleText;
+              previewEl.style.opacity = "1";
+            };
+
+            const setLoading = () => {
+              previewEl.textContent = _("Loading font...");
+              previewEl.style.opacity = "0.5";
+              previewEl.style.fontFamily = "inherit";
+            };
+
+            // Seed cache with current committed state so initial selection is instant
+            stageCache[currentPreset] = {
+              face_css: themeConfig["font_" + slot + "_face"] || "",
+              stack: themeConfig[stackKey] || defaultStack,
+            };
+            setPreview(stageCache[currentPreset].stack);
+
+            const doStage = (name) => {
+              if (stageCache[name]) {
+                applyFaceToPage(stageCache[name].face_css);
+                setPreview(stageCache[name].stack);
+                pendingName = name;
+                return;
+              }
+              setLoading();
+              L.resolveDefault(callStageFont(slot, name), {}).then((ret) => {
+                if (ret?.result === 0) {
+                  stageCache[name] = {
+                    face_css: ret.face_css || "",
+                    stack: ret.stack || defaultStack,
+                  };
+                  applyFaceToPage(stageCache[name].face_css);
+                  setPreview(stageCache[name].stack);
+                  pendingName = name;
+                } else {
+                  previewEl.textContent = _("Failed: %s").format(ret?.error || "Unknown");
+                  previewEl.style.opacity = "1";
+                }
+              });
+            };
+
+            select.addEventListener("change", () => doStage(select.value));
+            field.appendChild(preview);
             return el;
           });
       };
 
-      const applyOpt = ss.option(form.Button, "_apply_" + slot,
-        slot === "sans" ? _("Apply Sans Font") : _("Apply Mono Font"));
-      applyOpt.inputstyle = "apply";
-      applyOpt.inputtitle = _("Apply");
-      applyOpt.onclick = ui.createHandlerFn(viewCtx, (ev) => {
-        const section = ev.target.closest(".cbi-section");
-        const select = section.querySelector('[data-name="_' + slot + '_preset"] select');
-        const fontName = select?.value || "default";
-        const fontLabel = select?.selectedOptions?.[0]?.textContent || fontName;
-
-        return ui.showModal(
-          slot === "sans" ? _("Apply Sans Font") : _("Apply Mono Font"),
-          [
-            E("p", {}, fontName === "default"
-              ? _("This will restore the default font for this slot.")
-              : _("Aurora will download '%s' and store the font files locally. Continue?").format(fontLabel)),
-            E("div", { class: "right" }, [
-              E("button", { class: "btn", click: ui.hideModal }, _("Cancel")),
-              " ",
-              E("button", {
-                class: "btn cbi-button-action important",
-                click: () => {
-                  ui.showModal(_("Applying..."), [
-                    E("p", { class: "spinning" },
-                      fontName === "default" ? _("Restoring default font...") : _("Downloading font files...")),
-                  ]);
-                  return L.resolveDefault(callApplyFontPreset(slot, fontName), {})
-                    .then((ret) => {
-                      ui.hideModal();
-                      if (ret?.result === 0) {
-                        ui.addNotification(null, E("p", _("Font applied successfully.")), "info");
-                        window.location.reload();
-                      } else {
-                        ui.addNotification(null,
-                          E("p", _("Font apply failed: %s").format(ret?.error || "Unknown")), "error");
-                      }
-                    });
-                },
-              }, _("Continue")),
-            ]),
-          ],
-        );
+      const saveOpt = ss.option(
+        form.Button,
+        "_save_" + slot,
+        slot === "sans" ? _("Save Sans Font") : _("Save Mono Font"),
+      );
+      saveOpt.inputstyle = "apply";
+      saveOpt.inputtitle = _("Save Font");
+      saveOpt.onclick = ui.createHandlerFn(viewCtx, () => {
+        return L.resolveDefault(callCommitFont(slot, pendingName), {}).then((ret) => {
+          if (ret?.result === 0) {
+            ui.addNotification(null, E("p", _("Font saved successfully.")), "info");
+            window.location.reload();
+          } else {
+            ui.addNotification(
+              null,
+              E("p", _("Failed to save font: %s").format(ret?.error || "Unknown")),
+              "error",
+            );
+          }
+        });
       });
 
-      const stackOpt = ss.option(form.Value, stackKey,
-        slot === "sans" ? _("Sans Font Stack") : _("Mono Font Stack"));
+      const stackOpt = ss.option(
+        form.Value,
+        stackKey,
+        slot === "sans" ? _("Sans Font Stack") : _("Mono Font Stack"),
+      );
       stackOpt.default = defaultStack;
       stackOpt.placeholder = defaultStack;
       stackOpt.rmempty = true;
     };
 
-    addFontSlot(fontSubsection, "sans",
-      "font_sans_preset", "struct_font_sans",
+    addFontSlot(
+      fontSubsection,
+      "sans",
+      "font_sans_preset",
+      "struct_font_sans",
       '"Lato", ui-sans-serif, system-ui, sans-serif',
-      _("The quick brown fox jumps over the lazy dog. 0123456789"));
+      _("Sans-serif: The quick brown fox jumps over the lazy dog"),
+    );
 
-    addFontSlot(fontSubsection, "mono",
-      "font_mono_preset", "struct_font_mono",
+    addFontSlot(
+      fontSubsection,
+      "mono",
+      "font_mono_preset",
+      "struct_font_mono",
       'ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace',
-      "const aurora = () => 'OpenWrt'; // 0123 + - * /");
+      "Monospace: const fn = () => 0; // 0123456789",
+    );
 
     const iconSection = s.taboption(
       "icons_toolbar",

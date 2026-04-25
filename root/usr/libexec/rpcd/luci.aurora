@@ -46,9 +46,13 @@ cleanup_custom_fonts() {
 	local slot="$1"
 	mkdir -p "$FONT_PATH"
 	if [ -n "$slot" ]; then
-		rm -f "$FONT_PATH"/aurora-font-${slot}-*.woff2 "$FONT_PATH"/aurora-font-${slot}-*.tmp 2>/dev/null
+		rm -f "$FONT_PATH"/aurora-font-${slot}-*.woff2 \
+		      "$FONT_PATH"/aurora-font-${slot}-*.tmp \
+		      "$FONT_PATH"/aurora-font-${slot}-*.face 2>/dev/null
 	else
-		rm -f "$FONT_PATH"/aurora-font-*.woff2 "$FONT_PATH"/aurora-font-*.tmp 2>/dev/null
+		rm -f "$FONT_PATH"/aurora-font-*.woff2 \
+		      "$FONT_PATH"/aurora-font-*.tmp \
+		      "$FONT_PATH"/aurora-font-*.face 2>/dev/null
 	fi
 }
 
@@ -221,7 +225,11 @@ case "$1" in
 	json_add_object "get_theme_config"; json_close_object
 	json_add_object "get_theme_presets"; json_close_object
 	json_add_object "get_font_presets"; json_close_object
-	json_add_object "apply_font_preset"
+	json_add_object "stage_font"
+		json_add_string "slot" "slot"
+		json_add_string "name" "name"
+	json_close_object
+	json_add_object "commit_font"
 		json_add_string "slot" "slot"
 		json_add_string "name" "name"
 	json_close_object
@@ -318,7 +326,7 @@ case "$1" in
 		json_dump; json_cleanup
 		;;
 
-	"apply_font_preset")
+	"stage_font")
 		read -r input; json_load "$input"
 		json_get_var slot "slot"
 		json_get_var name "name"
@@ -330,12 +338,67 @@ case "$1" in
 		esac
 
 		meta=$(get_font_meta "$slot" "$name") || { echo '{ "result": 1, "error": "Unknown font preset" }'; exit 0; }
-		label=$(echo "$meta" | cut -d'|' -f1)
 		stack=$(echo "$meta" | cut -d'|' -f4)
 		css_url=$(echo "$meta" | cut -d'|' -f5-)
 
 		if [ "$name" = "default" ]; then
-			cleanup_custom_fonts "$slot"
+			if [ "$slot" = "sans" ]; then
+				face="$DEFAULT_SANS_FACE"
+				stack="$DEFAULT_SANS_STACK"
+			else
+				face=""
+				stack="$DEFAULT_MONO_STACK"
+			fi
+			json_init
+			json_add_int "result" 0
+			json_add_string "face_css" "$face"
+			json_add_string "stack" "$stack"
+			json_dump; json_cleanup
+			exit 0
+		fi
+
+		face_file="$FONT_PATH/aurora-font-${slot}-${name}.face"
+		if [ -f "$face_file" ] && ls "$FONT_PATH/aurora-font-${slot}-${name}-1.woff2" >/dev/null 2>&1; then
+			face=$(cat "$face_file")
+			json_init
+			json_add_int "result" 0
+			json_add_string "face_css" "$face"
+			json_add_string "stack" "$stack"
+			json_dump; json_cleanup
+			exit 0
+		fi
+
+		face=$(download_and_build_face "$slot" "$name" "$css_url")
+		if [ -z "$face" ]; then
+			echo '{ "result": 1, "error": "Failed to download font files" }'
+			exit 0
+		fi
+
+		printf '%s' "$face" > "$face_file"
+		chmod 0644 "$face_file"
+
+		json_init
+		json_add_int "result" 0
+		json_add_string "face_css" "$face"
+		json_add_string "stack" "$stack"
+		json_dump; json_cleanup
+		;;
+
+	"commit_font")
+		read -r input; json_load "$input"
+		json_get_var slot "slot"
+		json_get_var name "name"
+		json_cleanup
+
+		case "$slot" in
+		sans|mono) ;;
+		*) echo '{ "result": 1, "error": "Invalid slot" }'; exit 0 ;;
+		esac
+
+		meta=$(get_font_meta "$slot" "$name") || { echo '{ "result": 1, "error": "Unknown font preset" }'; exit 0; }
+		stack=$(echo "$meta" | cut -d'|' -f4)
+
+		if [ "$name" = "default" ]; then
 			if [ "$slot" = "sans" ]; then
 				uci -q set aurora.theme.struct_font_sans="$DEFAULT_SANS_STACK"
 				uci -q set aurora.theme.font_sans_face="$DEFAULT_SANS_FACE"
@@ -351,11 +414,14 @@ case "$1" in
 			exit 0
 		fi
 
-		face=$(download_and_build_face "$slot" "$name" "$css_url")
-		if [ -z "$face" ]; then
-			echo '{ "result": 1, "error": "Failed to download font files" }'
+		face_file="$FONT_PATH/aurora-font-${slot}-${name}.face"
+		if [ ! -f "$face_file" ]; then
+			echo '{ "result": 1, "error": "Font not staged — select and wait for download first" }'
 			exit 0
 		fi
+
+		face=$(cat "$face_file")
+		[ -n "$face" ] || { echo '{ "result": 1, "error": "Staged face data is empty" }'; exit 0; }
 
 		if [ "$slot" = "sans" ]; then
 			uci -q set aurora.theme.struct_font_sans="$stack"
@@ -368,11 +434,7 @@ case "$1" in
 		fi
 		uci -q commit aurora
 		update_icon_cache_timestamp
-
-		json_init
-		json_add_int "result" 0
-		json_add_string "label" "$label"
-		json_dump; json_cleanup
+		echo '{ "result": 0 }'
 		;;
 
 	"apply_theme_preset")

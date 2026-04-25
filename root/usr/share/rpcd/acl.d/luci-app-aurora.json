@@ -35,7 +35,8 @@
           "reset_defaults",
           "import_config",
           "apply_theme_preset",
-          "apply_font_preset"
+          "stage_font",
+          "commit_font"
         ],
         "file": ["write", "remove", "exec", "stat"]
       },
