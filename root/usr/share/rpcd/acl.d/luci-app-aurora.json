@@ -11,6 +11,7 @@
           "get_system_info",
           "get_theme_config",
           "get_theme_presets",
+          "get_font_presets",
           "export_config"
         ],
         "file": ["read", "list", "stat"]
@@ -19,7 +20,8 @@
         "/tmp/aurora_icon.tmp": ["read", "write"],
         "/tmp/aurora_config_export.conf": ["read"],
         "/tmp/aurora_downloads/*": ["read", "list"],
-        "/www/luci-static/aurora/images/*": ["read", "list"]
+        "/www/luci-static/aurora/images/*": ["read", "list"],
+        "/www/luci-static/aurora/fonts/*": ["read", "list"]
       }
     },
     "write": {
@@ -32,7 +34,8 @@
           "install_package",
           "reset_defaults",
           "import_config",
-          "apply_theme_preset"
+          "apply_theme_preset",
+          "apply_font_preset"
         ],
         "file": ["write", "remove", "exec", "stat"]
       },
@@ -40,7 +43,8 @@
         "/tmp/aurora_icon.tmp": ["read", "write"],
         "/tmp/aurora_config_import.tmp": ["read", "write", "remove"],
         "/tmp/aurora_downloads/*": ["read", "write", "remove"],
-        "/www/luci-static/aurora/images/*": ["read", "write", "remove"]
+        "/www/luci-static/aurora/images/*": ["read", "write", "remove"],
+        "/www/luci-static/aurora/fonts/*": ["read", "write", "remove"]
       }
     }
   }

@@ -4,6 +4,8 @@
 . /usr/share/libubox/jshn.sh
 
 readonly ICON_PATH="/www/luci-static/aurora/images"
+readonly FONT_PATH="/www/luci-static/aurora/fonts"
+readonly FONT_CSS="$FONT_PATH/aurora-custom-font.css"
 readonly TMP_UPLOAD_PATH="/tmp/aurora_icon.tmp"
 readonly DOWNLOAD_PATH="/tmp/aurora_downloads"
 readonly CONFIG_FILE="/etc/config/aurora"
@@ -36,6 +38,108 @@ update_icon_cache_timestamp() {
 	local timestamp=$(date +%s)
 	uci -q set aurora.theme.icon_cache_version="$timestamp"
 	uci -q commit aurora
+}
+
+cleanup_custom_fonts() {
+	mkdir -p "$FONT_PATH"
+	rm -f "$FONT_PATH"/aurora-font-*.woff2 "$FONT_PATH"/aurora-font-*.tmp 2>/dev/null
+	: > "$FONT_CSS"
+	chmod 0644 "$FONT_CSS" 2>/dev/null
+}
+
+json_add_font() {
+	local name="$1" label="$2" source="$3" family="$4" stack="$5" css_url="$6"
+
+	json_add_object ""
+		json_add_string "name" "$name"
+		json_add_string "label" "$label"
+		json_add_string "source" "$source"
+		json_add_string "family" "$family"
+		json_add_string "stack" "$stack"
+		json_add_string "css_url" "$css_url"
+	json_close_object
+}
+
+get_font_meta() {
+	local name="$1"
+
+	case "$name" in
+	"default")
+		echo 'Aurora Default|Built-in|Lato|"Lato", ui-sans-serif, system-ui, sans-serif|'
+		;;
+	"inter")
+		echo 'Inter|Google Fonts|Inter|"Inter", "Lato", ui-sans-serif, system-ui, sans-serif|https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap'
+		;;
+	"roboto")
+		echo 'Roboto|Google Fonts|Roboto|"Roboto", "Lato", ui-sans-serif, system-ui, sans-serif|https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap'
+		;;
+	"source-sans-3")
+		echo 'Source Sans 3|Google Fonts|Source Sans 3|"Source Sans 3", "Lato", ui-sans-serif, system-ui, sans-serif|https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap'
+		;;
+	"noto-sans-sc")
+		echo 'Noto Sans SC|Google Fonts|Noto Sans SC|"Noto Sans SC", "Lato", ui-sans-serif, system-ui, sans-serif|https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap'
+		;;
+	*)
+		return 1
+		;;
+	esac
+}
+
+css_escape_sed() {
+	echo "$1" | sed 's/[.[\*^$()+?{}|\\/]/\\&/g'
+}
+
+fetch_url() {
+	local output="$1" url="$2"
+
+	if [ "$output" = "-" ]; then
+		wget -qO- --timeout=20 --header="User-Agent: Mozilla/5.0" "$url" 2>/dev/null ||
+			wget -qO- --timeout=20 "$url" 2>/dev/null
+	else
+		wget -q -O "$output" --timeout=30 --header="User-Agent: Mozilla/5.0" "$url" 2>/dev/null ||
+			wget -q -O "$output" --timeout=30 "$url" 2>/dev/null
+	fi
+}
+
+download_font_css() {
+	local name="$1" css_url="$2" css css_local url escaped file idx tmp_file
+
+	mkdir -p "$FONT_PATH" || return 1
+	css=$(fetch_url "-" "$css_url")
+	[ -n "$css" ] || return 1
+
+	css_local="$css"
+	idx=0
+	cleanup_custom_fonts
+
+	for url in $(printf '%s\n' "$css" | sed -n 's/.*url(\([^)]*\)).*/\1/p'); do
+		idx=$((idx + 1))
+		file="aurora-font-${name}-${idx}.woff2"
+		tmp_file="$FONT_PATH/${file}.tmp"
+
+		if ! fetch_url "$tmp_file" "$url"; then
+			rm -f "$tmp_file"
+			cleanup_custom_fonts
+			return 1
+		fi
+
+		if [ ! -s "$tmp_file" ]; then
+			rm -f "$tmp_file"
+			cleanup_custom_fonts
+			return 1
+		fi
+
+		mv "$tmp_file" "$FONT_PATH/$file"
+		chmod 0644 "$FONT_PATH/$file"
+
+		escaped=$(css_escape_sed "$url")
+		css_local=$(printf '%s' "$css_local" | sed "s#url($escaped)#url(\"./$file\")#g")
+	done
+
+	[ "$idx" -gt 0 ] || return 1
+	printf '%s\n' "$css_local" > "$FONT_CSS" || return 1
+	chmod 0644 "$FONT_CSS"
+	return 0
 }
 
 
@@ -90,6 +194,10 @@ case "$1" in
 	json_add_object "reset_defaults"; json_close_object
 	json_add_object "get_theme_config"; json_close_object
 	json_add_object "get_theme_presets"; json_close_object
+	json_add_object "get_font_presets"; json_close_object
+	json_add_object "apply_font_preset"
+		json_add_string "name" "name"
+	json_close_object
 	json_add_object "apply_theme_preset"
 		json_add_string "name" "name"
 	json_close_object
@@ -116,6 +224,7 @@ case "$1" in
 		if [ -f "$CLASSIC_TEMPLATE" ]; then
 			cp "$CLASSIC_TEMPLATE" "$CONFIG_FILE"
 			chmod 644 "$CONFIG_FILE"
+			cleanup_custom_fonts
 			update_icon_cache_timestamp
 			echo '{ "result": 0 }'
 		else
@@ -162,6 +271,55 @@ case "$1" in
 		json_dump; json_cleanup
 		;;
 
+	"get_font_presets")
+		json_init
+		json_add_array "fonts"
+		for font_name in default inter roboto source-sans-3 noto-sans-sc; do
+			meta=$(get_font_meta "$font_name") || continue
+			label=$(echo "$meta" | cut -d'|' -f1)
+			source=$(echo "$meta" | cut -d'|' -f2)
+			family=$(echo "$meta" | cut -d'|' -f3)
+			stack=$(echo "$meta" | cut -d'|' -f4)
+			css_url=$(echo "$meta" | cut -d'|' -f5-)
+			json_add_font "$font_name" "$label" "$source" "$family" "$stack" "$css_url"
+		done
+		json_close_array
+		json_dump; json_cleanup
+		;;
+
+	"apply_font_preset")
+		read -r input; json_load "$input"; json_get_var name "name"; json_cleanup
+		meta=$(get_font_meta "$name") || { echo '{ "result": 1, "error": "Unknown font preset" }'; exit 0; }
+		label=$(echo "$meta" | cut -d'|' -f1)
+		stack=$(echo "$meta" | cut -d'|' -f4)
+		css_url=$(echo "$meta" | cut -d'|' -f5-)
+
+		if [ "$name" = "default" ]; then
+			cleanup_custom_fonts
+			uci -q delete aurora.theme.font_preset
+			uci -q delete aurora.theme.struct_font_sans
+			uci -q commit aurora
+			update_icon_cache_timestamp
+			echo '{ "result": 0 }'
+			exit 0
+		fi
+
+		if ! download_font_css "$name" "$css_url"; then
+			echo '{ "result": 1, "error": "Failed to download font files" }'
+			exit 0
+		fi
+
+		uci -q set aurora.theme.font_preset="$name"
+		uci -q set aurora.theme.struct_font_sans="$stack"
+		uci -q commit aurora
+		update_icon_cache_timestamp
+
+		json_init
+		json_add_int "result" 0
+		json_add_string "label" "$label"
+		json_dump; json_cleanup
+		;;
+
 	"apply_theme_preset")
 		read -r input; json_load "$input"; json_get_var name "name"; json_cleanup
 
@@ -203,6 +361,7 @@ case "$1" in
 		fi
 
 		chmod 644 "$CONFIG_FILE" 2>/dev/null
+		cleanup_custom_fonts
 		update_icon_cache_timestamp
 		echo '{ "result": 0 }'
 		;;

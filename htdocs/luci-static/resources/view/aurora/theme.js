@@ -84,9 +84,20 @@ const callGetThemePresets = rpc.declare({
   method: "get_theme_presets",
 });
 
+const callGetFontPresets = rpc.declare({
+  object: "luci.aurora",
+  method: "get_font_presets",
+});
+
 const callApplyThemePreset = rpc.declare({
   object: "luci.aurora",
   method: "apply_theme_preset",
+  params: ["name"],
+});
+
+const callApplyFontPreset = rpc.declare({
+  object: "luci.aurora",
+  method: "apply_font_preset",
   params: ["name"],
 });
 
@@ -455,6 +466,7 @@ return view.extend({
       L.resolveDefault(callGetThemeConfig(), {}),
       L.resolveDefault(callGetThemePresets(), {}),
       L.resolveDefault(callGetInstalledVersions(), {}),
+      L.resolveDefault(callGetFontPresets(), {}),
     ]);
   },
 
@@ -462,6 +474,7 @@ return view.extend({
     const themeConfig = loadData[1]?.theme || {};
     const themePresets = loadData[2]?.presets || [];
     const installedVersions = loadData[3];
+    const fontPresets = loadData[4]?.fonts || [];
 
     // Order matches luci-theme-aurora/.dev/src/media/main.css @theme inline
     const baseColorVars = [
@@ -562,6 +575,31 @@ return view.extend({
         { name: "sage-green", label: _("Sage Green") },
         { name: "amber-sand", label: _("Amber Sand") },
         { name: "sky-blue", label: _("Sky Blue") },
+      ];
+    };
+
+    const buildFontOptions = () => {
+      if (fontPresets.length > 0) {
+        const options = fontPresets
+          .filter((font) => font?.name)
+          .map((font) => ({
+            name: font.name,
+            label: font.label || font.name,
+            source: font.source || "",
+            stack: font.stack || "",
+          }));
+        if (options.length > 0) return options;
+      }
+      return [
+        { name: "default", label: _("Aurora Default"), source: _("Built-in") },
+        { name: "inter", label: "Inter", source: "Google Fonts" },
+        { name: "roboto", label: "Roboto", source: "Google Fonts" },
+        {
+          name: "source-sans-3",
+          label: "Source Sans 3",
+          source: "Google Fonts",
+        },
+        { name: "noto-sans-sc", label: "Noto Sans SC", source: "Google Fonts" },
       ];
     };
 
@@ -978,6 +1016,7 @@ return view.extend({
 
     s.tab("colors", _("Color"));
     s.tab("structure", _("Structure"));
+    s.tab("fonts", _("Fonts"));
     s.tab("icons_toolbar", _("Icons & Toolbar"));
 
     const colorSection = s.taboption(
@@ -1038,6 +1077,117 @@ return view.extend({
     so.placeholder = "80rem";
     so.rmempty = false;
     so.render = renderContainerMaxWidthControl;
+
+    const fontSection = s.taboption(
+      "fonts",
+      form.SectionValue,
+      "_font_settings",
+      form.NamedSection,
+      "theme",
+      "aurora",
+      _("Font Settings"),
+      _(
+        "Choose a bundled or free web font. When you apply a web font, Aurora downloads the font files to /www/luci-static/aurora/fonts/ and uses them locally.",
+      ),
+    );
+    const fontSubsection = fontSection.subsection;
+
+    so = fontSubsection.option(
+      form.ListValue,
+      "_font_preset",
+      _("Font Preset"),
+    );
+    so.default = themeConfig.font_preset || "default";
+    so.rmempty = false;
+    buildFontOptions().forEach((font) => {
+      const label = font.source
+        ? "%s (%s)".format(font.label, font.source)
+        : font.label;
+      so.value(font.name, label);
+    });
+    so.cfgvalue = () => themeConfig.font_preset || "default";
+    so.write = () => Promise.resolve();
+    so.remove = () => Promise.resolve();
+
+    so = fontSubsection.option(form.Button, "_apply_font", _("Apply Font"));
+    so.inputstyle = "apply";
+    so.inputtitle = _("Download and Apply");
+    so.onclick = ui.createHandlerFn(viewCtx, (ev) => {
+      const sectionNode = ev.target.closest(".cbi-section");
+      const select = sectionNode?.querySelector(
+        '[data-name="_font_preset"] select',
+      );
+      const fontName = select?.value || "default";
+      const fontLabel = select?.selectedOptions?.[0]?.textContent || fontName;
+
+      ui.showModal(_("Apply Font"), [
+        E(
+          "p",
+          {},
+          fontName === "default"
+            ? _("This will restore the default Aurora font.")
+            : _(
+                "Aurora will download '%s' and store the font files locally. Continue?",
+              ).format(fontLabel),
+        ),
+        E("div", { class: "right" }, [
+          E("button", { class: "btn", click: ui.hideModal }, _("Cancel")),
+          " ",
+          E(
+            "button",
+            {
+              class: "btn cbi-button-action important",
+              click: () => {
+                ui.showModal(_("Applying..."), [
+                  E(
+                    "p",
+                    { class: "spinning" },
+                    fontName === "default"
+                      ? _("Restoring default font...")
+                      : _("Downloading font files..."),
+                  ),
+                ]);
+
+                return L.resolveDefault(callApplyFontPreset(fontName), {}).then(
+                  (ret) => {
+                    ui.hideModal();
+                    if (ret?.result === 0) {
+                      ui.addNotification(
+                        null,
+                        E("p", _("Font applied successfully.")),
+                        "info",
+                      );
+                      window.location.reload();
+                    } else {
+                      ui.addNotification(
+                        null,
+                        E(
+                          "p",
+                          _("Font apply failed: %s").format(
+                            ret?.error || "Unknown",
+                          ),
+                        ),
+                        "error",
+                      );
+                    }
+                  },
+                );
+              },
+            },
+            _("Continue"),
+          ),
+        ]),
+      ]);
+    });
+
+    so = fontSubsection.option(
+      form.Value,
+      "struct_font_sans",
+      _("Current Font Stack"),
+    );
+    so.default = '"Lato", ui-sans-serif, system-ui, sans-serif';
+    so.placeholder = so.default;
+    so.rmempty = true;
 
     const iconSection = s.taboption(
       "icons_toolbar",
