@@ -95,12 +95,6 @@ const callApplyThemePreset = rpc.declare({
   params: ["name"],
 });
 
-const callStageFont = rpc.declare({
-  object: "luci.aurora",
-  method: "stage_font",
-  params: ["slot", "name"],
-});
-
 const callCommitFont = rpc.declare({
   object: "luci.aurora",
   method: "commit_font",
@@ -587,17 +581,65 @@ return view.extend({
     const FONT_FALLBACKS = {
       sans: [
         { name: "default", label: _("Aurora Default"), source: _("Built-in") },
-        { name: "inter", label: "Inter", source: "Google Fonts" },
-        { name: "roboto", label: "Roboto", source: "Google Fonts" },
-        { name: "source-sans-3", label: "Source Sans 3", source: "Google Fonts" },
-        { name: "noto-sans-sc", label: "Noto Sans SC", source: "Google Fonts" },
+        {
+          name: "inter",
+          label: "Inter",
+          source: "Google Fonts",
+          css_url:
+            "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
+        },
+        {
+          name: "roboto",
+          label: "Roboto",
+          source: "Google Fonts",
+          css_url:
+            "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap",
+        },
+        {
+          name: "source-sans-3",
+          label: "Source Sans 3",
+          source: "Google Fonts",
+          css_url:
+            "https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap",
+        },
+        {
+          name: "noto-sans-sc",
+          label: "Noto Sans SC",
+          source: "Google Fonts",
+          css_url:
+            "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap",
+        },
       ],
       mono: [
         { name: "default", label: _("System Mono"), source: _("Built-in") },
-        { name: "jetbrains-mono", label: "JetBrains Mono", source: "Google Fonts" },
-        { name: "fira-code", label: "Fira Code", source: "Google Fonts" },
-        { name: "ibm-plex-mono", label: "IBM Plex Mono", source: "Google Fonts" },
-        { name: "source-code-pro", label: "Source Code Pro", source: "Google Fonts" },
+        {
+          name: "jetbrains-mono",
+          label: "JetBrains Mono",
+          source: "Google Fonts",
+          css_url:
+            "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap",
+        },
+        {
+          name: "fira-code",
+          label: "Fira Code",
+          source: "Google Fonts",
+          css_url:
+            "https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap",
+        },
+        {
+          name: "ibm-plex-mono",
+          label: "IBM Plex Mono",
+          source: "Google Fonts",
+          css_url:
+            "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap",
+        },
+        {
+          name: "source-code-pro",
+          label: "Source Code Pro",
+          source: "Google Fonts",
+          css_url:
+            "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap",
+        },
       ],
     };
 
@@ -612,6 +654,7 @@ return view.extend({
             source: font.source || "",
             family: font.family || "",
             stack: font.stack || "",
+            css_url: font.css_url || "",
           }));
         if (options.length > 0) return options;
       }
@@ -1112,11 +1155,10 @@ return view.extend({
       const stackByName = Object.fromEntries(
         options.map((o) => [o.name, o.stack || defaultStack]),
       );
+      const cssUrlByName = Object.fromEntries(
+        options.map((o) => [o.name, o.css_url || ""]),
+      );
       const currentPreset = themeConfig[presetKey] || "default";
-      let stageRequestId = 0;
-
-      // Per-slot stage cache (name → { face_css, stack }); avoids redundant RPC calls
-      const stageCache = {};
 
       const presetOpt = ss.option(
         form.ListValue,
@@ -1186,31 +1228,66 @@ return view.extend({
             ]);
 
             // Inject the slot-specific @font-face into the page head
-            const applyFaceToPage = (faceCSS) => {
-              const id = "aurora-font-stage-" + slot;
-              let tag = document.getElementById(id);
-              if (!tag) {
-                tag = document.createElement("style");
-                tag.id = id;
-                document.head.appendChild(tag);
+            const applyPreviewFace = (name) => {
+              const styleId = "aurora-font-preview-style-" + slot;
+              const linkId = "aurora-font-preview-link-" + slot;
+              const cssUrl = cssUrlByName[name] || "";
+              let styleTag = document.getElementById(styleId);
+              let linkTag = document.getElementById(linkId);
+
+              if (linkTag) {
+                linkTag.parentNode.removeChild(linkTag);
+                linkTag = null;
               }
-              tag.textContent = faceCSS || "";
+
+              if (!styleTag) {
+                styleTag = document.createElement("style");
+                styleTag.id = styleId;
+                document.head.appendChild(styleTag);
+              }
+
+              if (name === currentPreset) {
+                styleTag.textContent =
+                  themeConfig["font_" + slot + "_face"] || "";
+                return;
+              }
+
+              styleTag.textContent = "";
+              if (cssUrl) {
+                linkTag = document.createElement("link");
+                linkTag.id = linkId;
+                linkTag.rel = "stylesheet";
+                linkTag.href = cssUrl;
+                linkTag.onload = () => {
+                  if (select.value === name)
+                    statusEl.textContent = _(
+                      "Preview ready. Save & Apply downloads and applies this font.",
+                    );
+                };
+                linkTag.onerror = () => {
+                  if (select.value === name)
+                    setFailed(_("Unable to load preview CSS"));
+                };
+                document.head.appendChild(linkTag);
+              }
             };
 
             const setPreview = (stack) => {
               previewEl.style.fontFamily = stack;
               previewEl.textContent = sampleText;
               previewEl.style.opacity = "1";
-              statusEl.textContent = _("Preview ready. Save & Apply keeps this font.");
+              statusEl.textContent = _(
+                "Preview ready. Save & Apply downloads and applies this font.",
+              );
               statusEl.style.color = "";
             };
 
             const setLoading = () => {
-              previewEl.textContent = _("Downloading preview font...");
+              previewEl.textContent = _("Loading preview...");
               previewEl.style.opacity = "0.5";
               previewEl.style.fontFamily = "inherit";
               statusEl.textContent = _(
-                "This may take a moment on networks that cannot reach Google Fonts.",
+                "The live theme is unchanged until you click Save & Apply.",
               );
               statusEl.style.color = "";
             };
@@ -1225,12 +1302,7 @@ return view.extend({
                 "var(--error-foreground,var(--destructive-foreground,#b91c1c))";
             };
 
-            // Seed cache with current committed state so initial selection is instant
-            stageCache[currentPreset] = {
-              face_css: themeConfig["font_" + slot + "_face"] || "",
-              stack: themeConfig[stackKey] || defaultStack,
-            };
-            setPreview(stageCache[currentPreset].stack);
+            setPreview(themeConfig[stackKey] || defaultStack);
 
             const syncStackInput = (stack) => {
               const stackEl = document.querySelector('[data-name="' + stackKey + '"]');
@@ -1241,38 +1313,15 @@ return view.extend({
               }
             };
 
-            const doStage = (name) => {
-              const requestId = ++stageRequestId;
-              if (stageCache[name]) {
-                applyFaceToPage(stageCache[name].face_css);
-                setPreview(stageCache[name].stack);
-                syncStackInput(stageCache[name].stack);
-                return;
-              }
+            const doPreview = (name) => {
+              const stack = stackByName[name] || defaultStack;
               setLoading();
-              L.resolveDefault(callStageFont(slot, name), null).then((ret) => {
-                if (requestId !== stageRequestId || select.value !== name) return;
-
-                if (ret?.result === 0) {
-                  stageCache[name] = {
-                    face_css: ret.face_css || "",
-                    stack: ret.stack || defaultStack,
-                  };
-                  applyFaceToPage(stageCache[name].face_css);
-                  setPreview(stageCache[name].stack);
-                  syncStackInput(stageCache[name].stack);
-                } else {
-                  setFailed(
-                    ret?.error ||
-                      (ret
-                        ? _("Unknown error")
-                        : _("Aurora RPC is unavailable. Restart rpcd or reinstall luci-app-aurora-config.")),
-                  );
-                }
-              });
+              applyPreviewFace(name);
+              setPreview(stack);
+              syncStackInput(stack);
             };
 
-            select.addEventListener("change", () => doStage(select.value));
+            select.addEventListener("change", () => doPreview(select.value));
             field.appendChild(preview);
             return el;
           });
