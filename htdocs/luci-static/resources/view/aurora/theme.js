@@ -581,65 +581,17 @@ return view.extend({
     const FONT_FALLBACKS = {
       sans: [
         { name: "default", label: _("Aurora Default"), source: _("Built-in") },
-        {
-          name: "inter",
-          label: "Inter",
-          source: "Google Fonts",
-          css_url:
-            "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
-        },
-        {
-          name: "roboto",
-          label: "Roboto",
-          source: "Google Fonts",
-          css_url:
-            "https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap",
-        },
-        {
-          name: "source-sans-3",
-          label: "Source Sans 3",
-          source: "Google Fonts",
-          css_url:
-            "https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap",
-        },
-        {
-          name: "noto-sans-sc",
-          label: "Noto Sans SC",
-          source: "Google Fonts",
-          css_url:
-            "https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap",
-        },
+        { name: "inter", label: "Inter", source: "Google Fonts" },
+        { name: "roboto", label: "Roboto", source: "Google Fonts" },
+        { name: "source-sans-3", label: "Source Sans 3", source: "Google Fonts" },
+        { name: "noto-sans-sc", label: "Noto Sans SC", source: "Google Fonts" },
       ],
       mono: [
         { name: "default", label: _("System Mono"), source: _("Built-in") },
-        {
-          name: "jetbrains-mono",
-          label: "JetBrains Mono",
-          source: "Google Fonts",
-          css_url:
-            "https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap",
-        },
-        {
-          name: "fira-code",
-          label: "Fira Code",
-          source: "Google Fonts",
-          css_url:
-            "https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap",
-        },
-        {
-          name: "ibm-plex-mono",
-          label: "IBM Plex Mono",
-          source: "Google Fonts",
-          css_url:
-            "https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&display=swap",
-        },
-        {
-          name: "source-code-pro",
-          label: "Source Code Pro",
-          source: "Google Fonts",
-          css_url:
-            "https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600;700&display=swap",
-        },
+        { name: "jetbrains-mono", label: "JetBrains Mono", source: "Google Fonts" },
+        { name: "fira-code", label: "Fira Code", source: "Google Fonts" },
+        { name: "ibm-plex-mono", label: "IBM Plex Mono", source: "Google Fonts" },
+        { name: "source-code-pro", label: "Source Code Pro", source: "Google Fonts" },
       ],
     };
 
@@ -654,7 +606,6 @@ return view.extend({
             source: font.source || "",
             family: font.family || "",
             stack: font.stack || "",
-            css_url: font.css_url || "",
           }));
         if (options.length > 0) return options;
       }
@@ -1150,19 +1101,14 @@ return view.extend({
     );
     const fontSubsection = fontSection.subsection;
 
-    const addFontSlot = (ss, slot, presetKey, stackKey, defaultStack, sampleText) => {
+    const addFontSlot = (ss, slot) => {
       const options = buildFontOptions(slot);
-      const stackByName = Object.fromEntries(
-        options.map((o) => [o.name, o.stack || defaultStack]),
-      );
-      const cssUrlByName = Object.fromEntries(
-        options.map((o) => [o.name, o.css_url || ""]),
-      );
+      const presetKey = "font_" + slot + "_preset";
       const currentPreset = themeConfig[presetKey] || "default";
 
       const presetOpt = ss.option(
         form.ListValue,
-        "_" + slot + "_preset",
+        presetKey,
         slot === "sans" ? _("Sans-serif Typeface") : _("Monospace Typeface"),
       );
       presetOpt.default = currentPreset;
@@ -1177,183 +1123,13 @@ return view.extend({
       presetOpt.write = (section_id, value) =>
         L.resolveDefault(callCommitFont(slot, value), null).then((ret) => {
           if (ret?.result === 0) return;
-          throw new Error(
-            ret?.error ||
-              (ret
-                ? _("Unknown font save error")
-                : _("Aurora RPC is unavailable. Restart rpcd or reinstall luci-app-aurora-config.")),
-          );
+          throw new Error(ret?.error || _("Unable to apply font settings"));
         });
       presetOpt.remove = () => Promise.resolve();
-
-      presetOpt.render = function (option_index, section_id, in_table) {
-        return form.ListValue.prototype.render
-          .call(this, option_index, section_id, in_table)
-          .then((el) => {
-            const select = el.querySelector("select");
-            const field = el.querySelector(".cbi-value-field");
-
-            const slotLabel = slot === "sans"
-              ? _("Sans-serif font — interface text")
-              : _("Monospace font — code &amp; terminal");
-            const previewEl = E(
-              "em",
-              {
-                style:
-                  "display:block; font-size:0.95rem; font-style:normal; line-height:1.45;",
-              },
-              sampleText,
-            );
-            const statusEl = E(
-              "small",
-              {
-                style:
-                  "display:block; margin-top:0.25rem; font-size:0.72rem; opacity:0.75; font-family:inherit;",
-              },
-              _("Select a font to preview it here. Save & Apply keeps the choice."),
-            );
-            const preview = E("div", {
-              style: "margin-top:0.4rem; color:var(--muted-foreground,inherit);",
-            }, [
-              E(
-                "small",
-                {
-                  style:
-                    "display:block; font-size:0.7rem; opacity:0.7; font-family:inherit; margin-bottom:0.2rem; letter-spacing:0.02em;",
-                },
-                slotLabel,
-              ),
-              previewEl,
-              statusEl,
-            ]);
-
-            // Inject the slot-specific @font-face into the page head
-            const applyPreviewFace = (name) => {
-              const styleId = "aurora-font-preview-style-" + slot;
-              const linkId = "aurora-font-preview-link-" + slot;
-              const cssUrl = cssUrlByName[name] || "";
-              let styleTag = document.getElementById(styleId);
-              let linkTag = document.getElementById(linkId);
-
-              if (linkTag) {
-                linkTag.parentNode.removeChild(linkTag);
-                linkTag = null;
-              }
-
-              if (!styleTag) {
-                styleTag = document.createElement("style");
-                styleTag.id = styleId;
-                document.head.appendChild(styleTag);
-              }
-
-              if (name === currentPreset) {
-                styleTag.textContent =
-                  themeConfig["font_" + slot + "_face"] || "";
-                return;
-              }
-
-              styleTag.textContent = "";
-              if (cssUrl) {
-                linkTag = document.createElement("link");
-                linkTag.id = linkId;
-                linkTag.rel = "stylesheet";
-                linkTag.href = cssUrl;
-                linkTag.onload = () => {
-                  if (select.value === name)
-                    statusEl.textContent = _(
-                      "Preview ready. Save & Apply downloads and applies this font.",
-                    );
-                };
-                linkTag.onerror = () => {
-                  if (select.value === name)
-                    setFailed(_("Unable to load preview CSS"));
-                };
-                document.head.appendChild(linkTag);
-              }
-            };
-
-            const setPreview = (stack) => {
-              previewEl.style.fontFamily = stack;
-              previewEl.textContent = sampleText;
-              previewEl.style.opacity = "1";
-              statusEl.textContent = _(
-                "Preview ready. Save & Apply downloads and applies this font.",
-              );
-              statusEl.style.color = "";
-            };
-
-            const setLoading = () => {
-              previewEl.textContent = _("Loading preview...");
-              previewEl.style.opacity = "0.5";
-              previewEl.style.fontFamily = "inherit";
-              statusEl.textContent = _(
-                "The live theme is unchanged until you click Save & Apply.",
-              );
-              statusEl.style.color = "";
-            };
-
-            const setFailed = (message) => {
-              previewEl.textContent = sampleText;
-              previewEl.style.opacity = "1";
-              previewEl.style.fontFamily = "inherit";
-              statusEl.textContent =
-                _("Preview unavailable: %s").format(message);
-              statusEl.style.color =
-                "var(--error-foreground,var(--destructive-foreground,#b91c1c))";
-            };
-
-            setPreview(themeConfig[stackKey] || defaultStack);
-
-            const syncStackInput = (stack) => {
-              const stackEl = document.querySelector('[data-name="' + stackKey + '"]');
-              const inp = stackEl?.querySelector("input");
-              if (inp) {
-                inp.value = stack;
-                inp.dispatchEvent(new Event("change", { bubbles: true }));
-              }
-            };
-
-            const doPreview = (name) => {
-              const stack = stackByName[name] || defaultStack;
-              setLoading();
-              applyPreviewFace(name);
-              setPreview(stack);
-              syncStackInput(stack);
-            };
-
-            select.addEventListener("change", () => doPreview(select.value));
-            field.appendChild(preview);
-            return el;
-          });
-      };
-
-      const stackOpt = ss.option(
-        form.Value,
-        stackKey,
-        slot === "sans" ? _("Sans Font Stack") : _("Mono Font Stack"),
-      );
-      stackOpt.default = defaultStack;
-      stackOpt.placeholder = defaultStack;
-      stackOpt.rmempty = true;
     };
 
-    addFontSlot(
-      fontSubsection,
-      "sans",
-      "font_sans_preset",
-      "struct_font_sans",
-      '"Lato", ui-sans-serif, system-ui, sans-serif',
-      _("Sans-serif: The quick brown fox jumps over the lazy dog"),
-    );
-
-    addFontSlot(
-      fontSubsection,
-      "mono",
-      "font_mono_preset",
-      "struct_font_mono",
-      'ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace',
-      "Monospace: const fn = () => 0; // 0123456789",
-    );
+    addFontSlot(fontSubsection, "sans");
+    addFontSlot(fontSubsection, "mono");
 
     const iconSection = s.taboption(
       "icons_toolbar",

@@ -436,34 +436,44 @@ case "$1" in
 		fi
 
 		face_file="$FONT_PATH/aurora-font-${slot}-${name}.face"
-		if [ -f "$face_file" ]; then
-			face=$(cat "$face_file")
-		fi
-
-		if ! face_references_exist "$face"; then
-			face=$(download_and_build_face "$slot" "$name" "$css_url")
-			if [ -z "$face" ]; then
-				echo '{ "result": 1, "error": "Failed to download font files" }'
-				exit 0
-			fi
-
-			printf '%s' "$face" > "$face_file"
-			chmod 0644 "$face_file"
-		fi
-
-		[ -n "$face" ] || { echo '{ "result": 1, "error": "Staged face data is empty" }'; exit 0; }
+		if [ -f "$face_file" ]; then face=$(cat "$face_file"); fi
 
 		if [ "$slot" = "sans" ]; then
 			uci -q set aurora.theme.struct_font_sans="$stack"
-			uci -q set aurora.theme.font_sans_face="$face"
 			uci -q set aurora.theme.font_sans_preset="$name"
+			if face_references_exist "$face"; then
+				uci -q set aurora.theme.font_sans_face="$face"
+			else
+				uci -q set aurora.theme.font_sans_face=""
+			fi
 		else
 			uci -q set aurora.theme.struct_font_mono="$stack"
-			uci -q set aurora.theme.font_mono_face="$face"
 			uci -q set aurora.theme.font_mono_preset="$name"
+			if face_references_exist "$face"; then
+				uci -q set aurora.theme.font_mono_face="$face"
+			else
+				uci -q set aurora.theme.font_mono_face=""
+			fi
 		fi
 		uci -q commit aurora
 		update_icon_cache_timestamp
+
+		if ! face_references_exist "$face"; then
+			(
+				face=$(download_and_build_face "$slot" "$name" "$css_url") || exit 0
+				[ -n "$face" ] || exit 0
+				printf '%s' "$face" > "$face_file"
+				chmod 0644 "$face_file"
+				if [ "$slot" = "sans" ]; then
+					uci -q set aurora.theme.font_sans_face="$face"
+				else
+					uci -q set aurora.theme.font_mono_face="$face"
+				fi
+				uci -q commit aurora
+				update_icon_cache_timestamp
+			) >/dev/null 2>&1 &
+		fi
+
 		echo '{ "result": 0 }'
 		;;
 
