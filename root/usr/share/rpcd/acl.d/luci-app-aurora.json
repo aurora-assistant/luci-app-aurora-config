@@ -12,7 +12,9 @@
           "get_theme_config",
           "get_theme_presets",
           "get_font_presets",
-          "export_config"
+          "export_config",
+          "stage_font",
+          "commit_font"
         ],
         "file": ["read", "list", "stat"]
       },
