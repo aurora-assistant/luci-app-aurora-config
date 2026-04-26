@@ -1109,8 +1109,11 @@ return view.extend({
 
     const addFontSlot = (ss, slot, presetKey, stackKey, defaultStack, sampleText) => {
       const options = buildFontOptions(slot);
-      const stackByName = Object.fromEntries(options.map((o) => [o.name, o.stack || defaultStack]));
+      const stackByName = Object.fromEntries(
+        options.map((o) => [o.name, o.stack || defaultStack]),
+      );
       const currentPreset = themeConfig[presetKey] || "default";
+      let stageRequestId = 0;
 
       // Per-slot stage cache (name → { face_css, stack }); avoids redundant RPC calls
       const stageCache = {};
@@ -1129,7 +1132,16 @@ return view.extend({
         );
       });
       presetOpt.cfgvalue = () => currentPreset;
-      presetOpt.write = () => Promise.resolve();
+      presetOpt.write = (section_id, value) =>
+        L.resolveDefault(callCommitFont(slot, value), null).then((ret) => {
+          if (ret?.result === 0) return;
+          throw new Error(
+            ret?.error ||
+              (ret
+                ? _("Unknown font save error")
+                : _("Aurora RPC is unavailable. Restart rpcd or reinstall luci-app-aurora-config.")),
+          );
+        });
       presetOpt.remove = () => Promise.resolve();
 
       presetOpt.render = function (option_index, section_id, in_table) {
@@ -1142,16 +1154,35 @@ return view.extend({
             const slotLabel = slot === "sans"
               ? _("Sans-serif font — interface text")
               : _("Monospace font — code &amp; terminal");
-            const previewEl = E("em", {
-              style: "display:block; font-size:0.95rem; font-style:normal;",
-            }, sampleText);
+            const previewEl = E(
+              "em",
+              {
+                style:
+                  "display:block; font-size:0.95rem; font-style:normal; line-height:1.45;",
+              },
+              sampleText,
+            );
+            const statusEl = E(
+              "small",
+              {
+                style:
+                  "display:block; margin-top:0.25rem; font-size:0.72rem; opacity:0.75; font-family:inherit;",
+              },
+              _("Select a font to preview it here. Save & Apply keeps the choice."),
+            );
             const preview = E("div", {
               style: "margin-top:0.4rem; color:var(--muted-foreground,inherit);",
             }, [
-              E("small", {
-                style: "display:block; font-size:0.7rem; opacity:0.7; font-family:inherit; margin-bottom:0.2rem; letter-spacing:0.02em;",
-              }, slotLabel),
+              E(
+                "small",
+                {
+                  style:
+                    "display:block; font-size:0.7rem; opacity:0.7; font-family:inherit; margin-bottom:0.2rem; letter-spacing:0.02em;",
+                },
+                slotLabel,
+              ),
               previewEl,
+              statusEl,
             ]);
 
             // Inject the slot-specific @font-face into the page head
@@ -1170,12 +1201,28 @@ return view.extend({
               previewEl.style.fontFamily = stack;
               previewEl.textContent = sampleText;
               previewEl.style.opacity = "1";
+              statusEl.textContent = _("Preview ready. Save & Apply keeps this font.");
+              statusEl.style.color = "";
             };
 
             const setLoading = () => {
-              previewEl.textContent = _("Loading font...");
+              previewEl.textContent = _("Downloading preview font...");
               previewEl.style.opacity = "0.5";
               previewEl.style.fontFamily = "inherit";
+              statusEl.textContent = _(
+                "This may take a moment on networks that cannot reach Google Fonts.",
+              );
+              statusEl.style.color = "";
+            };
+
+            const setFailed = (message) => {
+              previewEl.textContent = sampleText;
+              previewEl.style.opacity = "1";
+              previewEl.style.fontFamily = "inherit";
+              statusEl.textContent =
+                _("Preview unavailable: %s").format(message);
+              statusEl.style.color =
+                "var(--error-foreground,var(--destructive-foreground,#b91c1c))";
             };
 
             // Seed cache with current committed state so initial selection is instant
@@ -1195,6 +1242,7 @@ return view.extend({
             };
 
             const doStage = (name) => {
+              const requestId = ++stageRequestId;
               if (stageCache[name]) {
                 applyFaceToPage(stageCache[name].face_css);
                 setPreview(stageCache[name].stack);
@@ -1203,6 +1251,8 @@ return view.extend({
               }
               setLoading();
               L.resolveDefault(callStageFont(slot, name), null).then((ret) => {
+                if (requestId !== stageRequestId || select.value !== name) return;
+
                 if (ret?.result === 0) {
                   stageCache[name] = {
                     face_css: ret.face_css || "",
@@ -1212,10 +1262,12 @@ return view.extend({
                   setPreview(stageCache[name].stack);
                   syncStackInput(stageCache[name].stack);
                 } else {
-                  previewEl.textContent = _("Failed: %s").format(
-                    ret?.error || (ret ? _("Unknown error") : _("RPC unavailable — check rpcd")),
+                  setFailed(
+                    ret?.error ||
+                      (ret
+                        ? _("Unknown error")
+                        : _("Aurora RPC is unavailable. Restart rpcd or reinstall luci-app-aurora-config.")),
                   );
-                  previewEl.style.opacity = "1";
                 }
               });
             };

@@ -172,6 +172,23 @@ download_and_build_face() {
 	return 0
 }
 
+face_references_exist() {
+	local face="$1" url path
+
+	[ -n "$face" ] || return 1
+
+	for url in $(printf '%s\n' "$face" | sed 's/url(/\nurl(/g' | sed -n 's/^url("\([^"]*\)").*/\1/p; s/^url(\([^)]*\)).*/\1/p'); do
+		case "$url" in
+		/luci-static/aurora/fonts/*)
+			path="/www${url}"
+			[ -s "$path" ] || return 1
+			;;
+		esac
+	done
+
+	return 0
+}
+
 
 version_compare() {
 	local v1 v2
@@ -349,9 +366,6 @@ case "$1" in
 				face=""
 				stack="$DEFAULT_MONO_STACK"
 			fi
-			uci -q set "aurora.theme.font_${slot}_face=$face"
-			uci -q delete "aurora.theme.font_${slot}_preset"
-			uci -q commit aurora
 			json_init
 			json_add_int "result" 0
 			json_add_string "face_css" "$face"
@@ -363,12 +377,15 @@ case "$1" in
 		face_file="$FONT_PATH/aurora-font-${slot}-${name}.face"
 		if [ -f "$face_file" ] && ls "$FONT_PATH/aurora-font-${slot}-${name}-1.woff2" >/dev/null 2>&1; then
 			face=$(cat "$face_file")
-			json_init
-			json_add_int "result" 0
-			json_add_string "face_css" "$face"
-			json_add_string "stack" "$stack"
-			json_dump; json_cleanup
-			exit 0
+			if face_references_exist "$face"; then
+				json_init
+				json_add_int "result" 0
+				json_add_string "face_css" "$face"
+				json_add_string "stack" "$stack"
+				json_dump; json_cleanup
+				exit 0
+			fi
+			cleanup_custom_fonts "$slot"
 		fi
 
 		face=$(download_and_build_face "$slot" "$name" "$css_url")
@@ -379,10 +396,6 @@ case "$1" in
 
 		printf '%s' "$face" > "$face_file"
 		chmod 0644 "$face_file"
-
-		uci -q set "aurora.theme.font_${slot}_face=$face"
-		uci -q set "aurora.theme.font_${slot}_preset=$name"
-		uci -q commit aurora
 
 		json_init
 		json_add_int "result" 0
@@ -429,6 +442,7 @@ case "$1" in
 
 		face=$(cat "$face_file")
 		[ -n "$face" ] || { echo '{ "result": 1, "error": "Staged face data is empty" }'; exit 0; }
+		face_references_exist "$face" || { echo '{ "result": 1, "error": "Staged font files are missing — select the font again to re-download" }'; exit 0; }
 
 		if [ "$slot" = "sans" ]; then
 			uci -q set aurora.theme.struct_font_sans="$stack"
