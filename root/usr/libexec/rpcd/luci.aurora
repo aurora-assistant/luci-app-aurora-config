@@ -349,6 +349,9 @@ case "$1" in
 				face=""
 				stack="$DEFAULT_MONO_STACK"
 			fi
+			uci -q set "aurora.theme.font_${slot}_face=$face"
+			uci -q delete "aurora.theme.font_${slot}_preset"
+			uci -q commit aurora
 			json_init
 			json_add_int "result" 0
 			json_add_string "face_css" "$face"
@@ -376,6 +379,10 @@ case "$1" in
 
 		printf '%s' "$face" > "$face_file"
 		chmod 0644 "$face_file"
+
+		uci -q set "aurora.theme.font_${slot}_face=$face"
+		uci -q set "aurora.theme.font_${slot}_preset=$name"
+		uci -q commit aurora
 
 		json_init
 		json_add_int "result" 0

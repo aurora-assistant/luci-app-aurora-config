@@ -1114,13 +1114,11 @@ return view.extend({
 
       // Per-slot stage cache (name → { face_css, stack }); avoids redundant RPC calls
       const stageCache = {};
-      // Tracks which preset is currently staged/selected (drives commit_font)
-      let pendingName = currentPreset;
 
       const presetOpt = ss.option(
         form.ListValue,
         "_" + slot + "_preset",
-        slot === "sans" ? _("Sans Font") : _("Mono Font"),
+        slot === "sans" ? _("Sans-serif Typeface") : _("Monospace Typeface"),
       );
       presetOpt.default = currentPreset;
       presetOpt.rmempty = false;
@@ -1187,15 +1185,24 @@ return view.extend({
             };
             setPreview(stageCache[currentPreset].stack);
 
+            const syncStackInput = (stack) => {
+              const stackEl = document.querySelector('[data-name="' + stackKey + '"]');
+              const inp = stackEl?.querySelector("input");
+              if (inp) {
+                inp.value = stack;
+                inp.dispatchEvent(new Event("change", { bubbles: true }));
+              }
+            };
+
             const doStage = (name) => {
               if (stageCache[name]) {
                 applyFaceToPage(stageCache[name].face_css);
                 setPreview(stageCache[name].stack);
-                pendingName = name;
+                syncStackInput(stageCache[name].stack);
                 return;
               }
               setLoading();
-              L.resolveDefault(callStageFont(slot, name), {}).then((ret) => {
+              L.resolveDefault(callStageFont(slot, name), null).then((ret) => {
                 if (ret?.result === 0) {
                   stageCache[name] = {
                     face_css: ret.face_css || "",
@@ -1203,9 +1210,11 @@ return view.extend({
                   };
                   applyFaceToPage(stageCache[name].face_css);
                   setPreview(stageCache[name].stack);
-                  pendingName = name;
+                  syncStackInput(stageCache[name].stack);
                 } else {
-                  previewEl.textContent = _("Failed: %s").format(ret?.error || "Unknown");
+                  previewEl.textContent = _("Failed: %s").format(
+                    ret?.error || (ret ? _("Unknown error") : _("RPC unavailable — check rpcd")),
+                  );
                   previewEl.style.opacity = "1";
                 }
               });
@@ -1216,28 +1225,6 @@ return view.extend({
             return el;
           });
       };
-
-      const saveOpt = ss.option(
-        form.Button,
-        "_save_" + slot,
-        slot === "sans" ? _("Save Sans Font") : _("Save Mono Font"),
-      );
-      saveOpt.inputstyle = "apply";
-      saveOpt.inputtitle = _("Save Font");
-      saveOpt.onclick = ui.createHandlerFn(viewCtx, () => {
-        return L.resolveDefault(callCommitFont(slot, pendingName), {}).then((ret) => {
-          if (ret?.result === 0) {
-            ui.addNotification(null, E("p", _("Font saved successfully.")), "info");
-            window.location.reload();
-          } else {
-            ui.addNotification(
-              null,
-              E("p", _("Failed to save font: %s").format(ret?.error || "Unknown")),
-              "error",
-            );
-          }
-        });
-      });
 
       const stackOpt = ss.option(
         form.Value,
