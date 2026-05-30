@@ -374,15 +374,6 @@ const fromLoginBgUrl = (value) => {
 const isImageFile = (filename) =>
   /\.(jpg|jpeg|png|gif|webp|avif|svg|bmp|ico)$/i.test(filename);
 
-const getAssetType = (filename) => {
-  if (/^login-bg\./i.test(filename)) return _("Login Background");
-  if (filename === "logo.svg") return _("Site Logo");
-  if (filename === "favicon.ico") return _("Favicon");
-  if (filename.endsWith(".svg")) return _("SVG Icon");
-  if (/\.(png|jpg|jpeg|webp|gif|avif|bmp)$/i.test(filename)) return _("Image");
-  return _("File");
-};
-
 return view.extend({
   handleSave: function (ev) {
     const save = L.bind(function () {
@@ -1233,173 +1224,203 @@ return view.extend({
     );
     const assetSubsection = assetSection.subsection;
 
-    const uploadSo = assetSubsection.option(form.Button, "_upload_asset", _("Upload Asset"));
-    uploadSo.inputstyle = "add";
-    uploadSo.inputtitle = _("Upload image file");
-    uploadSo.onclick = ui.createHandlerFn(this, function () {
-      const fileInput = E("input", { type: "file", style: "display:none", accept: "image/*,.svg" });
-      document.body.appendChild(fileInput);
-
-      return new Promise((resolve) => {
-        const makeRadio = (value, labelText, checked) => {
-          const id = "aurora-asset-type-" + value;
-          const radio = E("input", { type: "radio", id, name: "aurora_asset_type", value });
-          if (checked) radio.checked = true;
-          return E("label", {
-            for: id,
-            style: "display:flex;align-items:center;gap:0.6em;padding:0.35em 0;cursor:pointer;",
-          }, [radio, labelText]);
-        };
-        const cancelFn = () => {
-          document.body.removeChild(fileInput);
-          ui.hideModal();
-          resolve(null);
-        };
-        ui.showModal(_("Upload Asset"), [
-          E("p", { style: "margin-bottom:0.25em;font-weight:600;" }, _("Select what this image will be used for:")),
-          E("div", { style: "margin:0.25em 0 1em;" }, [
-            makeRadio("icon", _("Logo / Icon"), true),
-            makeRadio("media", _("Login background image"), false),
-          ]),
-          E("div", { class: "right" }, [
-            E("button", { class: "btn", click: cancelFn }, _("Cancel")),
-            " ",
-            E("button", {
-              class: "btn cbi-button-action important",
-              click: () => {
-                const checked = document.querySelector('input[name="aurora_asset_type"]:checked');
-                const type = checked ? checked.value : "icon";
-                ui.hideModal();
-                fileInput.onchange = () => {
-                  const file = fileInput.files[0];
-                  document.body.removeChild(fileInput);
-                  resolve(file ? { type, file } : null);
-                };
-                fileInput.click();
-              },
-            }, _("Choose File")),
-          ]),
-        ]);
-      }).then((selection) => {
-        if (!selection) return;
-        const { type, file } = selection;
-        const tmpPath = "/tmp/aurora_icon.tmp";
-
-        ui.showModal(_("Uploading…"), [E("p", { class: "spinning" }, _("Uploading…"))]);
-
-        const formData = new FormData();
-        formData.append("sessionid", rpc.getSessionID());
-        formData.append("filename", tmpPath);
-        formData.append("filemode", "0600");
-        formData.append("filedata", file, file.name);
-
-        return fetch("/cgi-bin/cgi-upload", { method: "POST", credentials: "include", body: formData })
-          .then((r) => (r.ok ? r.json() : Promise.reject(new Error("HTTP " + r.status))))
-          .then(() => {
-              return L.resolveDefault(callUploadIcon(file.name), {}).then((ret) => {
-                if (ret?.result === 0) {
-                  if (type === "media") {
-                    localStorage.setItem("aurora.pending_bg", file.name);
-                  }
-                  ui.addNotification(null, E("p", _("Uploaded: %s").format(file.name)));
-                  window.location.reload();
-                } else {
-                  ui.addNotification(null, E("p", _("Failed to upload: %s").format(ret?.error || "Unknown")));
-                  return L.resolveDefault(fs.remove(tmpPath), {});
-                }
-              });
-          })
-          .catch((err) => {
-
-            ui.hideModal();
-
-            ui.addNotification(null, E("p", _("Upload failed: %s").format(err.message || err)));
-            return L.resolveDefault(fs.remove(tmpPath), {});
-          });
-      });
-    });
-
     const assetTableSo = assetSubsection.option(form.DummyValue, "_asset_table", " ");
     assetTableSo.load = () => L.resolveDefault(callListIcons(), { icons: [] });
     assetTableSo.cfgvalue = (section_id, data) => data?.icons || [];
     assetTableSo.render = function (option_index, section_id, in_table) {
       return this.load(section_id).then((data) => {
         const icons = this.cfgvalue(section_id, data);
+        const tmpPath = "/tmp/aurora_icon.tmp";
 
-        if (icons.length === 0) {
-          return E("div", { "data-name": this.option, style: "padding:0.5em 0;" }, [
-            E("em", {}, _("No assets uploaded yet.")),
-          ]);
-        }
-
-        const table = E("table", { class: "table" }, [
-          E("tr", { class: "tr table-titles" }, [
-            E("th", { class: "th" }, _("Filename")),
-            E("th", { class: "th" }, _("Usage")),
-            E("th", { class: "th center" }, _("Actions")),
-          ]),
-        ]);
-
-        icons.forEach((icon) => {
-          const deleteBtn = E(
-            "button",
-            {
-              class: "cbi-button cbi-button-remove",
-              click: ui.createHandlerFn(this, () => {
-                return ui.showModal(_("Delete Asset"), [
-                  E("p", {}, _("Delete '%s'?").format(icon)),
-                  E("div", { class: "right" }, [
-                    E(
-                      "button",
-                      { class: "btn", click: ui.hideModal },
-                      _("Cancel"),
-                    ),
-                    " ",
-                    E(
-                      "button",
-                      {
-                        class: "btn cbi-button-negative",
-                        click: () => {
-                          ui.showModal(_("Deleting…"), [
-                            E("p", { class: "spinning" }, _("Deleting…")),
-                          ]);
-                          L.resolveDefault(callRemoveIcon(icon), {}).then((ret) => {
-                            ui.hideModal();
-                            if (ret?.result === 0) {
-                              ui.addNotification(
-                                null,
-                                E("p", _("Deleted: %s").format(icon)),
-                              );
-                              window.location.reload();
-                            } else {
-                              ui.addNotification(
-                                null,
-                                E("p", _("Failed to delete: %s").format(icon)),
-                                "error",
-                              );
-                            }
-                          });
-                        },
-                      },
-                      _("Delete"),
-                    ),
-                  ]),
-                ]);
-              }),
-            },
-            _("Delete"),
-          );
-
-          table.appendChild(
-            E("tr", { class: "tr" }, [
-              E("td", { class: "td", style: "font-family:monospace;" }, icon),
-              E("td", { class: "td" }, getAssetType(icon)),
-              E("td", { class: "td center" }, deleteBtn),
-            ]),
-          );
+        const fileInput = E("input", {
+          type: "file",
+          style: "display:none",
+          accept: "image/*,.svg",
         });
 
-        return E("div", { "data-name": this.option }, table);
+        const progressBar = E("div", {
+          style: "height:100%;width:0%;transition:width 0.15s;border-radius:2px;background:var(--color-primary,#2196f3);",
+        });
+        const progressFilename = E("span", {}, "");
+        const progressPct = E("span", {}, "0%");
+        const progressRow = E("div", {
+          style: "display:none;margin-bottom:0.75em;padding:0.6em 0.875em;border-radius:0.375em;border:1px solid var(--border-color,#ddd);",
+        }, [
+          E("div", {
+            style: "display:flex;justify-content:space-between;align-items:center;font-size:0.85em;margin-bottom:0.4em;",
+          }, [progressFilename, progressPct]),
+          E("div", {
+            style: "height:4px;border-radius:2px;overflow:hidden;background:var(--border-color,#eee);",
+          }, [progressBar]),
+        ]);
+
+        const setUploading = (busy) => {
+          dropzone.style.opacity = busy ? "0.5" : "";
+          dropzone.style.pointerEvents = busy ? "none" : "";
+          progressRow.style.display = busy ? "block" : "none";
+        };
+
+        const dropzone = E("div", {
+          style: "border:2px dashed var(--border-color,#aaa);border-radius:0.5em;padding:1.25em 1em;text-align:center;cursor:pointer;margin-bottom:0.75em;transition:border-color 0.15s,background 0.15s;",
+          click: () => fileInput.click(),
+          dragover: (e) => {
+            e.preventDefault();
+            dropzone.style.borderColor = "var(--color-primary,#2196f3)";
+            dropzone.style.background = "rgba(33,150,243,0.06)";
+          },
+          dragleave: () => {
+            dropzone.style.borderColor = "";
+            dropzone.style.background = "";
+          },
+          drop: (e) => {
+            e.preventDefault();
+            dropzone.style.borderColor = "";
+            dropzone.style.background = "";
+            const file = e.dataTransfer.files[0];
+            if (file) uploadFile(file);
+          },
+        }, [
+          E("div", { style: "font-size:1.5em;margin-bottom:0.25em;pointer-events:none;" }, "⬆"),
+          E("strong", { style: "pointer-events:none;" }, _("Drop image here, or click to browse")),
+          E("div", {
+            style: "font-size:0.8em;opacity:0.6;margin-top:0.25em;pointer-events:none;",
+          }, _("JPG · PNG · WebP · AVIF · SVG · GIF")),
+        ]);
+
+        const uploadFile = (file) => {
+          fileInput.value = "";
+          progressFilename.textContent = file.name;
+          progressPct.textContent = "0%";
+          progressBar.style.width = "0%";
+          setUploading(true);
+
+          const xhr = new XMLHttpRequest();
+
+          xhr.upload.addEventListener("progress", (e) => {
+            if (e.lengthComputable) {
+              const pct = Math.round((e.loaded / e.total) * 100);
+              progressBar.style.width = pct + "%";
+              progressPct.textContent = pct + "%";
+            }
+          });
+
+          xhr.addEventListener("load", () => {
+            if (xhr.status !== 200) {
+              setUploading(false);
+              ui.addNotification(null, E("p", _("Upload failed: HTTP %s").format(xhr.status)), "error");
+              return;
+            }
+            L.resolveDefault(callUploadIcon(file.name), {}).then((ret) => {
+              if (ret?.result === 0) {
+                if (/^login-bg\./i.test(file.name)) {
+                  localStorage.setItem("aurora.pending_bg", file.name);
+                }
+                window.location.reload();
+              } else {
+                setUploading(false);
+                ui.addNotification(null, E("p", _("Failed to upload: %s").format(ret?.error || "Unknown")), "error");
+                L.resolveDefault(fs.remove(tmpPath), {});
+              }
+            });
+          });
+
+          xhr.addEventListener("error", () => {
+            setUploading(false);
+            ui.addNotification(null, E("p", _("Upload failed")), "error");
+          });
+
+          const formData = new FormData();
+          formData.append("sessionid", rpc.getSessionID());
+          formData.append("filename", tmpPath);
+          formData.append("filemode", "0600");
+          formData.append("filedata", file, file.name);
+
+          xhr.open("POST", "/cgi-bin/cgi-upload");
+          xhr.withCredentials = true;
+          xhr.send(formData);
+        };
+
+        fileInput.addEventListener("change", () => {
+          const file = fileInput.files[0];
+          fileInput.value = "";
+          if (file) uploadFile(file);
+        });
+
+        const idleCallback = window.requestIdleCallback
+          ? (fn) => window.requestIdleCallback(fn, { timeout: 2000 })
+          : (fn) => setTimeout(fn, 100);
+
+        const makeRow = (icon) => {
+          const placeholder = E("div", {
+            style: "width:40px;height:40px;border-radius:4px;background:var(--border-color,#eee);",
+          });
+          const previewCell = E("td", { class: "td", style: "width:56px;" }, placeholder);
+
+          idleCallback(() => {
+            generateLqip("/luci-static/aurora/images/" + icon).then((dataUrl) => {
+              if (!dataUrl) return;
+              placeholder.replaceWith(E("img", {
+                src: dataUrl,
+                style: "width:40px;height:40px;object-fit:contain;border-radius:4px;display:block;",
+                alt: "",
+              }));
+            });
+          });
+
+          const deleteBtn = E("button", {
+            class: "cbi-button cbi-button-remove",
+            click: ui.createHandlerFn(this, () => {
+              return ui.showModal(_("Delete Asset"), [
+                E("p", {}, _("Delete '%s'?").format(icon)),
+                E("div", { class: "right" }, [
+                  E("button", { class: "btn", click: ui.hideModal }, _("Cancel")),
+                  " ",
+                  E("button", {
+                    class: "btn cbi-button-negative",
+                    click: () => {
+                      ui.showModal(_("Deleting…"), [
+                        E("p", { class: "spinning" }, _("Deleting…")),
+                      ]);
+                      L.resolveDefault(callRemoveIcon(icon), {}).then((ret) => {
+                        ui.hideModal();
+                        if (ret?.result === 0) {
+                          ui.addNotification(null, E("p", _("Deleted: %s").format(icon)));
+                          window.location.reload();
+                        } else {
+                          ui.addNotification(null, E("p", _("Failed to delete: %s").format(ret?.error || "Unknown")), "error");
+                        }
+                      });
+                    },
+                  }, _("Delete")),
+                ]),
+              ]);
+            }),
+          }, _("Delete"));
+
+          return E("tr", { class: "tr" }, [
+            previewCell,
+            E("td", { class: "td", style: "font-family:monospace;" }, icon),
+            E("td", { class: "td center" }, deleteBtn),
+          ]);
+        };
+
+        const tableOrEmpty = icons.length === 0
+          ? E("div", { style: "padding:0.5em 0;" }, [E("em", {}, _("No assets uploaded yet."))])
+          : E("table", { class: "table" }, [
+              E("tr", { class: "tr table-titles" }, [
+                E("th", { class: "th", style: "width:56px;" }, _("Preview")),
+                E("th", { class: "th" }, _("Filename")),
+                E("th", { class: "th center" }, _("Actions")),
+              ]),
+              ...icons.map(makeRow),
+            ]);
+
+        return E("div", { "data-name": this.option }, [
+          fileInput,
+          dropzone,
+          progressRow,
+          tableOrEmpty,
+        ]);
       });
     };
 
