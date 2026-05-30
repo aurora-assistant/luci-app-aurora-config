@@ -27,6 +27,15 @@ const callListIcons = rpc.declare({
   method: "list_icons",
 });
 
+let _iconsPromise = null;
+const getIconsOnce = () => {
+  if (!_iconsPromise)
+    _iconsPromise = L.resolveDefault(callListIcons(), { icons: [] });
+  return _iconsPromise;
+};
+
+let _checkUpdatesPromise = null;
+
 const callRemoveIcon = rpc.declare({
   object: "luci.aurora",
   method: "remove_icon",
@@ -38,10 +47,6 @@ const callGetThemeConfig = rpc.declare({
   method: "get_theme_config",
 });
 
-const callGetThemePresets = rpc.declare({
-  object: "luci.aurora",
-  method: "get_theme_presets",
-});
 
 const callGetFontPresets = rpc.declare({
   object: "luci.aurora",
@@ -359,20 +364,36 @@ return view.extend({
   },
 
   load: function () {
+    if (!utils_version_api.versionCache?.get?.() && !_checkUpdatesPromise) {
+      _checkUpdatesPromise = fetch("/ubus/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify([{
+          id: 1, method: "call",
+          params: [L.env.sessionid, "luci.aurora", "check_updates", {}],
+        }]),
+      })
+        .then((r) => (r.ok ? r.json() : null))
+        .then((res) => {
+          const data = res?.[0]?.result?.[1];
+          if (data) utils_version_api.versionCache?.set(data);
+          return data ?? null;
+        })
+        .catch(() => null);
+    }
     return Promise.all([
       uci.load("aurora"),
       L.resolveDefault(callGetThemeConfig(), {}),
-      L.resolveDefault(callGetThemePresets(), {}),
       L.resolveDefault(utils_version_api.callGetInstalledVersions(), {}),
       L.resolveDefault(callGetFontPresets(), {}),
+      getIconsOnce(),
     ]);
   },
 
   render(loadData) {
     const themeConfig = loadData[1]?.theme || {};
-    const themePresets = loadData[2]?.presets || [];
-    const installedVersions = loadData[3];
-    const fontPresetsBySlot = loadData[4]?.fonts || {};
+    const installedVersions = loadData[2];
+    const fontPresetsBySlot = loadData[3]?.fonts || {};
 
     // Order matches luci-theme-aurora/.dev/src/media/main.css @theme inline
     const baseColorVars = [
@@ -457,24 +478,13 @@ return view.extend({
     let so;
     const viewCtx = this;
 
-    const buildPresetOptions = () => {
-      if (themePresets.length > 0) {
-        const options = themePresets
-          .filter((preset) => preset?.name)
-          .map((preset) => ({
-            name: preset.name,
-            label: preset.label || preset.name,
-          }));
-        if (options.length > 0) return options;
-      }
-      return [
-        { name: "classic", label: _("Classic") },
-        { name: "monochrome", label: _("Monochrome") },
-        { name: "sage-green", label: _("Sage Green") },
-        { name: "amber-sand", label: _("Amber Sand") },
-        { name: "sky-blue", label: _("Sky Blue") },
-      ];
-    };
+    const buildPresetOptions = () => [
+      { name: "classic", label: _("Classic") },
+      { name: "monochrome", label: _("Monochrome") },
+      { name: "sage-green", label: _("Sage Green") },
+      { name: "amber-sand", label: _("Amber Sand") },
+      { name: "sky-blue", label: _("Sky Blue") },
+    ];
 
     const FONT_DEFAULT_STACKS = {
       sans: '"Lato", ui-sans-serif, system-ui, sans-serif',
@@ -509,16 +519,14 @@ return view.extend({
 
     const buildPresetToolbarNode = () => {
       const presetOptions = buildPresetOptions();
-      const defaultPreset = "classic";
+      const uciPreset = themeConfig.active_preset;
       const storedPreset = localStorage.getItem("aurora.theme_preset");
-      const hasStoredPreset = presetOptions.some(
-        (preset) => preset.name === storedPreset,
-      );
-      const initialPreset = hasStoredPreset ? storedPreset : defaultPreset;
+      const initialPreset =
+        presetOptions.some((p) => p.name === uciPreset) ? uciPreset :
+        presetOptions.some((p) => p.name === storedPreset) ? storedPreset :
+        "classic";
 
-      if (!hasStoredPreset) {
-        localStorage.setItem("aurora.theme_preset", initialPreset);
-      }
+      localStorage.setItem("aurora.theme_preset", initialPreset);
 
       const select = E(
         "select",
