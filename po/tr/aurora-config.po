@@ -247,7 +247,7 @@ msgid "Content Max Width"
 msgstr "Maksimum İçerik Genişliği"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2032
-id "Corner Radius"
+msgid "Corner Radius"
 msgstr "Köşe Yarıçapı"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:173

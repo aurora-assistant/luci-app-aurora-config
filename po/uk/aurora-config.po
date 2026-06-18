@@ -604,7 +604,7 @@ msgid "Mega Menu"
 msgstr "Мега-меню"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:330
-id "Mega Menu Background"
+msgid "Mega Menu Background"
 msgstr "Фон мега-меню"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:337

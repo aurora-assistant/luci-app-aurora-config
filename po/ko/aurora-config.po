@@ -228,7 +228,7 @@ msgid "Colors"
 msgstr "색상"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/version.js:373
-id "Config"
+msgid "Config"
 msgstr "구성"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1953
@@ -331,7 +331,7 @@ msgid "Drop image asset here, or click to browse"
 msgstr "여기에 이미지 자산을 드롭하거나, 클릭하여 찾아보세요"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2013
-id "Dropdown"
+msgid "Dropdown"
 msgstr "드롭다운"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2717
@@ -442,7 +442,7 @@ msgstr "Aurora 테마 구성에 대한 액세스 권한 부여"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:218
 msgid "Hairline"
-msgstr "헤어ライン (Hairline)"
+msgstr "헤어라인 (Hairline)"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2588
 msgid "Home Screen icon for iOS and iPadOS."
@@ -469,7 +469,7 @@ msgid "Hyperlinks in page content, help text, and status output."
 msgstr "ページコンテンツ、ヘルプテキスト、およびステータス出力内のハイパーリンク。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2734
-id "Icon"
+msgid "Icon"
 msgstr "아이콘"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1816
@@ -623,7 +623,7 @@ msgid "Muted Text"
 msgstr "뮤트(Muted) 텍스트"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2009
-id "Navigation Style"
+msgid "Navigation Style"
 msgstr "탐색 스타일"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2011
@@ -669,7 +669,7 @@ msgid "Operational Status Accents"
 msgstr "작업 상태 강조색"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:211
-id "Overlay Surface"
+msgid "Overlay Surface"
 msgstr "오버레이 서페이스(Surface)"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2567
@@ -804,7 +804,7 @@ msgid "Shortcut Label"
 msgstr "바로가기 레이블"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2686
-id "Shortcut Toolbar"
+msgid "Shortcut Toolbar"
 msgstr "바로가기 툴바"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2728

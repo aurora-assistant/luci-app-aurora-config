@@ -404,7 +404,7 @@ msgid "Focus Ring"
 msgstr "Cincin Fokus (Focus Ring)"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:263
-id "Focus outline for inputs, selects, and keyboard-operated controls."
+msgid "Focus outline for inputs, selects, and keyboard-operated controls."
 msgstr "Garis luar fokus untuk input, seleksi, dan kontrol yang dioperasikan dengan keyboard."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2146

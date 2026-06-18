@@ -600,7 +600,7 @@ msgid "Medium-emphasis text for helper copy, metadata, and summaries."
 msgstr "Tekst met gemiddelde nadruk voor helpteksten, metadata en samenvattingen."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2012
-id "Mega Menu"
+msgid "Mega Menu"
 msgstr "Megamenu"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:330

@@ -474,7 +474,7 @@ msgstr "Icono"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1816
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1836
-id "Import"
+msgid "Import"
 msgstr "Importar"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:1758

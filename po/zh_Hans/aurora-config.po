@@ -658,7 +658,7 @@ msgstr "未安装"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:143
 msgid "On-Brand Text"
-msgstr "品牌底色反白文本 (On-Brand Text)"
+msgstr "品牌背景上的文本"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:331
 msgid "Opaque surface for the expanded mega menu and its header."

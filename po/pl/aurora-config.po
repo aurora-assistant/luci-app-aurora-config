@@ -868,7 +868,7 @@ msgid "Success Surface"
 msgstr "Powierzchnia sukcesu"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:202
-id "Sunken Surface"
+msgid "Sunken Surface"
 msgstr "Zagłębiona powierzchnia"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:119

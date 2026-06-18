@@ -101,10 +101,6 @@ msgid ""
 "strong>?"
 msgstr "Sind Sie sicher, dass Sie <strong>%h</strong> auf Version <strong>%h</strong> aktualisieren möchten?"
 
-#: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2527
-msgid "Danger"
-msgstr "Gefahr"
-
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:2551
 msgid ""
 "Assign uploaded images to icons, favicons, PWA metadata, and the login "

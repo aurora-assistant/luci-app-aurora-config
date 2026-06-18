@@ -453,7 +453,7 @@ msgid "Hover fill for menu items, table rows, and neutral controls."
 msgstr "メニュー項目、テーブルの行、およびニュートラルなコントロールのホバー時の塗りつぶし。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:317
-id "Hover fill for quiet destructive and delete controls."
+msgid "Hover fill for quiet destructive and delete controls."
 msgstr "控えめな破壊および削除コントロール의ホバー時の塗りつぶし。"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:254
@@ -857,7 +857,7 @@ msgstr "控えめなブランド色（ホバー）"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:193
 msgid "Subtle Text"
-msgstr "微妙なテキスト"
+msgstr "繊細なテキスト"
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:167
 msgid "Success"

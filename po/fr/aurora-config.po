@@ -448,7 +448,7 @@ msgid "Home Screen icon for iOS and iPadOS."
 msgstr "Icône d'écran d'accueil pour iOS et iPadOS."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:227
-id "Hover fill for menu items, table rows, and neutral controls."
+msgid "Hover fill for menu items, table rows, and neutral controls."
 msgstr "Remplissage au survol pour les éléments de menu, les lignes de tableau et les contrôles neutres."
 
 #: applications/luci-app-aurora-config/htdocs/luci-static/resources/view/aurora/theme.js:317
