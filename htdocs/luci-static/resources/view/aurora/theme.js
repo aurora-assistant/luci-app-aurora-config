@@ -1441,6 +1441,7 @@ const runSavePipeline = function (ev, after) {
     return colorLibraryReady
       .catch(() => {})
       .then(() => this.colorEditor?.flush?.())
+      .then(() => this.super("handleSave", [ev]))
       .then(() => persistDerivedTokens(this.colorEditor))
       .then(() => uci.save());
   }, this);
