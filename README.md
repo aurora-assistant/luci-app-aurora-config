@@ -30,7 +30,7 @@
 
 | Component             | Requirement | Note                                             |
 | :-------------------- | :---------- | :----------------------------------------------- |
-| **LuCI Theme Aurora** | `≥ v1.0.0`  | Older versions will ignore these configurations. |
+| **LuCI Theme Aurora** | `≥ v1.1.0`  | Older versions will ignore these configurations. |
 | **OpenWrt**           | `≥ 23.05`   | Lua-based LuCI are not supported.                |
 
 ## Install a pre-built release
